@@ -5,7 +5,6 @@
 #define LED_RED PB12
 #define LED_YELLOW PC_7
 
-// NFC Tag Library - https://github.com/Seeed-Studio/NFC_Tag_M24LR6E
 
 //                      RX    TX
 HardwareSerial SerialUSB(PA10, PA9);
