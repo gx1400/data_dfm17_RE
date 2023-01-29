@@ -46,12 +46,12 @@ void setup() {
   pinMode(LED_YELLOW, OUTPUT);
   pinMode(LED_RED, OUTPUT);
   SerialUSB.begin(9600);
-  SerialUSB.println("Hello World!");
+  //SerialUSB.println("Hello World!");
 
   //SerialGPS.begin(9600);
 
-  SerialUSB.print("TinyGPS Version: ");
-  SerialUSB.println(TinyGPSPlus::libraryVersion());
+  //SerialUSB.print("TinyGPS Version: ");
+  //SerialUSB.println(TinyGPSPlus::libraryVersion());
 
   nfc.init();
   delay(50);
@@ -70,15 +70,28 @@ void dumpNFC() {
   uint index = 0;
   uint max = 4096;
 
-  bool flag = false;
 
   if(execute) {
-    for(; index < max ; index++ ) {
-      SerialUSB.print("0x");
-      SerialUSB.print(index,HEX);
-      SerialUSB.print(",");
-      SerialUSB.println(nfc.readByte(index),HEX);
-    } 
+    bool textdump = true;
+    bool bytedump = false;    
+
+    // DUMP BLOCK
+    if (textdump) {
+      SerialUSB.println("---START TEXT DUMP---");
+      for(; index < max ; index++ ) {
+        byte mem = nfc.readByte(index);
+
+        char buf[8];
+        sprintf(buf, "%02X", mem);
+        //SerialUSB.print("0x");
+        //SerialUSB.print(index,HEX);
+        //SerialUSB.print(",");
+        SerialUSB.print(buf);
+      } 
+      SerialUSB.println("\n---END TEXT DUMP---");
+    }
+    
+    
     execute = false;
   }
   
