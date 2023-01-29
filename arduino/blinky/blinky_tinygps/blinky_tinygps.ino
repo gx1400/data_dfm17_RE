@@ -1,4 +1,4 @@
-#include <TinyGPS++.h>
+#include <TinyGPS++.h>  //http://arduiniana.org/libraries/tinygpsplus/
 #include <TinyGPSPlus.h>
 
 #define LED_GREEN PC_6
@@ -74,7 +74,8 @@ void feedGPS() {
       SerialUSB.print("Time="); SerialUSB.print(buf); 
       SerialUSB.print(", LAT="); SerialUSB.print(gps.location.lat(), 6);
       SerialUSB.print(", LNG="); SerialUSB.print(gps.location.lng(), 6);
-      SerialUSB.print(", ALT="); SerialUSB.println(gps.altitude.meters());
+      SerialUSB.print(", ALT="); SerialUSB.print(gps.altitude.meters());
+      SerialUSB.print(", SATS="); SerialUSB.println(gps.satellites.value());
     }
   }
 }
