@@ -10,6 +10,8 @@
 Saleae Logic Pro 8 using Logic 2 software.
 
 <img src="imgs/pcbbite.jpg" height="400">
+<img src="imgs/signaltrace.png" height="400">
+
 
 PCBite probes on STM pins for Si4063 SPI:
 - PB2 = CS/nSEL
