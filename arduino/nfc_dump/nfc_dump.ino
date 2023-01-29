@@ -72,8 +72,8 @@ void dumpNFC() {
 
 
   if(execute) {
-    bool textdump = true;
-    bool bytedump = false;    
+    bool textdump = false;
+    bool bytedump = true;    
 
     // DUMP BLOCK
     if (textdump) {
@@ -88,7 +88,18 @@ void dumpNFC() {
         //SerialUSB.print(",");
         SerialUSB.print(buf);
       } 
-      SerialUSB.println("\n---END TEXT DUMP---");
+      SerialUSB.println("\r\n---END TEXT DUMP---");
+    }
+
+    //bytedunmp
+    if (bytedump) {
+      SerialUSB.println("---START BYTE DUMP---");
+      for(; index < max ; index++ ) {
+        byte mem = nfc.readByte(index);
+
+        SerialUSB.write(mem);
+      }
+      SerialUSB.println("\r\n---END BYTE DUMP---");
     }
     
     
