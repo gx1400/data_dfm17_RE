@@ -28,10 +28,18 @@ From AN633 Section 7.2 pg 15:
 
 ![AN633 Section 7.2 excerpt](imgs/CTS.png)
 
-The next image shows the MCU sending READ_CMD_BUFF commands to the Si4063, but NOT receiving the CTS response.
+In the Logic 2 capture file ["SI4063_startup1.sal"](SI4063_startup1.sal) shows the MCU sending READ_CMD_BUFF commands to the Si4063, but NOT receiving the CTS response.
 
 ![MCU sending READ_CMD_BUFF but not receiving CTS](imgs/start_notcts.png)
 
-In the Logic 2 capture file ["SI4063_startup1.sal"](SI4063_startup1.sal), the CTS signal is not received until transmit attempt #16 shown below.
+This can also be seen in the analyzer table below
+
+<img src="imgs/start_table_notcts.png" height="400">
+
+## Receive CTS signal
+
+The CTS signal is not received until transmit attempt #16 shown below.
 
 ![MCU sending READ_CMD_BUFF but receiving CTS](imgs/start_cts.png)
+
+<img src="imgs/start_table_cts.png" height="400">
