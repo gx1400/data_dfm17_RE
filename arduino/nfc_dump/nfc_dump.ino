@@ -68,7 +68,7 @@ void loop() {
 
 void dumpNFC() {
   uint index = 0;
-  uint max = 4096;
+  uint max = 512;
 
 
   if(execute) {
