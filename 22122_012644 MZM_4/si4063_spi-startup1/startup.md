@@ -113,8 +113,8 @@ The CTS signal is not received until transmit attempt #16 shown below.
 | 60 | 0x0000a222 | 05 | 11 00 01 03 20          | SET PROPERTY, Grp 00, Prop 03: GLOBAL_CONFIG (Enter TX asap after START_TX cmd, GENERIC protocol, HIGH POWER_MODE) |
 | 61 | 0x0000a228 | 05 | 11 01 01 00 00          | SET_PROPERTY, Grp 01, Prop 00: INT_CTL_PH_ENABLE (All disabled) |
 | 62 | 0x0000a22e | 08 | 11 02 04 00 00 00 00 00 | SET_PROPERTY, Grp 02, Prop 00-04: FRR_CTL_A_MODE (Disabled), FRR_CTL_B_MODE (Disabled), FRR_CTL_C_MODE (Disabled), FRR_CTL_D_MODE (Disabled) |
-| 63 | 0x0000a237 | 05 | 11 10 01 04 21          | |
-| 64 | 0x0000a23d | 10 | 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01 | |
+| 63 | 0x0000a237 | 05 | 11 10 01 04 21          | SET PROPERTY, Grp 10, Prop 04: PREAMBLE_CONFIG (First bit in Pkt is 1), LENGTH_CONFIG = 0, MAN_CONST = 0, MAN_ENABLE = 0, STANDARD_PREAM = PRE_1010 preamble) |
+| 64 | 0x0000a23d | 10 | 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01 | Group 20, Props 00-0B (MODEM Setup):  |
 | 65 | 0x0000a24e | 05 | 11 20 01 0C 33          | |
 | 66 | 0x0000a254 | 10 | 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40 | |
 | 67 | 0x0000a265 | 10 | 11 20 0C 24 01 99 9A 00 CD 00 C2 00 54 62 80 6B | |
@@ -124,9 +124,9 @@ The CTS signal is not received until transmit attempt #16 shown below.
 | 71 | 0x0000a295 | 07 | 11 20 03 45 8F 00 9C    | |
 | 72 | 0x0000a29d | 06 | 11 20 02 50 94 09       | |
 | 73 | 0x0000a2a4 | 05 | 11 20 01 54 03          | |
-| 74 | 0x0000a2aa | 08 | 11 22 04 00 08 7F 00 1F | |
-| 75 | 0x0000a2b3 | 0B | 11 23 07 00 2C 0E 0B 04 0C 73 03 | |
-| 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | |
+| 74 | 0x0000a2aa | 08 | 11 22 04 00 08 7F 00 1F | SET_PROPERTY, Group 22 Prop 00-03: PA_MODE, PA_PWR_LVL, PA_BIAS_CLKDUTY, PA_TC |
+| 75 | 0x0000a2b3 | 0B | 11 23 07 00 2C 0E 0B 04 0C 73 03 | SET_PROPERTY, Group 23 Prop 00-06: |
+| 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | SET_PROPERTY, Group 40 Prop 00-06: FREQ_CONTROL_INTE, FREQ_CONTROL_FRAC, FREQ_CONTROL_CHANNEL_STEP_SIZE, FREQ_CONTROL_W_SIZE|
 
 ## Additional Setup Packets
 
