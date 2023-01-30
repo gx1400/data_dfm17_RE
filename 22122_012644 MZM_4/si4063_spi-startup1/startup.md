@@ -47,7 +47,7 @@ The CTS signal is not received until transmit attempt #16 shown below.
 
 <img src="imgs/start_table_cts.png" height="400">
 
-## Data
+##  Setup Packets from Firmware
 
 | Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
 | :-----------: | :--------- | ----: | :------------------ | :----------- |
@@ -127,3 +127,26 @@ The CTS signal is not received until transmit attempt #16 shown below.
 | 74 | 0x0000a2aa | 08 | 11 22 04 00 08 7F 00 1F | |
 | 75 | 0x0000a2b3 | 0B | 11 23 07 00 2C 0E 0B 04 0C 73 03 | |
 | 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | |
+
+## Additional Setup Packets
+
+Note the response packets below do not have including the "0xFF 0xxFF" response to the "0x44" READ_CMD_BUFF.
+
+| Packet Number | Bytes | Command/Response | Data (HEX) | Command Type |
+| :-----------: | ----: | :----------- | :--------- | :----------- |
+| 77            | 01    | Command      | 33         | |
+| 78            | 02    | Response     | 03 00      | | 
+| 79            | 02    | Command      | 34 03      | |
+| 80            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | |
+| 81            | 06    | Command      | 11 20 02 0D 00 00 | |
+| 82            | 06    | Command      | 11 20 02 0B 01 33 | |
+| 83            | 02    | Command      | 34 07      | |
+| 84            | 01    | Command      | 33         | |
+| 85            | 02    | Response     | 07 00      | |
+| 86            | 02    | Command      | 34 03      | |
+| 87            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | |
+| 88            | 02    | Command      | 34 07      | |
+| 89            | 01    | Command      | 33         | |
+| 90            | 02    | Response     | 00 00      | |
+| 91            | 02    | Command      | 34 03      | |
+| 92            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | |
