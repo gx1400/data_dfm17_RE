@@ -107,7 +107,7 @@ The CTS signal is not received until transmit attempt #16 shown below.
 | 54 | 0x0000a1ef | 08 | 05 04 EB D8 12 D6 8D E0 | |
 | 55 | 0x0000a1f8 | 08 | EC 29 66 4B DE B7 DE 36 | |
 | 56 | 0x0000a201 | 08 | 05 0D 28 B9 0A 89 31 1A | |
-| 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | |
+| 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | POWER_UP, FUNC EZRadio PRO, Use PATCH, Use External TCXO, Freq 0x0186A000=25600000Hz |
 | 58 | 0x0000a212 | 08 | 13 10 0F 07 04 00 0B 00 | |
 | 59 | 0x0000a21b | 06 | 11 00 02 00 62 60       | |
 | 60 | 0x0000a222 | 05 | 11 00 01 03 20          | |
