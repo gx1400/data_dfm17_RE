@@ -124,6 +124,7 @@ Note the response packets below do not have including the "0xFF 0xxFF" response 
 ## Pkt 57 - POWER_UP
 
 **Function:**   POWER_UP
+
 **Summary:**    Command to power-up the device and select the operational mode and functionality.
 
 ```
@@ -142,6 +143,7 @@ DATA:       0x 02 81 01 01 86 A0 00
 ## Pkt 58 - GPIO_PIN_CFG
 
 **Function:**   GPIO_PIN_CFG
+
 **Summary:**    Configures the GPIO pins.
 
 
@@ -197,6 +199,7 @@ DATA:       0x 13 10 0F 07 04 00 0B 00
 ## Pkt 59 - SET_PROPERTY - GLOBAL (2 Properties)
 
 **Function:**   SET_PROPERTY
+
 **Summary:**    Sets the value of one or more properties.
 
 - Group:            00  GLOBAL
@@ -212,6 +215,7 @@ DATA:       0x 11 00 02 00 62 60
 ### Property 00 - GLOBAL_XO_TUNE
 
 **Summary:**    Configure the internal capacitor frequency tuning bank for the crystal oscillator. 
+
 **Byte:**       0x 62 = 0b 0110 0010
 
 | Property | Bits | Value            | Function         | Decode |
@@ -221,6 +225,7 @@ DATA:       0x 11 00 02 00 62 60
 ### Property 01 - GLOBAL_CLK_CFG
 
 **Summary:**    Clock configuration options.
+
 **Byte:**       0x 60 = 0b 0110 0000
 
 | Property | Bits | Value            | Function         | Decode |
@@ -242,6 +247,7 @@ DATA:       0x 11 00 01 03 20
 ### Property 03 - GLOBAL_CONFIG
 
 **Summary:**    Global configuration settings.
+
 **Byte:**       0x 20 = 0b 0010 0000
 
 | Property | Bits | Value            | Function         | Decode |
@@ -260,6 +266,24 @@ DATA:       0x 11 01 01 00 00
 - Group:            01  INT_CTL
 - Property Count:   01
   - Property:       01  INT_CTL_PH_ENABLE
+
+**Summary:**    Enable individual interrupt sources within the Packet Handler Interrupt Group to generate a HW interrupt on the NIRQ output pin.
+
+**Byte:**       0x 00 = 0b 0000 0000
+
+| Property | Bits | Value            | Function                | Decode |
+| -------: | ---: | ----:            | :-------                | :----- |
+| 0x00     | 7    | 0b0              | FILTER_MATCH_EN         |        |
+| 0x00     | 6    | 0b0              | FILTER_MISS_EN          |        |
+| 0x00     | 5    | 0b0              | PACKET_SENT_EN          |        |
+| 0x00     | 4    | 0b0              | PACKET_RX_EN            |        |
+| 0x00     | 3    | 0b0              | CRC_ERROR_EN            |        |
+| 0x00     | 2    | 0b0              | ALT_CRC_ERROR_EN        |        |
+| 0x00     | 1    | 0b0              | TX_FIFO_ALMOST_EMPTY_EN |        |
+| 0x00     | 0    | 0b0              | RX_FIFO_ALMOST_FULL_EN  |        |
+
+*\*Note - All interrupts disabled*
+
 
 ## Pkt 62 - SET_PROPERTY - FRR_CTL (4 Properties)
 
@@ -478,8 +502,8 @@ $RF_{Channel_{Hz}}=400,000,000 Hz$
 ### Property 00 - FREQ_CONTROL_INTE
 
 **Summary:**    Frac-N PLL Synthesizer integer divide number.
-**Byte:**       0x 4D = 0b 0100 1101
 
+**Byte:**       0x 4D = 0b 0100 1101
 
 
 | Property | Bits | Value            | Function         | Decode |
@@ -489,6 +513,7 @@ $RF_{Channel_{Hz}}=400,000,000 Hz$
 ### Property 01:03 - FREQ_CONTROL_FRAC
 
 **Summary:**    Frac-N PLL Synthesizer integer divide number.
+
 **Bytes:**       0x 09 00 00 = 0b 0000 1001 0000 0000 0000 0000
 
 $RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
@@ -504,6 +529,7 @@ FRAC = 0x 09 00 00 = 589,824d
 ### Property 04:05 - FREQ_CONTROL_CHANNEL_STEP_SIZE
 
 **Summary:**    EZ Frequency Programming channel step size.
+
 **Bytes:**      0x 04 00 = 0b 0100 0000 0000 0000
 
 
@@ -530,6 +556,7 @@ $FREQ\_CTRL\_CHAN\_STEP\_SIZE =\ 104.8576 Hz$
 ### Property 06 - FREQ_CONTROL_W_SIZE
 
 **Summary:**    Set window gating period (in number of crystal reference clock cycles) for counting VCO frequency during calibration.
+
 **Bytes:**      0x 20 = 32d
 
 *\*Note: This property does not need to change as a function of crystal reference frequency; the chip automatically calculates the target VCO count value as a function of crystal reference frequency and thus this property may remain constant. Silicon Labs recommends setting this property always to 0x20.*
