@@ -135,7 +135,7 @@ DATA:       0x 02 81 01 01 86 A0 00
 | ---------: | ---: | ----:       | :-------     | :----- |
 | 0x00       | 7:0  | 0x02        | POWER_UP Cmd |        |
 | 0x01       | 7    | 0b1         | PATCH        | Patch has been applied |
-| 0x01       | 5:0  | 0d1         | FUNC         | Stay in boot mode      |
+| 0x01       | 5:0  | 1d          | FUNC         | Stay in boot mode      |
 | 0x02       | 0    | 0b1         | TCXO         | Reference signal is derived from external TXCO |
 | 0x03:06    | all  | 0x0186 A000 | XO_FREQ      | 0x0186A000 = 25600000Hz = 25.6Mhz external clock |
 
@@ -154,18 +154,18 @@ DATA:       0x 13 10 0F 07 04 00 0B 00
 | ---------: | ---: | ----:         | :-------         | :----- |
 | 0x00       | 7:0  | 0x13          | GPIO_PIN_CFG Cmd |        |
 | 0x01       | 6    | 0b0           | GPIO0 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x01       | 5:0  | 0b10000 = 0d16| GPIO0 MODE       | 0d16 = TX_DATA_CLK |
+| 0x01       | 5:0  | 0b10000 = 16d | GPIO0 MODE       | 16d = TX_DATA_CLK |
 | 0x02       | 6    | 0b0           | GPIO1 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x02       | 5:0  | 0b01111 = 0d15| GPIO1 MODE       | 0d15 = EN_PA |
+| 0x02       | 5:0  | 0b01111 = 15d | GPIO1 MODE       | 15d = EN_PA |
 | 0x03       | 6    | 0b0           | GPIO2 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x03       | 5:0  | 0b00111 = 0d7 | GPIO2 MODE       | 0d7 = DIV_CLK  |
+| 0x03       | 5:0  | 0b00111 = 7d  | GPIO2 MODE       | 7d = DIV_CLK  |
 | 0x04       | 6    | 0b0           | GPIO3 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x04       | 5:0  | 0b00100 = 0d4 | GPIO2 MODE       | 0d4 = INPUT |
+| 0x04       | 5:0  | 0b00100 = 4d  | GPIO2 MODE       | 4d = INPUT |
 | 0x05       | 6    | 0b0           | NIRQ PULL_CTL    | PULL_DIS, disable pull up resistor |
-| 0x05       | 5:0  | 0b00000 = 0d0 | NIRQ_MODE        | DONOTHING |
+| 0x05       | 5:0  | 0b00000 = 0d  | NIRQ_MODE        | DONOTHING |
 | 0x06       | 6    | 0b0           | SDO PULL_CTL     | PULL_DIS, disable pull up resistor |
-| 0x06       | 5:0  | 0x0B = 0d11   | SDO_MODE         | 0d11 = SDO,  |
-| 0x07       | 6:5  | 0b00 = 0d0    | DRV_STRENGTH     | 0d0 = HIGH, GPIOs configured to have highest drive strength |
+| 0x06       | 5:0  | 0x0B = 11d    | SDO_MODE         | 11d = SDO,  |
+| 0x07       | 6:5  | 0b00 = 0d     | DRV_STRENGTH     | 0d = HIGH, GPIOs configured to have highest drive strength |
 
 **GPIO0 Mode:** TX_DATA_CLK
 - STM32 Pin: Not Connected?
@@ -216,7 +216,7 @@ DATA:       0x 11 00 02 00 62 60
 
 | Property | Bits | Value            | Function         | Decode |
 | -------: | ---: | ----:            | :-------         | :----- |
-| 0x00     | 6:0  | 0b1100010 = 0d98 | TUNE_VALUE       | 0d98 * 70e-15 pF = 6.86pF |
+| 0x00     | 6:0  | 0b1100010 = 98d  | TUNE_VALUE       | 98d * 70e-15 pF = 6.86pF |
 
 ### Property 01 - GLOBAL_CLK_CFG
 
@@ -226,8 +226,8 @@ DATA:       0x 11 00 02 00 62 60
 | Property | Bits | Value            | Function         | Decode |
 | -------: | ---: | ----:            | :-------         | :----- |
 | 0x01     | 6    | 0b1              | DIVIDED_CLK_EN   | Divided system clock output is enabled |
-| 0x01     | 5:3  | 0b100 = 0d4      | DIVIDED_CLK_SEL  | 0d4 = DIV_10, Clock output is divided by 10 |
-| 0x01     | 1:0  | 0b00 = 0d0       | CLK_32K_SEL      | 0d0 = OFF, 32KHz clock is disabled. |
+| 0x01     | 5:3  | 0b100 = 4d       | DIVIDED_CLK_SEL  | 4d = DIV_10, Clock output is divided by 10 |
+| 0x01     | 1:0  | 0b00 = 0d        | CLK_32K_SEL      | 0d = OFF, 32KHz clock is disabled. |
 
 ## Pkt 60 - SET_PROPERTY - GLOBAL_CONFIG (1 Property)
 
@@ -248,7 +248,7 @@ DATA:       0x 11 00 01 03 20
 | -------: | ---: | ----:            | :-------         | :----- |
 | 0x03     | 5    | 0b1              | SEQUENCER_MODE   | 1 = FAST, Enter TX mode as quickly as possible after START_TX Cmd |
 | 0x03     | 4    | 0b0              | FIFO_MODE        | 0 = SPLIT_FIFO, Tx & Rx FIFO are independent (not applicable for Si4063) |
-| 0x03     | 3:1  | 0b000 = 0d0      | PROTOCOL         | 0 = GENERIC packet format |
+| 0x03     | 3:1  | 0b000 = 0d       | PROTOCOL         | 0 = GENERIC packet format |
 | 0x03     | 0    | 0b0              | POWER_MODE       | 0 = HIGH_PERF, high performance mode |
 
 ## Pkt 61 - SET_PROPERTY - INT_CTL (1 Property)
@@ -483,7 +483,7 @@ $RF_{Channel_{Hz}}=400,000,000 Hz$
 
 | Property | Bits | Value            | Function         | Decode |
 | -------: | ---: | ----:            | :-------         | :----- |
-| 0x00     | 6:0  | 0b1001101 = 0d77 | INTE             | 0d77   |
+| 0x00     | 6:0  | 0b1001101 = 77d  | INTE             | 77d    |
 
 ### Property 01:03 - FREQ_CONTROL_FRAC
 
@@ -498,4 +498,15 @@ $RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(
 | 0x02     | 7:0  | 0b0000 0000      | FRAC[15:8]       |        |
 | 0x03     | 7:0  | 0b0000 0000      | FRAC[7:0]        |        |
 
-FRAC = 0x 09 00 00 = 0d589824
+FRAC = 0x 09 00 00 = 589,824d
+
+### Property 04:05 - FREQ_CONTROL_CHANNEL_STEP_SIZE
+
+**Summary:**    EZ Frequency Programming channel step size.
+**Bytes:**      0x 04 00 = 0b 0100 0000 0000 0000
+
+
+| Property | Bits | Value            | Function         | Decode |
+| -------: | ---: | ----:            | :-------         | :----- |
+| 0x04     | 7:0  | 0b01000000       | CHANNEL_STEP_SIZE[15:8] | |
+| 0x05     | 7:0  | 0b00000000       | CHANNEL_STEP_SIZE[7:0]  | |
