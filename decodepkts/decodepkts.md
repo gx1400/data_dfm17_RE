@@ -10,7 +10,9 @@
 
 ## PATCH DATA Packets
 
-See [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pdf) for more info on patch
+- See [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pdf) for more info on patch
+- [Silicon Labs Knowledge Article "Latest patch for  EZRadio/PRO and do I need to use it?"](https://community.silabs.com/s/article/latest-patch-for-ezradio-pro-and-do-i-need-to-use-it-x?language=en_US) - [PDF Print of page](patchfile/patchfile_helppage.pdf)
+- [Patchfile](patchfile/fw_6_0_2_4668.csg)
 
 | Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
 | :-----------: | :--------- | ----: | :------------------ | :----------- |
