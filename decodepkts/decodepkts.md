@@ -71,7 +71,7 @@ See [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pd
 | 55 | 0x0000a1f8 | 08 | EC 29 66 4B DE B7 DE 36 | PATCH_DATA   |
 | 56 | 0x0000a201 | 08 | 05 0D 28 B9 0A 89 31 1A | PATCH_ARGS   |
 
-## RADIO CONFIGURATION PACKETS
+## RADIO CONFIGURATION Packets
 
 | Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
 | :-----------: | :--------- | ----: | :------------------ | :----------- |
