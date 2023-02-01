@@ -8,6 +8,10 @@
 
 #  Packets from Firmware
 
+## PATCH DATA Packets
+
+See [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pdf) for more info on patch
+
 | Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
 | :-----------: | :--------- | ----: | :------------------ | :----------- |
 | 01 | 0x0000a012 | 08 | 04 21 71 4B 00 00 BA 9E | PATCH_IMAGE, Verify CRC, Use TRX Image, CRC 0x714B, Key 0xBA9E |
@@ -66,6 +70,11 @@
 | 54 | 0x0000a1ef | 08 | 05 04 EB D8 12 D6 8D E0 | PATCH_ARGS   |
 | 55 | 0x0000a1f8 | 08 | EC 29 66 4B DE B7 DE 36 | PATCH_DATA   |
 | 56 | 0x0000a201 | 08 | 05 0D 28 B9 0A 89 31 1A | PATCH_ARGS   |
+
+## RADIO CONFIGURATION PACKETS
+
+| Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
+| :-----------: | :--------- | ----: | :------------------ | :----------- |
 | 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | [POWER_UP](pkts/pkt57.md)     |
 | 58 | 0x0000a212 | 08 | 13 10 0F 07 04 00 0B 00 | [GPIO_PIN_CFG](pkts/pkt58.md) |
 | 59 | 0x0000a21b | 06 | 11 00 02 00 62 60       | [SET_PROPERTY - Group 00: GLOBAL](pkts/pkt59.md)       |
