@@ -7,6 +7,9 @@ This project is to assist in the DFM-17 rev engineering effort
 [Si4063 Start-up SPI capture](/capture/capture.md)
 
 [Start-up SPI Capture and Decoding](/capture/decodepkts.md)
+
+[Packet Decoding](/decodepkts/decodepkts.md)
+
 ## Project Wiki
 [Wiki for project](https://wiki.recessim.com/view/DFM-17_Radiosonde)
 
