@@ -4,6 +4,7 @@
 
 - [Application Note AN633: PROGRAMMING GUIDE FOR EZRADIOPRO® Si4X6X DEVICES](../docs/AN633.pdf)
 - [API documentation (zip file)](../docs/EZRadioPRO_REVC2_API.zip)
+- [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pdf)
 
 #  Packets from Firmware
 
@@ -65,11 +66,11 @@
 | 54 | 0x0000a1ef | 08 | 05 04 EB D8 12 D6 8D E0 | PATCH_ARGS   |
 | 55 | 0x0000a1f8 | 08 | EC 29 66 4B DE B7 DE 36 | PATCH_DATA   |
 | 56 | 0x0000a201 | 08 | 05 0D 28 B9 0A 89 31 1A | PATCH_ARGS   |
-| 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | POWER_UP     |
-| 58 | 0x0000a212 | 08 | 13 10 0F 07 04 00 0B 00 | GPIO_PIN_CFG |
-| 59 | 0x0000a21b | 06 | 11 00 02 00 62 60       | SET_PROPERTY - Group 00: GLOBAL                        |
-| 60 | 0x0000a222 | 05 | 11 00 01 03 20          | SET_PROPERTY - Group 00: GLOBAL                        |
-| 61 | 0x0000a228 | 05 | 11 01 01 00 00          | SET_PROPERTY - Group 01: INT_CTL                       |
+| 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | [POWER_UP](pkts/pkt57.md)     |
+| 58 | 0x0000a212 | 08 | 13 10 0F 07 04 00 0B 00 | [GPIO_PIN_CFG](pkts/pkt58.md) |
+| 59 | 0x0000a21b | 06 | 11 00 02 00 62 60       | [SET_PROPERTY - Group 00: GLOBAL](pkts/pkt59.md)       |
+| 60 | 0x0000a222 | 05 | 11 00 01 03 20          | [SET_PROPERTY - Group 00: GLOBAL](pkts/pkt60.md)       |
+| 61 | 0x0000a228 | 05 | 11 01 01 00 00          | [SET_PROPERTY - Group 01: INT_CTL](pkts/pkt61.md)      |
 | 62 | 0x0000a22e | 08 | 11 02 04 00 00 00 00 00 | SET_PROPERTY - Group 02: FRR_CTL                       |
 | 63 | 0x0000a237 | 05 | 11 10 01 04 21          | SET_PROPERTY - Group 10: PREAMBLE                      |
 | 64 | 0x0000a23d | 10 | 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01 | SET_PROPERTY - Group 20: MODEM |
@@ -121,168 +122,8 @@ Note the response packets below do not have including the "0xFF 0xxFF" response 
 
 # Packet Decoding
 
-## Pkt 57 - POWER_UP
-
-**Function:**   POWER_UP
-
-**Summary:**    Command to power-up the device and select the operational mode and functionality.
-
-```
-LENGTH:     0x 07
-DATA:       0x 02 81 01 01 86 A0 00
-```
-
-| Byte Index | Bits | Value       | Function     | Decode |
-| ---------: | ---: | ----:       | :-------     | :----- |
-| 0x00       | 7:0  | 0x02        | POWER_UP Cmd |        |
-| 0x01       | 7    | 0b1         | PATCH        | Patch has been applied |
-| 0x01       | 5:0  | 1d          | FUNC         | Stay in boot mode      |
-| 0x02       | 0    | 0b1         | TCXO         | Reference signal is derived from external TXCO |
-| 0x03:06    | all  | 0x0186 A000 | XO_FREQ      | 0x0186A000 = 25600000Hz = 25.6Mhz external clock |
-
-## Pkt 58 - GPIO_PIN_CFG
-
-**Function:**   GPIO_PIN_CFG
-
-**Summary:**    Configures the GPIO pins.
 
 
-```
-LENGTH:     0x 08
-DATA:       0x 13 10 0F 07 04 00 0B 00
-```
-
-| Byte Index | Bits | Value         | Function         | Decode |
-| ---------: | ---: | ----:         | :-------         | :----- |
-| 0x00       | 7:0  | 0x13          | GPIO_PIN_CFG Cmd |        |
-| 0x01       | 6    | 0b0           | GPIO0 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x01       | 5:0  | 0b10000 = 16d | GPIO0 MODE       | 16d = TX_DATA_CLK |
-| 0x02       | 6    | 0b0           | GPIO1 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x02       | 5:0  | 0b01111 = 15d | GPIO1 MODE       | 15d = EN_PA |
-| 0x03       | 6    | 0b0           | GPIO2 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x03       | 5:0  | 0b00111 = 7d  | GPIO2 MODE       | 7d = DIV_CLK  |
-| 0x04       | 6    | 0b0           | GPIO3 PULL_CTL   | PULL_DIS, disable pull up resistor |
-| 0x04       | 5:0  | 0b00100 = 4d  | GPIO2 MODE       | 4d = INPUT |
-| 0x05       | 6    | 0b0           | NIRQ PULL_CTL    | PULL_DIS, disable pull up resistor |
-| 0x05       | 5:0  | 0b00000 = 0d  | NIRQ_MODE        | DONOTHING |
-| 0x06       | 6    | 0b0           | SDO PULL_CTL     | PULL_DIS, disable pull up resistor |
-| 0x06       | 5:0  | 0x0B = 11d    | SDO_MODE         | 11d = SDO,  |
-| 0x07       | 6:5  | 0b00 = 0d     | DRV_STRENGTH     | 0d = HIGH, GPIOs configured to have highest drive strength |
-
-**GPIO0 Mode:** TX_DATA_CLK
-- STM32 Pin: Not Connected?
-- This signal is a square wave at the selected TX data rate, and is intended for use in TX Direct Synchronous Mode (i.e., in conjunction with a pin configured for TX Data Input).
-
-**GPIO1 Mode:** EN_PA
-- STM32 Pin: Not Connected, routes to PTH Test point directly above pin
-- This output goes high when the internal PA is enabled.
-
-**GPIO2 Mode:** DIV_CLK
-- STM32 Pin: PD0
-- Outputs the divided clock signal (or the divided boot clock signal in SPI ACTIVE state). 
-- This output is low while the chip is in SLEEP state as the source (e.g., the Xtal Oscillator) for the divided clock signal is not running, and outputs the divided XtalOsc signal in all other states. 
-- The divider is configured using the GLOBAL_CLK_CFG:DIVIDED_CLK_SEL
-
-**GPIO3 Mode:** INPUT
-- STM32 Pin: PA4
-- Pin is configured as a CMOS input. This is used for all GPIO functions that require the pin to be an input (e.g., TXDATA input for TX Direct Mode). 
-- However, configuration of this pin as an input does NOT additionally select which internal circuit receives that input; that functionality is controlled by other properties, as appropriate.
-
-**NIRQ Mode:** DONOTHING
-- STM Pin: Not connected
-- Behavior of this pin is not modified
-
-**SDO Mode:**: SDO
-- STM32 Pin: PA6
-- Outputs serial data out signal for SPI bus
-
-## Pkt 59 - SET_PROPERTY - GLOBAL (2 Properties)
-
-**Function:**   SET_PROPERTY
-
-**Summary:**    Sets the value of one or more properties.
-
-- Group:            00  GLOBAL
-- Property Count:   02
-  - Property:       00  GLOBAL_XO_TUNE
-  - Property:       01  GLOBAL_CLK_CFG
-
-```
-LENGTH:     0x 06 
-DATA:       0x 11 00 02 00 62 60
-```
-
-### Property 00 - GLOBAL_XO_TUNE
-
-**Summary:**    Configure the internal capacitor frequency tuning bank for the crystal oscillator. 
-
-**Byte:**       0x 62 = 0b 0110 0010
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x00     | 6:0  | 0b1100010 = 98d  | TUNE_VALUE       | 98d * 70e-15 pF = 6.86pF |
-
-### Property 01 - GLOBAL_CLK_CFG
-
-**Summary:**    Clock configuration options.
-
-**Byte:**       0x 60 = 0b 0110 0000
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x01     | 6    | 0b1              | DIVIDED_CLK_EN   | Divided system clock output is enabled |
-| 0x01     | 5:3  | 0b100 = 4d       | DIVIDED_CLK_SEL  | 4d = DIV_10, Clock output is divided by 10 |
-| 0x01     | 1:0  | 0b00 = 0d        | CLK_32K_SEL      | 0d = OFF, 32KHz clock is disabled. |
-
-## Pkt 60 - SET_PROPERTY - GLOBAL_CONFIG (1 Property)
-
-```
-LENGTH:     0x 05
-DATA:       0x 11 00 01 03 20
-```
-- Group:            00  GLOBAL
-- Property Count:   01
-  - Property:       03  GLOBAL_CONFIG
-  
-### Property 03 - GLOBAL_CONFIG
-
-**Summary:**    Global configuration settings.
-
-**Byte:**       0x 20 = 0b 0010 0000
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x03     | 5    | 0b1              | SEQUENCER_MODE   | 1 = FAST, Enter TX mode as quickly as possible after START_TX Cmd |
-| 0x03     | 4    | 0b0              | FIFO_MODE        | 0 = SPLIT_FIFO, Tx & Rx FIFO are independent (not applicable for Si4063) |
-| 0x03     | 3:1  | 0b000 = 0d       | PROTOCOL         | 0 = GENERIC packet format |
-| 0x03     | 0    | 0b0              | POWER_MODE       | 0 = HIGH_PERF, high performance mode |
-
-## Pkt 61 - SET_PROPERTY - INT_CTL (1 Property)
-
-```
-LENGTH:     0x 05
-DATA:       0x 11 01 01 00 00
-```
-- Group:            01  INT_CTL
-- Property Count:   01
-  - Property:       01  INT_CTL_PH_ENABLE
-
-**Summary:**    Enable individual interrupt sources within the Packet Handler Interrupt Group to generate a HW interrupt on the NIRQ output pin.
-
-**Byte:**       0x 00 = 0b 0000 0000
-
-| Property | Bits | Value            | Function                | Decode |
-| -------: | ---: | ----:            | :-------                | :----- |
-| 0x00     | 7    | 0b0              | FILTER_MATCH_EN         |        |
-| 0x00     | 6    | 0b0              | FILTER_MISS_EN          |        |
-| 0x00     | 5    | 0b0              | PACKET_SENT_EN          |        |
-| 0x00     | 4    | 0b0              | PACKET_RX_EN            |        |
-| 0x00     | 3    | 0b0              | CRC_ERROR_EN            |        |
-| 0x00     | 2    | 0b0              | ALT_CRC_ERROR_EN        |        |
-| 0x00     | 1    | 0b0              | TX_FIFO_ALMOST_EMPTY_EN |        |
-| 0x00     | 0    | 0b0              | RX_FIFO_ALMOST_FULL_EN  |        |
-
-*\*Note - All interrupts disabled*
 
 
 ## Pkt 62 - SET_PROPERTY - FRR_CTL (4 Properties)
