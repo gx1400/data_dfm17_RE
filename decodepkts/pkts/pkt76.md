@@ -63,6 +63,8 @@ FRAC = 0x 09 00 00 = 589,824d
 
 Channel Step Size = 0x 04 00 = 1024d
 
+*\*Note:* WDS3 Utility shows 0x0400 is equivalent to 10Khz channel step size
+
 FREQ_CONTROL_CHANNEL_STEP_SIZE property is given by the following equation:
 
 $FREQ\_CTRL\_CHAN\_STEP\_SIZE=\frac{2^{19} \times outdiv \times Desired\_Stepsize\_Hz}{N_{PRESC} \times freq\_xo}$
