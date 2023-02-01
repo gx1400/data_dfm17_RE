@@ -12,7 +12,10 @@
 
 - See [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pdf) for more info on patch
 - [Silicon Labs Knowledge Article "Latest patch for  EZRadio/PRO and do I need to use it?"](https://community.silabs.com/s/article/latest-patch-for-ezradio-pro-and-do-i-need-to-use-it-x?language=en_US) - [PDF Print of page](patchfile/patchfile_helppage.pdf)
-- [Patchfile](patchfile/fw_6_0_2_4668.csg)
+- [Latest Patchfile](patchfile/fw_6_0_2_4668.csg)
+- [Knowledge Article "Doubt about WDS configuration file, vRadio_Init and si4455_configuration_init" (found this patch file referenced)](https://community.silabs.com/s/question/0D51M00007xeICqSAM/doubt-about-wds-configuration-file-vradioinit-and-si4455configurationinit) - [PDF Print of page](patchfile/patchfile_foundpatchreference.pdf)
+- [Patch file in Github](https://github.com/dvdfreitag/Si4455Radio/blob/master/si4455_patch.h) - [Downloaded file](patchfile/si4455_patch.h)
+
 
 | Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
 | :-----------: | :--------- | ----: | :------------------ | :----------- |
@@ -130,6 +133,34 @@ Note the response packets below do not have including the "0xFF 0xxFF" response 
 | RX_TUNE    | 6     |
 | TX         | 7     | 
 | RX         | 8     | 
+
+# Startup Process
+
+- [Knowledge Article "Si4x6x, Si4x55 startup sequence"](https://community.silabs.com/s/article/si4x6x-c2a-si4x55-c2a-startup-sequence)
+
+
+```
+In the Si4x6x chips there is a timeout after POR built-in to make sure if there is no host activity (SPI comms), the chip would go back to inactive state saving energy.
+Feb 2, 2022•Knowledge
+Details
+
+In the Si4x6x chips there is a timeout after POR built-in to make sure if there is no host activity (SPI comms), the chip would go back to inactive state saving energy. Inactive state is the state the chip is sitting in after POR.
+Because of this time-out, some refinement is necessary on the recommended startup sequence of AN633, as follows:
+ 
+
+    Assert SDN
+    Wait at least 10µs
+    Deassert SDN
+    a) Wait at least 14ms or b) wait until GPIO1(CTS) goes HIGH
+    Issue the POWER_UP command over SPI (or send first line of patch if applied)
+
+This first SPI transaction has to finish in less than 4ms.
+In case 4.a) it is counted from NSEL falling edge to NSEL rising edge.
+In case 4.b) it is counted from GPIO1 rising edge to NSEL rising edge.
+If it cannot be guaranteed, send a shorter command (e.g. NOP) first, check CTS, then send POWER_UP or patch.
+
+This information applies to both the B and C revisions of Si4x6x and Si4x55, and to the Si106x, Si108x and EZR32 WMCUs. 
+```
 
 # Packet Decoding
 
