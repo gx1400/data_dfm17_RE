@@ -13,7 +13,7 @@ DATA:       0x 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01
   - Property:       06:09   MODEM_TX_NCO_MODE
   - Property:       0A:0B   MODEM_FREQ_DEV [2:1]*
 
-*\*Note - 0A & 0B are top two of three words of MODEM_FREQ_DEV.  Pkt 65 has third word.*
+*\*Note - 0A & 0B are top two of three words of MODEM_FREQ_DEV.  [Pkt 65](pkt65.md) has third word.*
 *\*Note - See Packet 65 for MODEM_FREQ_DEV decode*
 
 ## Property 00 - MODEM_MOD_TYPE

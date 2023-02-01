@@ -94,7 +94,7 @@ See [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pd
 | 73 | 0x0000a2a4 | 05 | 11 20 01 54 03          | SET_PROPERTY - Group 20: MODEM                         |
 | 74 | 0x0000a2aa | 08 | 11 22 04 00 08 7F 00 1F | SET_PROPERTY - Group 22: PA                            |
 | 75 | 0x0000a2b3 | 0B | 11 23 07 00 2C 0E 0B 04 0C 73 03 | SET_PROPERTY - Group 23: SYNTH                |
-| 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | SET_PROPERTY - Group 40: FREQ_CONTROL         |
+| 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | [SET_PROPERTY - Group 40: FREQ_CONTROL](pkts/pkt76.md)         |
 
 ## Additional Setup Packets
 
@@ -134,35 +134,6 @@ Note the response packets below do not have including the "0xFF 0xxFF" response 
 
 
 
-## Pkt 65 - SET_PROPERTY - MODEM (1 Property)
-
-```
-LENGTH:     0x 05
-DATA:       0x 11 20 01 0C 33
-```
-- Group:            20  MODEM
-- Property Count:   01
-  - Property:       0C  MODEM_FREQ_DEV [0]*
-
-*\*Note - 0C is bottom words of MODEM_FREQ_DEV.  Pkt 64 has first and second word.*
-
-| Property | Bits | Value            | Function       | Decode   |
-| -------: | ---: | ----:            | :-------       | :-----   |
-| 0x0A\*   | 0    | 0b0              | FREQDEV[16:16] | |
-| 0x0B\*   | 7:0  | 0x 01            | FREQDEV[15:8]  | |
-| 0x0C     | 7:0  | 0x 33            | FREQDEV[7:0]   | |
-
-0x 00 01 33 = 307d
-
-$MODEM\_FREQ\_DEV=\left(\frac{2^{19} \times outdiv \times Desired\_Dev\_Hz}{N_{PRESC} \times freq\_xo}\right)$
-
-Whereas:
-- $outdiv = 10$
-- $Desired\_Dev\_Hz = 307$
-- $N_{PRESC} = 2$
-- $freq\_xo = 25,600,600$
-
-$MODEM\_FREQ\_DEV = 3.14 Hz??$
 
 ## Pkt 66 - SET_PROPERTY - MODEM (12 Properties)
 
@@ -301,93 +272,5 @@ DATA:       0x 11 23 07 00 2C 0E 0B 04 0C 73 03
   - Property:       05  SYNTH_LPFILT1
   - Property:       06  SYNTH_LPFILT0
 
-## Pkt 76 - SET_PROPERTY - FREQ_CONTROL (1 Property)
 
-```
-LENGTH:     0x 0B
-DATA:       0x 11 40 07 00 4D 09 00 00 04 00 20
-```
-- Group:            40      FREQ_CONTROL
-- Property Count:   07
-  - Property:       00      FREQ_CONTROL_INTE
-  - Property:       01:03   FREQ_CONTROL_FRAC
-  - Property:       04:05   FREQ_CONTROL_CHANNEL_STEP_SIZE
-  - Property:       06      FREQ_CONTROL_W_SIZE
-
-$RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
-
-Whereas:
-- $fc_{inte} = 77$
-- $fc_{frac} = 589,824$
-- $N_{PRESC} = 2$
-- $freq\_xo = 25,600,000$
-- $outdiv = 10$
-
-$RF_{Channel_{Hz}}=400,000,000 Hz$
-
-### Property 00 - FREQ_CONTROL_INTE
-
-**Summary:**    Frac-N PLL Synthesizer integer divide number.
-
-**Byte:**       0x 4D = 0b 0100 1101
-
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x00     | 6:0  | 0b1001101 = 77d  | INTE             | 77d    |
-
-### Property 01:03 - FREQ_CONTROL_FRAC
-
-**Summary:**    Frac-N PLL Synthesizer integer divide number.
-
-**Bytes:**       0x 09 00 00 = 0b 0000 1001 0000 0000 0000 0000
-
-$RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x01     | 3:0  | 0b1001           | FRAC[19:16]      |        |
-| 0x02     | 7:0  | 0b0000 0000      | FRAC[15:8]       |        |
-| 0x03     | 7:0  | 0b0000 0000      | FRAC[7:0]        |        |
-
-FRAC = 0x 09 00 00 = 589,824d
-
-### Property 04:05 - FREQ_CONTROL_CHANNEL_STEP_SIZE
-
-**Summary:**    EZ Frequency Programming channel step size.
-
-**Bytes:**      0x 04 00 = 0b 0100 0000 0000 0000
-
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x04     | 7:0  | 0b01000000       | CHANNEL_STEP_SIZE[15:8] | |
-| 0x05     | 7:0  | 0b00000000       | CHANNEL_STEP_SIZE[7:0]  | |
-
-Channel Step Size = 0x 04 00 = 1024d
-
-FREQ_CONTROL_CHANNEL_STEP_SIZE property is given by the following equation:
-
-$FREQ\_CTRL\_CHAN\_STEP\_SIZE=\frac{2^{19} \times outdiv \times Desired\_Stepsize\_Hz}{N_{PRESC} \times freq\_xo}$
-
-Whereas: 
-
-- $outdiv = 10$
-- $Desired\_Stepsize\_Hz =\ 1024$
-- $N_{PRESC} = 2$
-- $freq\_xo = 25,600,000$
-
-$FREQ\_CTRL\_CHAN\_STEP\_SIZE =\ 104.8576 Hz$
-
-### Property 06 - FREQ_CONTROL_W_SIZE
-
-**Summary:**    Set window gating period (in number of crystal reference clock cycles) for counting VCO frequency during calibration.
-
-**Bytes:**      0x 20 = 32d
-
-*\*Note: This property does not need to change as a function of crystal reference frequency; the chip automatically calculates the target VCO count value as a function of crystal reference frequency and thus this property may remain constant. Silicon Labs recommends setting this property always to 0x20.*
-
-| Property | Bits | Value            | Function         | Decode |
-| -------: | ---: | ----:            | :-------         | :----- |
-| 0x06     | 7:0  | 0x20 = 32d       | W_SIZE           |        |
 
