@@ -89,3 +89,7 @@ $FREQ\_CTRL\_CHAN\_STEP\_SIZE =\ 104.8576 Hz$
 | Property | Bits | Value            | Function         | Decode |
 | -------: | ---: | ----:            | :-------         | :----- |
 | 0x06     | 7:0  | 0x20 = 32d       | W_SIZE           |        |
+
+# WDS3 Validations
+
+![WDS Frequency confirmation](../imgs/WDS3_pkt76.png)
