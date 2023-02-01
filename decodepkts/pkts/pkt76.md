@@ -65,7 +65,7 @@ Channel Step Size = 0x 04 00 = 1024d
 
 FREQ_CONTROL_CHANNEL_STEP_SIZE property is given by the following equation:
 
-$\texttt{FREQ\_textunderscore_CTRL\_textunderscore_CHAN\_STEP\_SIZE}=\frac{2^{19} \times outdiv \times Desired\_Stepsize\_Hz}{N_{PRESC} \times freq\_xo}$
+$FREQ\_CTRL\_CHAN\_STEP\_SIZE=\frac{2^{19} \times outdiv \times Desired\_Stepsize\_Hz}{N_{PRESC} \times freq\_xo}$
 
 Whereas: 
 
@@ -74,7 +74,7 @@ Whereas:
 - $N_{PRESC} = 2$
 - $freq\_xo = 25,600,000$
 
-$\texttt{FREQ\_textunderscore_CTRL\_textunderscore_CHAN\_STEP\_SIZE} = 104.8576 Hz$
+$FREQ\_CTRL\_CHAN\_STEP\_SIZE =\ 104.8576 Hz$
 
 ## Property 06 - FREQ_CONTROL_W_SIZE
 
