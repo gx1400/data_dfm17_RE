@@ -119,3 +119,29 @@ $MODEM\_IF\_FREQ = (\frac{2^{19}\times{outdiv}\times{IF\_FREQ\_HZ}}{Npresc\times
 | 0x1F     | 5    | 0b1        | DWN3BYP                 | 1 = Bypass the decimate-by-3 polyphase filter |
 | 0x1F     | 4    | 0b0        | DWN2BYP                 | 0 = Bypass the decimate-by-2 polyphase filter |
 | 0x1F     | 0    | 0b0        | RXGAINX2                | 0 = Normal decimate-by-8 filter gain |
+
+## Property 20 - MODEM_RESERVED_20_20
+
+**Summary:**    Reserved
+
+**Byte:**       0x 0C
+
+## Property 21 - MODEM_RESERVED_20_21
+
+**Summary:**    Reserved
+
+**Byte:**       0x E8
+
+
+## Property 22:23 - MODEM_BCR_OSR
+
+**Summary:**    RX BCR/Slicer oversampling rate (12-bit unsigned number).
+
+**Byte:**       0x 01 40 = 0b 0000 0001 0100 0000
+
+| Property | Bits | Value       | Function                | Decode   |
+| -------: | ---: | ----:       | :-------                | :-----   |
+| 0x22     | 3:0  | 0b0001 = 1d | RXOSR[11:8]             |          |
+| 0x23     | 7:0  | 0x40        | RXOSR[7:0]              |          | 
+
+0x 01 40 = 320d
