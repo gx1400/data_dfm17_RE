@@ -29,8 +29,8 @@
 | 62 | 0x0000a22e | 08 | 11 02 04 00 00 00 00 00 | [SET_PROPERTY - Group 02: FRR_CTL](pkts/pkt62.md)      |
 | 63 | 0x0000a237 | 05 | 11 10 01 04 21          | [SET_PROPERTY - Group 10: PREAMBLE](pkts/pkt63.md)     |
 | 64 | 0x0000a23d | 10 | 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01 | [SET_PROPERTY - Group 20: MODEM](pkts/pkt64.md) |
-| 65 | 0x0000a24e | 05 | 11 20 01 0C 33          | SET_PROPERTY - Group 20: MODEM                         |
-| 66 | 0x0000a254 | 10 | 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40 | SET_PROPERTY - Group 20: MODEM |
+| 65 | 0x0000a24e | 05 | 11 20 01 0C 33          | [SET_PROPERTY - Group 20: MODEM](pkts/pkt65.md)                         |
+| 66 | 0x0000a254 | 10 | 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40 | [SET_PROPERTY - Group 20: MODEM](pkts/pkt66.md) |
 | 67 | 0x0000a265 | 10 | 11 20 0C 24 01 99 9A 00 CD 00 C2 00 54 62 80 6B | SET_PROPERTY - Group 20: MODEM |
 | 68 | 0x0000a276 | 07 | 11 20 03 30 01 E5 80    | SET_PROPERTY - Group 20: MODEM                         |
 | 69 | 0x0000a27e | 05 | 11 20 01 35 E0          | SET_PROPERTY - Group 20: MODEM                         |
@@ -109,23 +109,7 @@ This information applies to both the B and C revisions of Si4x6x and Si4x55, and
 
 
 
-## Pkt 66 - SET_PROPERTY - MODEM (12 Properties)
 
-```
-LENGTH:     0x 10
-DATA:       0x 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40
-```
-- Group:            20  MODEM
-- Property Count:   0C
-  - Property:       18      MODEM_TX_RAMP_DELAY
-  - Property:       19      MODEM_MDM_CTRL
-  - Property:       1A      MODEM_IF_CONTROL
-  - Property:       1B:1D   MODEM_IF_FREQ
-  - Property:       1E      MODEM_DECIMATION_CFG1
-  - Property:       1F      MODEM_DECIMATION_CFG0
-  - Property:       20      MODEM_RESERVED_20_20
-  - Property:       21      MODEM_RESERVED_20_21
-  - Property:       22:23   MODEM_BCR_OSR
   
 ## Pkt 67 - SET_PROPERTY - MODEM (12 Properties)
 
