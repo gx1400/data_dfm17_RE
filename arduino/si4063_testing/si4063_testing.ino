@@ -12,6 +12,8 @@
 #define siSDO PA6
 #define siSCLK PA5
 
+SPIClass siSPI(siSDI, siSDO, siSCLK);
+
 //                      RX    TX
 HardwareSerial SerialUSB(PA10, PA9);
 HardwareSerial SerialGPS(PA3, PA2);
@@ -44,16 +46,16 @@ void setup() {
   // Setup Si4063 pins
   pinMode(siSDN, OUTPUT);
   pinMode(siCS, OUTPUT);
-  SPI.begin();
-  SPI.setClockDivider(SPI_CLOCK_DIV16);
+
+  siSPI.begin(siCS);
+  siSPI.setClockDivider(SPI_CLOCK_DIV16);
+
 
   // Setup USB UART
   SerialUSB.begin(9600);
   SerialUSB.println("Hello World!");
 
-
-  digitalWrite(siCS, HIGH);
-  digitalWrite(siSDN, HIGH);
+  digitalWrite(siSDN, LOW);
 
   delay(100);
 
@@ -113,26 +115,29 @@ void toggleLED(int led, bool& state) {
 
 void sendSPITest() {
   SerialUSB.println("Start SPI");
-  digitalWrite(siSDN, LOW);
-  digitalWrite(siCS, LOW);
 
+  // 
+  digitalWriteFast(siSDN, HIGH);
 
   for(int x = 0; x < 10; x++ ) {
-    SerialUSB.print("SPI Packet #" );
-    SerialUSB.print(x,DEC);
-    SerialUSB.println(":");
+    byte cmd = 0x44;
+    byte resp = 0x00;
 
-    SPI.transfer(0x44);
-
-    byte resp = SPI.transfer(0xFF);
+    resp = siSPI.transfer(siCS, cmd);
+    //resp = siSPI.transfer(siCS, 0xFF);
     SerialUSB.print("Response: \t");
-    SerialUSB.println(resp,BIN);
+    SerialUSB.println(resp,HEX);
 
-    delay(10);
+    if(resp == 0xFF) {
+      return;
+    }
+    delayMicroseconds(5);
   }
 
-  digitalWrite(siCS, HIGH);
+  SPI.endTransaction();
+
+  //digitalWrite(siCS, HIGH);
   delay(100);
-  digitalWrite(siSDN, HIGH);
+  digitalWrite(siSDN, LOW);
   SerialUSB.println("End SPI");
 } 
