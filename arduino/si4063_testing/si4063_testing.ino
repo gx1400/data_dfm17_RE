@@ -13,8 +13,8 @@
 #define spiSCLK PA5   // SPI Clock
 
 
-SPIClass siSPI(spiMOSI, spiMISO, spiSCLK);
-//SPIClass siSPI();
+
+
 //                      RX    TX
 HardwareSerial SerialUSB(PA10, PA9);
 HardwareSerial SerialGPS(PA3, PA2);
@@ -48,9 +48,14 @@ void setup() {
   pinMode(siSDN, OUTPUT);
   pinMode(spiCS, OUTPUT);
 
-  //siSPI.begin();
-  //siSPI.setClockDivider(SPI_CLOCK_DIV16);
-  siSPI.beginTransaction(SPISettings(500000,MSBFIRST,SPI_MODE0, SPI_TRANSMITRECEIVE));
+  SPI.setMISO(spiMISO);
+  SPI.setMOSI(spiMOSI);
+  SPI.setSCLK(spiSCLK);
+  SPI.setBitOrder(MSBFIRST);
+  //SPI.setSSEL(spiCS);
+  SPI.setClockDivider(SPI_CLOCK_DIV16);
+
+  SPI.begin();
 
   // Setup USB UART
   SerialUSB.begin(9600);
@@ -103,13 +108,15 @@ void sendSPITest() {
 } 
 
 void sendCmd(byte cmd) {
-  siSPI.transfer(spiCS, cmd);
+  SPI.transfer(spiCS, cmd);
 }
 
 void waitForCTS() {
   for(int x = 0; x < 100; x++ ) {
     byte resp = 0x00;
+    digitalWrite(spiCS, LOW);
     resp = readSPIoneByte();
+    digitalWrite(spiCS, HIGH);
     SerialUSB.print("Response: \t");
     SerialUSB.println(resp,HEX);
 
@@ -121,7 +128,11 @@ void waitForCTS() {
 }
 
 byte readSPIoneByte() {
-  return siSPI.transfer(spiCS, 0xFF);
+  byte resp;
+  digitalWrite(spiCS, LOW);
+  resp = SPI.transfer(spiCS, 0xFF);
+  digitalWrite(spiCS, HIGH);
+  return resp;
 }
 
 // toggle led per the interval
