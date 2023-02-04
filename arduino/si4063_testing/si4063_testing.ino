@@ -55,7 +55,7 @@ void setup() {
   SerialUSB.begin(9600);
   SerialUSB.println("Hello World!");
 
-  digitalWrite(siSDN, LOW);
+  digitalWrite(siSDN, HIGH);
 
   delay(100);
 
@@ -115,15 +115,14 @@ void toggleLED(int led, bool& state) {
 
 void sendSPITest() {
   SerialUSB.println("Start SPI");
-
-  // 
-  digitalWriteFast(siSDN, HIGH);
+  digitalWriteFast(siSDN, LOW);
 
   for(int x = 0; x < 10; x++ ) {
     byte cmd = 0x44;
     byte resp = 0x00;
 
     resp = siSPI.transfer(siCS, cmd);
+    siSPI.transfer(siCS, )
     //resp = siSPI.transfer(siCS, 0xFF);
     SerialUSB.print("Response: \t");
     SerialUSB.println(resp,HEX);
@@ -136,7 +135,6 @@ void sendSPITest() {
 
   SPI.endTransaction();
 
-  //digitalWrite(siCS, HIGH);
   delay(100);
   digitalWrite(siSDN, LOW);
   SerialUSB.println("End SPI");
