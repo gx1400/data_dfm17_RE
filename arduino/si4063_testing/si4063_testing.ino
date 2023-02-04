@@ -121,8 +121,7 @@ void sendSPITest() {
     byte cmd = 0x44;
     byte resp = 0x00;
 
-    resp = siSPI.transfer(siCS, cmd);
-    siSPI.transfer(siCS, )
+    siSPI.transfer(siCS, cmd);
     //resp = siSPI.transfer(siCS, 0xFF);
     SerialUSB.print("Response: \t");
     SerialUSB.println(resp,HEX);
