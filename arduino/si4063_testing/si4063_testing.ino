@@ -47,23 +47,28 @@ void setup() {
   // Setup Si4063 pins
   pinMode(siSDN, OUTPUT);
   pinMode(spiCS, OUTPUT);
+  //pinMode(spiMOSI, OUTPUT);
+  //pinMode(spiSCLK, OUTPUT);
+  //pinMode(spiMOSI, OUTPUT);
 
-  SPI.setMISO(spiMISO);
-  SPI.setMOSI(spiMOSI);
-  SPI.setSCLK(spiSCLK);
-  SPI.setBitOrder(MSBFIRST);
+  //SPI.setMISO(spiMISO);
+  //SPI.setMOSI(spiMOSI);
+  //SPI.setSCLK(spiSCLK);
+  //SPI.setBitOrder(MSBFIRST);
   //SPI.setSSEL(spiCS);
-  SPI.setClockDivider(SPI_CLOCK_DIV16);
+  
 
-  SPI.begin();
+  //SPI.begin();
+  SPI.beginTransaction(SPISettings(500000, MSBFIRST, SPI_MODE0));
 
   // Setup USB UART
   SerialUSB.begin(9600);
   SerialUSB.println("Hello World!");
 
-  digitalWrite(siSDN, HIGH);    //assert shutdown on Si4063
+  digitalWrite(siSDN, HIGH);
+  digitalWrite(spiCS, HIGH);
 
-  delay(100);
+  //delay(100);
 }
 
 
@@ -75,65 +80,104 @@ void loop() {
   //for testing SPI just execute once
   if (!executeonce && (millis() >= 2000)) {
     executeonce = true;
-    sendSPITest();
+    //sendSPITest();
+    //testPins();
+    testSPIbasic();
   }
 }
 
-void sendSPITest() {
-  SerialUSB.println("Start SPI");
-
-  // deassert shutdown
-  digitalWrite(siSDN, LOW);
-  delayMicroseconds(10);
-
-  sendCmd(0x44);
-  waitForCTS();
-
-  //sendCmd(0x33);
-  //waitForCTS();
-
-  //byte mainstate = readSPIoneByte();
-  //byte currchan = readSPIoneByte();
-  
-  
-
-  delay(50);
-  digitalWrite(siSDN, LOW);
-  SerialUSB.println("End SPI");
-
-  //SerialUSB.print("Main state: ");
-  //SerialUSB.println(mainstate, HEX);
-  //SerialUSB.print("Current channel: ");
-  //SerialUSB.println(currchan, HEX);
-} 
-
-void sendCmd(byte cmd) {
-  SPI.transfer(spiCS, cmd);
-}
-
-void waitForCTS() {
+// true is good, 
+bool waitForCTS() {
   for(int x = 0; x < 100; x++ ) {
-    byte resp = 0x00;
     digitalWrite(spiCS, LOW);
-    resp = readSPIoneByte();
-    digitalWrite(spiCS, HIGH);
-    SerialUSB.print("Response: \t");
-    SerialUSB.println(resp,HEX);
 
+    SPI.transfer( 0x44);
+
+    byte resp = 0x00;
+    resp = SPI.transfer( 0xFF);
+    
+
+    digitalWrite(spiCS, HIGH);
+        
     if(resp == 0xFF) {
-      return;
+      return true;
     }
     delayMicroseconds(50);
   }
+
+  // error
+  return false;
 }
 
-byte readSPIoneByte() {
-  byte resp;
+void testSPIbasic() {
+  digitalWrite(siSDN, LOW);
+  delayMicroseconds(10);
+
+  for(int x = 0; x < 100; x++ ) {
+    digitalWrite(spiCS, LOW);
+
+    SPI.transfer( 0x44);
+
+    byte resp = 0x00;
+    resp = SPI.transfer( 0xFF);
+    
+
+    digitalWrite(spiCS, HIGH);
+    
+    SerialUSB.print("Response from 1st 0x44: \t");
+    SerialUSB.println(resp,HEX);
+    
+    if(resp == 0xFF) {
+      break;
+    }
+    delayMicroseconds(50);
+  }
+
   digitalWrite(spiCS, LOW);
-  resp = SPI.transfer(spiCS, 0xFF);
+  SPI.transfer( 0x33);
   digitalWrite(spiCS, HIGH);
-  return resp;
+
+  for(int x = 0; x < 100; x++ ) {
+    digitalWrite(spiCS, LOW);
+
+    SPI.transfer( 0x44);
+
+    byte resp = 0x00;
+    byte resp1 = 0x00;
+    byte resp2 = 0x00;
+
+    resp = SPI.transfer( 0xFF);
+    
+        
+    if(resp == 0xFF) {
+      
+      resp1 = SPI.transfer( 0xFF);
+      resp2 = SPI.transfer( 0xFF);
+      digitalWrite(spiCS, HIGH);
+
+      SerialUSB.print("Response from 0x44: \t");
+      SerialUSB.println(resp,HEX);
+      SerialUSB.print("Response1 from 0x33: \t");
+      SerialUSB.println(resp1,HEX);
+      SerialUSB.print("Response2 from 0x33: \t");
+      SerialUSB.println(resp2,HEX);
+      break;
+    }
+    digitalWrite(spiCS, HIGH);
+
+    //SerialUSB.print("Response from 0x44: \t");
+    //SerialUSB.println(resp,HEX);
+
+    delayMicroseconds(50);
+  }
+  
+  
+  
+
+  delayMicroseconds(10);
+  digitalWrite(siSDN, HIGH);
 }
+
 
 // toggle led per the interval
 void ledInterval() {
@@ -142,7 +186,7 @@ void ledInterval() {
   if ((currentms - greenLastms) >= greenInterval) {
     greenLastms = currentms;
     toggleLED(LED_GREEN, greenState);
-
+    
     if(debugLedMsgs) {
       SerialUSB.println("Green Toggle!");
     }
