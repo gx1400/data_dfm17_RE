@@ -112,6 +112,22 @@ bool waitForCTS() {
 void testSPIbasic() {
   digitalWrite(siSDN, LOW);
   delayMicroseconds(10);
+  
+  waitForCTS();
+
+  delay(1);
+
+  // send power  up
+  digitalWrite(spiCS, LOW);
+  SPI.transfer( 0x02);
+  SPI.transfer( 0x01);
+  SPI.transfer( 0x01);
+  SPI.transfer( 0x01);
+  SPI.transfer( 0x86);
+  SPI.transfer( 0xA0);
+  SPI.transfer( 0x00);
+
+  digitalWrite(spiCS, HIGH);
 
   for(int x = 0; x < 100; x++ ) {
     digitalWrite(spiCS, LOW);
@@ -120,21 +136,20 @@ void testSPIbasic() {
 
     byte resp = 0x00;
     resp = SPI.transfer( 0xFF);
-    
-
-    digitalWrite(spiCS, HIGH);
-    
-    SerialUSB.print("Response from 1st 0x44: \t");
-    SerialUSB.println(resp,HEX);
-    
+        
     if(resp == 0xFF) {
+      digitalWrite(spiCS, HIGH);
       break;
     }
+    digitalWrite(spiCS, HIGH);
     delayMicroseconds(50);
   }
 
+  delay(1);
+
+  // send info request
   digitalWrite(spiCS, LOW);
-  SPI.transfer( 0x33);
+  SPI.transfer( 0x01);
   digitalWrite(spiCS, HIGH);
 
   for(int x = 0; x < 100; x++ ) {
@@ -145,6 +160,12 @@ void testSPIbasic() {
     byte resp = 0x00;
     byte resp1 = 0x00;
     byte resp2 = 0x00;
+    byte resp3 = 0x00;
+    byte resp4 = 0x00;
+    byte resp5 = 0x00;
+    byte resp6 = 0x00;
+    byte resp7 = 0x00;
+    byte resp8 = 0x00;
 
     resp = SPI.transfer( 0xFF);
     
@@ -153,24 +174,40 @@ void testSPIbasic() {
       
       resp1 = SPI.transfer( 0xFF);
       resp2 = SPI.transfer( 0xFF);
+      resp3 = SPI.transfer( 0xFF);
+      resp4 = SPI.transfer( 0xFF);
+      resp5 = SPI.transfer( 0xFF);
+      resp6 = SPI.transfer( 0xFF);
+      resp7 = SPI.transfer( 0xFF);
+      resp8 = SPI.transfer( 0xFF);
       digitalWrite(spiCS, HIGH);
 
-      SerialUSB.print("Response from 0x44: \t");
-      SerialUSB.println(resp,HEX);
-      SerialUSB.print("Response1 from 0x33: \t");
-      SerialUSB.println(resp1,HEX);
-      SerialUSB.print("Response2 from 0x33: \t");
-      SerialUSB.println(resp2,HEX);
+      // SerialUSB.print("Response from 0x44: \t");
+      // SerialUSB.println(resp,HEX);
+      // SerialUSB.print("Response1 from 0x33: \t");
+      // SerialUSB.println(resp1,HEX);
+      // SerialUSB.print("Response2 from 0x33: \t");
+      // SerialUSB.println(resp2,HEX);
+      // SerialUSB.print("Response3 from 0x33: \t");
+      // SerialUSB.println(resp3,HEX);
+      // SerialUSB.print("Response4 from 0x33: \t");
+      // SerialUSB.println(resp4,HEX);
+      // SerialUSB.print("Response5 from 0x33: \t");
+      // SerialUSB.println(resp5,HEX);
+      // SerialUSB.print("Response6 from 0x33: \t");
+      // SerialUSB.println(resp6,HEX);
+      // SerialUSB.print("Response7 from 0x33: \t");
+      // SerialUSB.println(resp7,HEX);
+      // SerialUSB.print("Response8 from 0x33: \t");
+      // SerialUSB.println(resp8,HEX);
       break;
     }
     digitalWrite(spiCS, HIGH);
-
     //SerialUSB.print("Response from 0x44: \t");
     //SerialUSB.println(resp,HEX);
 
     delayMicroseconds(50);
   }
-  
   
   
 
