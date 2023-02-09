@@ -69,8 +69,9 @@ void usbPrint(char _out[]);
 #define oLED_G_GPIO_Port GPIOC
 #define oLED_Y_Pin GPIO_PIN_7
 #define oLED_Y_GPIO_Port GPIOC
-#define iButton_Pin GPIO_PIN_8
-#define iButton_GPIO_Port GPIOC
+#define intButton_Pin GPIO_PIN_8
+#define intButton_GPIO_Port GPIOC
+#define intButton_EXTI_IRQn EXTI9_5_IRQn
 #define usbTX_Pin GPIO_PIN_9
 #define usbTX_GPIO_Port GPIOA
 #define usbRX_Pin GPIO_PIN_10

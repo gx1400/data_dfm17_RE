@@ -40,7 +40,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef hUsb;
+UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 uint32_t greenLastms 		= 0;
@@ -169,15 +169,15 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 1 */
 
   /* USER CODE END USART1_Init 1 */
-  hUsb.Instance = USART1;
-  hUsb.Init.BaudRate = 9600;
-  hUsb.Init.WordLength = UART_WORDLENGTH_8B;
-  hUsb.Init.StopBits = UART_STOPBITS_1;
-  hUsb.Init.Parity = UART_PARITY_NONE;
-  hUsb.Init.Mode = UART_MODE_TX_RX;
-  hUsb.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  hUsb.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&hUsb) != HAL_OK)
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 9600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -224,16 +224,27 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(oLED_R_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : iButton_Pin */
-  GPIO_InitStruct.Pin = iButton_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pin : intButton_Pin */
+  GPIO_InitStruct.Pin = intButton_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(iButton_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(intButton_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin == intButton_Pin) // INT Source is pin A9
+    {
+    	GPIO_PinState sButton = HAL_GPIO_ReadPin(intButton_GPIO_Port, intButton_Pin);
+    	HAL_GPIO_WritePin(oLED_Y_GPIO_Port, oLED_Y_Pin, sButton); // Toggle LED
+    }
+}
 
 void ledInterval(void) {
 	uint32_t currentms = HAL_GetTick();
@@ -246,10 +257,12 @@ void ledInterval(void) {
 			redLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
 	}
+	/*
 	if( (currentms - yellowLastms) >= yellowIntervalMs) {
 			yellowLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin);
 	}
+	*/
 }
 
 void usbInterval(void) {
@@ -259,25 +272,17 @@ void usbInterval(void) {
 		usbLastms = currentms;
 
 		usbPrintln("hello world");
-
-		GPIO_PinState sButton = HAL_GPIO_ReadPin(iButton_GPIO_Port, iButton_Pin);
-
-		if(sButton) {
-			usbPrintln("Button HIGH");
-		} else {
-			usbPrintln("Button LOW");
-		}
 	}
 }
 
 void usbPrintln(char _out[]){
-	HAL_UART_Transmit(&hUsb, (uint8_t *) _out, strlen(_out), 10);
+	HAL_UART_Transmit(&huart1, (uint8_t *) _out, strlen(_out), 10);
 	char newline[2] = "\r\n";
-	HAL_UART_Transmit(&hUsb, (uint8_t *) newline, 2, 10);
+	HAL_UART_Transmit(&huart1, (uint8_t *) newline, 2, 10);
 }
 
 void usbPrint(char _out[]){
-	HAL_UART_Transmit(&hUsb, (uint8_t *) _out, strlen(_out), 10);
+	HAL_UART_Transmit(&huart1, (uint8_t *) _out, strlen(_out), 10);
 }
 
 /* USER CODE END 4 */
