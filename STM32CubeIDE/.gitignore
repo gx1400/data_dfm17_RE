@@ -1,7 +1,7 @@
 # https://github.com/github/gitignore/blob/master/C.gitignore
 
 # Exclusions
-!22*
+
 
 # Prerequisites
 *.d
@@ -68,3 +68,10 @@ ctrlp.root
 
 #html
 *.html
+
+# Eclipse
+.metadata
+.settings
+[Rr]elease
+[Dd]ebug
+.launch
