@@ -554,3 +554,293 @@ arm-none-eabi-size   dfm17_demo.elf
    5908	     20	   1660	   7588	   1da4	dfm17_demo.elf
 Finished building: default.size.stdout
  
+22:04:04 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5840	     28	   1652	   7520	   1d60	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:04:12 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5840	     28	   1652	   7520	   1d60	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+22:05:12 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:11:01 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:254:6: error: 'usbInterval' redeclared as different kind of symbol
+  254 | void usbInterval(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:53:10: note: previous definition of 'usbInterval' was here
+   53 | uint16_t usbInterval  = 2000;
+      |          ^~~~~~~~~~~
+../Core/Src/main.c: In function 'usbInterval':
+../Core/Src/main.c:257:30: warning: comparison between pointer and integer
+  257 |  if ((currentms - usbLastms) >= usbInterval) {
+      |                              ^~
+../Core/Src/main.c:261:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  261 |   HAL_UART_Transmit(&huart1, msg, sizeof(msg), HAL_MAX_DELAY);
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:338,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:725:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+  725 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+22:13:05 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'usbInterval':
+../Core/Src/main.c:261:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  261 |   HAL_UART_Transmit(&huart1, msg, sizeof(msg), HAL_MAX_DELAY);
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:338,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:725:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+  725 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:14:23 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'usbInterval':
+../Core/Src/main.c:261:30: warning: passing argument 2 of 'HAL_UART_Transmit' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  261 |   HAL_UART_Transmit(&huart1, msg, sizeof(msg), HAL_MAX_DELAY);
+      |                              ^~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:338,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:725:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'const char *'
+  725 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:15:08 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'usbInterval':
+../Core/Src/main.c:261:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  261 |   HAL_UART_Transmit(&huart1, msg, sizeof(msg), HAL_MAX_DELAY);
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:338,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:725:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+  725 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:20:53 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'usbPrintln':
+../Core/Src/main.c:266:45: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  266 |  HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
+      |                                             ^~~~~~
+../Core/Src/main.c:266:45: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:21:50 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:21:54 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+22:24:18 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+22:25:03 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:116:4: warning: implicit declaration of function 'usbInterval'; did you mean 'ledInterval'? [-Wimplicit-function-declaration]
+  116 |    usbInterval();
+      |    ^~~~~~~~~~~
+      |    ledInterval
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:256:6: warning: conflicting types for 'usbInterval'
+  256 | void usbInterval(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:116:4: note: previous implicit declaration of 'usbInterval' was here
+  116 |    usbInterval();
+      |    ^~~~~~~~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   6420	     28	   1652	   8100	   1fa4	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:26:28 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:26:39 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+22:26:53 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:28:17 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_hal_msp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_hal_msp.d" -MT"Core/Src/stm32f1xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_it.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_it.d" -MT"Core/Src/stm32f1xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_it.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+22:28:22 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5824	     28	   1652	   7504	   1d50	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+22:29:11 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   6420	     28	   1652	   8100	   1fa4	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 

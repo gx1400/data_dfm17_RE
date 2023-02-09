@@ -21,7 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -46,12 +45,12 @@ UART_HandleTypeDef huart1;
 uint32_t greenLastms 		= 0;
 uint32_t redLastms 			= 0;
 uint32_t yellowLastms 		= 0;
+
 uint32_t usbLastms			= 0;
 
-uint16_t greenIntervalMs	= 500;
-uint16_t redIntervalMs		= 1000;
-uint16_t yellowIntervalMs	= 2000;
-uint16_t usbIntervalMs		= 2000;
+uint16_t greenInterval		= 500;
+uint16_t redInterval		= 1000;
+uint16_t yellowInterval		= 2000;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -59,7 +58,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+void ledInterval(void);
 
 /* USER CODE END PFP */
 
@@ -112,7 +111,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  ledInterval();
-	  //usbInterval();
+
 
   }
   /* USER CODE END 3 */
@@ -238,35 +237,21 @@ static void MX_GPIO_Init(void)
 void ledInterval(void) {
 	uint32_t currentms = HAL_GetTick();
 
-	if( (currentms - greenLastms) >= greenIntervalMs) {
+	if( (currentms - greenLastms) >= greenInterval) {
 			greenLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
 	}
-	if( (currentms - redLastms) >= redIntervalMs) {
+	if( (currentms - redLastms) >= redInterval) {
 			redLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
 	}
-	if( (currentms - yellowLastms) >= yellowIntervalMs) {
+	if( (currentms - yellowLastms) >= yellowInterval) {
 			yellowLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin);
 	}
 }
 
-void usbInterval(void) {
-	uint32_t currentms = HAL_GetTick();
 
-	if ((currentms - usbLastms) >= usbIntervalMs) {
-		usbLastms = currentms;
-
-		usbPrintln(&huart1, "hello world");
-	}
-}
-
-void usbPrintln(UART_HandleTypeDef *huart, char _out[]){
-	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
-	char newline[2] = "\r\n";
-	HAL_UART_Transmit(huart, (uint8_t *) newline, 2, 10);
-}
 
 /* USER CODE END 4 */
 

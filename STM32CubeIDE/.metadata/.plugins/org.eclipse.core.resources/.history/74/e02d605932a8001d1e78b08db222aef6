@@ -112,7 +112,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  ledInterval();
-	  //usbInterval();
+	  usbInterval();
 
   }
   /* USER CODE END 3 */

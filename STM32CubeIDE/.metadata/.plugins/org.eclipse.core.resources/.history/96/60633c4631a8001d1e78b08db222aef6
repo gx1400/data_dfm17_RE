@@ -21,7 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -48,9 +47,9 @@ uint32_t redLastms 			= 0;
 uint32_t yellowLastms 		= 0;
 uint32_t usbLastms			= 0;
 
-uint16_t greenIntervalMs	= 500;
+uint16_t greenIntervalMs		= 500;
 uint16_t redIntervalMs		= 1000;
-uint16_t yellowIntervalMs	= 2000;
+uint16_t yellowIntervalMs		= 2000;
 uint16_t usbIntervalMs		= 2000;
 /* USER CODE END PV */
 
@@ -59,7 +58,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+void ledInterval(void);
+void usbPrintln(UART_HandleTypeDef *huart, char _out[]);
 
 /* USER CODE END PFP */
 
@@ -112,7 +112,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  ledInterval();
-	  //usbInterval();
+
 
   }
   /* USER CODE END 3 */

@@ -23,7 +23,7 @@ bool redState = false;
 bool yellowState = false;
 
 // Serial debug messages
-const bool debugLedMsgs = false;
+const bool debugLedMsgs = true;
 
 void setup() {
   // put your setup code here, to run once:

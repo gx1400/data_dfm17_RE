@@ -59,7 +59,9 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+void ledInterval(void);
+void usbInterval(void);
+void usbPrintln(UART_HandleTypeDef *huart, char _out[]);
 
 /* USER CODE END PFP */
 
