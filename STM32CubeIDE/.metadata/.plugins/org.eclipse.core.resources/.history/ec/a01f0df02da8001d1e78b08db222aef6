@@ -243,7 +243,6 @@ void ledInit(void) {
 }
 
 void ledInterval(void) {
-	uint32_t currentms = HAL_GetTick();
 
 	if( (currentms - greenLastms) >= greenInterval) {
 			greenLastms = currentms;

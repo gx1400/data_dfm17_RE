@@ -232,6 +232,13 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void ledCompare(uint32_t currMs, uint32_t interval, GPIO_TypeDef *GPIOPort, uint16_t GPIOPin, uint32_t *lastms){
+	if((currMs - lastms) >= interval ){
+		*lastms = currMs;
+		HAL_GPIO_TogglePin(GPIOPort, GPIOPin);
+	}
+}
+
 void ledInit(void) {
 	greenLastms = 0;
 	redLastms = 0;
@@ -244,19 +251,13 @@ void ledInit(void) {
 
 void ledInterval(void) {
 	uint32_t currentms = HAL_GetTick();
+	uint32_t* ptr_redLastMs = &redLastms;
 
-	if( (currentms - greenLastms) >= greenInterval) {
-			greenLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
-	}
-	if( (currentms - redLastms) >= redInterval) {
-			redLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
-	}
-	if( (currentms - yellowLastms) >= yellowInterval) {
-			yellowLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin);
-	}
+	//if( (currentms - greenLastms) >= greenInterval) {
+	//	greenLastms = currentms;
+	//	HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
+	//}
+	ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, &ptr_redLastMs);
 }
 
 

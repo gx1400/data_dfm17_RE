@@ -109,6 +109,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
 	  ledInterval();
 
 
@@ -232,6 +233,16 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void ledInterval(void) {
+	uint32_t currentms = HAL_GetTick();
+
+	if( (currentms - greenLastms) >= greenInterval) {
+		greenLastms = currentms;
+		HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
+	}
+
+}
+
 void ledInit(void) {
 	greenLastms = 0;
 	redLastms = 0;
@@ -241,25 +252,6 @@ void ledInit(void) {
 	redInterval = 1000;
 	yellowInterval = 2000;
 }
-
-void ledInterval(void) {
-	uint32_t currentms = HAL_GetTick();
-
-	if( (currentms - greenLastms) >= greenInterval) {
-			greenLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
-	}
-	if( (currentms - redLastms) >= redInterval) {
-			redLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
-	}
-	if( (currentms - yellowLastms) >= yellowInterval) {
-			yellowLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin);
-	}
-}
-
-
 
 /* USER CODE END 4 */
 

@@ -37,3 +37,520 @@ Finished building: default.size.stdout
  
 Finished building: dfm17_demo.list
  
+21:11:58 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_hal_msp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_hal_msp.d" -MT"Core/Src/stm32f1xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_it.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_it.d" -MT"Core/Src/stm32f1xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:81:3: warning: implicit declaration of function 'ledInit' [-Wimplicit-function-declaration]
+   81 |   ledInit();
+      |   ^~~~~~~
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'ledInterval' [-Wimplicit-function-declaration]
+  109 |    ledInterval();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:241:6: warning: conflicting types for 'ledInterval'
+  241 | void ledInterval(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'ledInterval' was here
+  109 |    ledInterval();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:242:11: warning: unused variable 'currentms' [-Wunused-variable]
+  242 |  uint32_t currentms = HAL_GetTick();
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:247:6: warning: conflicting types for 'ledInit'
+  247 | void ledInit(void) {
+      |      ^~~~~~~
+../Core/Src/main.c:81:3: note: previous implicit declaration of 'ledInit' was here
+   81 |   ledInit();
+      |   ^~~~~~~
+arm-none-eabi-gcc "../Core/Src/system_stm32f1xx.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f1xx.d" -MT"Core/Src/system_stm32f1xx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/system_stm32f1xx.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5880	     20	   1652	   7552	   1d80	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:12:45 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:81:3: warning: implicit declaration of function 'ledInit' [-Wimplicit-function-declaration]
+   81 |   ledInit();
+      |   ^~~~~~~
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'ledInterval' [-Wimplicit-function-declaration]
+  109 |    ledInterval();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:241:13: warning: conflicting types for 'ledInterval'
+  241 | static void ledInterval(void) {
+      |             ^~~~~~~~~~~
+../Core/Src/main.c:241:13: error: static declaration of 'ledInterval' follows non-static declaration
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'ledInterval' was here
+  109 |    ledInterval();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:242:11: warning: unused variable 'currentms' [-Wunused-variable]
+  242 |  uint32_t currentms = HAL_GetTick();
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:247:13: warning: conflicting types for 'ledInit'
+  247 | static void ledInit(void) {
+      |             ^~~~~~~
+../Core/Src/main.c:247:13: error: static declaration of 'ledInit' follows non-static declaration
+../Core/Src/main.c:81:3: note: previous implicit declaration of 'ledInit' was here
+   81 |   ledInit();
+      |   ^~~~~~~
+../Core/Src/main.c:247:13: warning: 'ledInit' defined but not used [-Wunused-function]
+  247 | static void ledInit(void) {
+      |             ^~~~~~~
+../Core/Src/main.c:241:13: warning: 'ledInterval' defined but not used [-Wunused-function]
+  241 | static void ledInterval(void) {
+      |             ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:13:15 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:81:3: warning: implicit declaration of function 'ledInit' [-Wimplicit-function-declaration]
+   81 |   ledInit();
+      |   ^~~~~~~
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'ledInterval' [-Wimplicit-function-declaration]
+  109 |    ledInterval();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:241:6: warning: conflicting types for 'ledInterval'
+  241 | void ledInterval(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'ledInterval' was here
+  109 |    ledInterval();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:242:11: warning: unused variable 'currentms' [-Wunused-variable]
+  242 |  uint32_t currentms = HAL_GetTick();
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:247:6: warning: conflicting types for 'ledInit'
+  247 | void ledInit(void) {
+      |      ^~~~~~~
+../Core/Src/main.c:81:3: note: previous implicit declaration of 'ledInit' was here
+   81 |   ledInit();
+      |   ^~~~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5880	     20	   1652	   7552	   1d80	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:15:20 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:242:11: warning: unused variable 'currentms' [-Wunused-variable]
+  242 |  uint32_t currentms = HAL_GetTick();
+      |           ^~~~~~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5880	     20	   1652	   7552	   1d80	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:16:54 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:246:11: warning: unused variable 'currentms' [-Wunused-variable]
+  246 |  uint32_t currentms = HAL_GetTick();
+      |           ^~~~~~~~~
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5916	     20	   1660	   7596	   1dac	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:19:43 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5828	     20	   1660	   7508	   1d54	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:19:50 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5828	     20	   1660	   7508	   1d54	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+21:26:31 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:259:13: error: 'cur' undeclared (first use in this function)
+  259 |  ledCompare(cur, greenInterval);
+      |             ^~~
+../Core/Src/main.c:259:13: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:253:11: warning: unused variable 'currentms' [-Wunused-variable]
+  253 |  uint32_t currentms = HAL_GetTick();
+      |           ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:26:44 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5856	     20	   1660	   7536	   1d70	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:26:53 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5856	     20	   1660	   7536	   1d70	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+21:28:27 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5868	     20	   1660	   7548	   1d7c	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:28:32 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5868	     20	   1660	   7548	   1d7c	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+21:31:31 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5868	     20	   1660	   7548	   1d7c	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:33:01 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:235:104: error: expected ';', ',' or ')' before '&' token
+  235 | void ledCompare(uint32_t currMs, uint32_t interval, GPIO_TypeDef *GPIOPort, uint16_t GPIOPin, uint32_t &lastms){
+      |                                                                                                        ^
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:259:2: warning: implicit declaration of function 'ledCompare' [-Wimplicit-function-declaration]
+  259 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin);
+      |  ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:33:49 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5868	     20	   1660	   7548	   1d7c	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:35:58 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:236:13: error: invalid operands to binary - (have 'uint32_t' {aka 'long unsigned int'} and 'uint32_t *' {aka 'long unsigned int *'})
+  236 |  if((currMs - lastms) >= interval ){
+      |             ^
+../Core/Src/main.c:237:10: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'uint32_t' {aka 'long unsigned int'} makes pointer from integer without a cast [-Wint-conversion]
+  237 |   lastms = currMs;
+      |          ^
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:259:67: warning: passing argument 5 of 'ledCompare' makes pointer from integer without a cast [-Wint-conversion]
+  259 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, redLastms);
+      |                                                                   ^~~~~~~~~
+      |                                                                   |
+      |                                                                   uint32_t {aka long unsigned int}
+../Core/Src/main.c:235:105: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  235 | void ledCompare(uint32_t currMs, uint32_t interval, GPIO_TypeDef *GPIOPort, uint16_t GPIOPin, uint32_t *lastms){
+      |                                                                                               ~~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:36:19 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:236:13: error: invalid operands to binary - (have 'uint32_t' {aka 'long unsigned int'} and 'uint32_t *' {aka 'long unsigned int *'})
+  236 |  if((currMs - lastms) >= interval ){
+      |             ^
+../Core/Src/main.c:237:10: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'uint32_t' {aka 'long unsigned int'} makes pointer from integer without a cast [-Wint-conversion]
+  237 |   lastms = currMs;
+      |          ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:39:53 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:236:13: error: invalid operands to binary - (have 'uint32_t' {aka 'long unsigned int'} and 'uint32_t *' {aka 'long unsigned int *'})
+  236 |  if((currMs - lastms) >= interval ){
+      |             ^
+../Core/Src/main.c:237:10: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'uint32_t' {aka 'long unsigned int'} makes pointer from integer without a cast [-Wint-conversion]
+  237 |   lastms = currMs;
+      |          ^
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:260:67: warning: passing argument 5 of 'ledCompare' from incompatible pointer type [-Wincompatible-pointer-types]
+  260 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, &ptr_redLastMs);
+      |                                                                   ^~~~~~~~~~~~~~
+      |                                                                   |
+      |                                                                   uint32_t ** {aka long unsigned int **}
+../Core/Src/main.c:235:105: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t **' {aka 'long unsigned int **'}
+  235 | void ledCompare(uint32_t currMs, uint32_t interval, GPIO_TypeDef *GPIOPort, uint16_t GPIOPin, uint32_t *lastms){
+      |                                                                                               ~~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:40:42 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:236:13: error: invalid operands to binary - (have 'uint32_t' {aka 'long unsigned int'} and 'uint32_t *' {aka 'long unsigned int *'})
+  236 |  if((currMs - lastms) >= interval ){
+      |             ^
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:260:67: warning: passing argument 5 of 'ledCompare' from incompatible pointer type [-Wincompatible-pointer-types]
+  260 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, &ptr_redLastMs);
+      |                                                                   ^~~~~~~~~~~~~~
+      |                                                                   |
+      |                                                                   uint32_t ** {aka long unsigned int **}
+../Core/Src/main.c:235:105: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t **' {aka 'long unsigned int **'}
+  235 | void ledCompare(uint32_t currMs, uint32_t interval, GPIO_TypeDef *GPIOPort, uint16_t GPIOPin, uint32_t *lastms){
+      |                                                                                               ~~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:41:07 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:236:13: error: invalid operands to binary - (have 'uint32_t' {aka 'long unsigned int'} and 'uint32_t *' {aka 'long unsigned int *'})
+  236 |  if((currMs - lastms) >= interval ){
+      |             ^
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:260:67: warning: passing argument 5 of 'ledCompare' from incompatible pointer type [-Wincompatible-pointer-types]
+  260 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, &ptr_redLastMs);
+      |                                                                   ^~~~~~~~~~~~~~
+      |                                                                   |
+      |                                                                   uint32_t ** {aka long unsigned int **}
+../Core/Src/main.c:235:105: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t **' {aka 'long unsigned int **'}
+  235 | void ledCompare(uint32_t currMs, uint32_t interval, GPIO_TypeDef *GPIOPort, uint16_t GPIOPin, uint32_t* lastms){
+      |                                                                                               ~~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:43:55 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:261:67: error: 'redLastMs' undeclared (first use in this function); did you mean 'redLastms'?
+  261 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, redLastMs);
+      |                                                                   ^~~~~~~~~
+      |                                                                   redLastms
+../Core/Src/main.c:261:67: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:255:12: warning: unused variable 'ptr_redLastMs' [-Wunused-variable]
+  255 |  uint32_t* ptr_redLastMs = &redLastms;
+      |            ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:44:27 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5876	     20	   1660	   7556	   1d84	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:44:36 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5876	     20	   1660	   7556	   1d84	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+21:44:38 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5876	     20	   1660	   7556	   1d84	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+21:50:37 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:237:13: error: invalid operands to binary - (have 'uint32_t' {aka 'long unsigned int'} and 'uint32_t *' {aka 'long unsigned int *'})
+  237 |  if((currMs - lastms) >= interval ){
+      |             ^
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:263:67: error: 'ptr_redLastms' undeclared (first use in this function); did you mean 'ptr_redLastMs'?
+  263 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, ptr_redLastms);
+      |                                                                   ^~~~~~~~~~~~~
+      |                                                                   ptr_redLastMs
+../Core/Src/main.c:263:67: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:256:12: warning: unused variable 'ptr_redLastMs' [-Wunused-variable]
+  256 |  uint32_t* ptr_redLastMs = &redLastms;
+      |            ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:52:07 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledCompare':
+../Core/Src/main.c:236:23: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'uint32_t *' {aka 'long unsigned int *'} makes integer from pointer without a cast [-Wint-conversion]
+  236 |  uint32_t lastValue = lastms;
+      |                       ^~~~~~
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:263:67: error: 'ptr_redLastms' undeclared (first use in this function); did you mean 'ptr_redLastMs'?
+  263 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, ptr_redLastms);
+      |                                                                   ^~~~~~~~~~~~~
+      |                                                                   ptr_redLastMs
+../Core/Src/main.c:263:67: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:256:12: warning: unused variable 'ptr_redLastMs' [-Wunused-variable]
+  256 |  uint32_t* ptr_redLastMs = &redLastms;
+      |            ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:53:39 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:263:67: error: 'ptr_redLastms' undeclared (first use in this function); did you mean 'ptr_redLastMs'?
+  263 |  ledCompare(currentms, redInterval, oLED_R_GPIO_Port, oLED_R_Pin, ptr_redLastms);
+      |                                                                   ^~~~~~~~~~~~~
+      |                                                                   ptr_redLastMs
+../Core/Src/main.c:263:67: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:256:12: warning: unused variable 'ptr_redLastMs' [-Wunused-variable]
+  256 |  uint32_t* ptr_redLastMs = &redLastms;
+      |            ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:54:29 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5880	     20	   1660	   7560	   1d88	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:54:43 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5880	     20	   1660	   7560	   1d88	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+21:57:24 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ledInterval':
+../Core/Src/main.c:247:7: error: 'currentms' undeclared (first use in this function)
+  247 |  if( (currentms - greenLastms) >= greenInterval) {
+      |       ^~~~~~~~~
+../Core/Src/main.c:247:7: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:57:57 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F100xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "dfm17_demo.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/STM32F100R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dfm17_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: dfm17_demo.elf
+ 
+arm-none-eabi-size   dfm17_demo.elf 
+arm-none-eabi-objdump -h -S  dfm17_demo.elf  > "dfm17_demo.list"
+   text	   data	    bss	    dec	    hex	filename
+   5908	     20	   1660	   7588	   1da4	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
+Finished building: dfm17_demo.list
+ 
+21:58:04 **** Incremental Build of configuration Debug for project dfm17_demo ****
+make -j4 all 
+arm-none-eabi-size   dfm17_demo.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5908	     20	   1660	   7588	   1da4	dfm17_demo.elf
+Finished building: default.size.stdout
+ 
