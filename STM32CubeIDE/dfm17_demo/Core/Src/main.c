@@ -224,11 +224,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(oLED_R_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : intButton_Pin */
-  GPIO_InitStruct.Pin = intButton_Pin;
+  /*Configure GPIO pin : intGpsPPS_Pin */
+  GPIO_InitStruct.Pin = intGpsPPS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(intButton_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(intGpsPPS_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
@@ -239,10 +239,10 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    if(GPIO_Pin == intButton_Pin) // INT Source is pin A9
+    if(GPIO_Pin == intGpsPPS_Pin) // INT Source is pin A9
     {
-    	GPIO_PinState sButton = HAL_GPIO_ReadPin(intButton_GPIO_Port, intButton_Pin);
-    	HAL_GPIO_WritePin(oLED_Y_GPIO_Port, oLED_Y_Pin, sButton); // Toggle LED
+    	GPIO_PinState sButton = HAL_GPIO_ReadPin(intGpsPPS_GPIO_Port, intGpsPPS_Pin);
+    	HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin); // Toggle LED
     }
 }
 
