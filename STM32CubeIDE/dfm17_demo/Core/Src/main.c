@@ -40,7 +40,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart1;
+UART_HandleTypeDef hUsb;
 
 /* USER CODE BEGIN PV */
 uint32_t greenLastms 		= 0;
@@ -112,7 +112,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  ledInterval();
-	  //usbInterval();
+	  usbInterval();
 
   }
   /* USER CODE END 3 */
@@ -169,15 +169,15 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 1 */
 
   /* USER CODE END USART1_Init 1 */
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 9600;
-  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-  huart1.Init.StopBits = UART_STOPBITS_1;
-  huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart1) != HAL_OK)
+  hUsb.Instance = USART1;
+  hUsb.Init.BaudRate = 9600;
+  hUsb.Init.WordLength = UART_WORDLENGTH_8B;
+  hUsb.Init.StopBits = UART_STOPBITS_1;
+  hUsb.Init.Parity = UART_PARITY_NONE;
+  hUsb.Init.Mode = UART_MODE_TX_RX;
+  hUsb.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  hUsb.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&hUsb) != HAL_OK)
   {
     Error_Handler();
   }
@@ -258,14 +258,26 @@ void usbInterval(void) {
 	if ((currentms - usbLastms) >= usbIntervalMs) {
 		usbLastms = currentms;
 
-		usbPrintln(&huart1, "hello world");
+		usbPrintln("hello world");
+
+		GPIO_PinState sButton = HAL_GPIO_ReadPin(iButton_GPIO_Port, iButton_Pin);
+
+		if(sButton) {
+			usbPrintln("Button HIGH");
+		} else {
+			usbPrintln("Button LOW");
+		}
 	}
 }
 
-void usbPrintln(UART_HandleTypeDef *huart, char _out[]){
-	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
+void usbPrintln(char _out[]){
+	HAL_UART_Transmit(&hUsb, (uint8_t *) _out, strlen(_out), 10);
 	char newline[2] = "\r\n";
-	HAL_UART_Transmit(huart, (uint8_t *) newline, 2, 10);
+	HAL_UART_Transmit(&hUsb, (uint8_t *) newline, 2, 10);
+}
+
+void usbPrint(char _out[]){
+	HAL_UART_Transmit(&hUsb, (uint8_t *) _out, strlen(_out), 10);
 }
 
 /* USER CODE END 4 */

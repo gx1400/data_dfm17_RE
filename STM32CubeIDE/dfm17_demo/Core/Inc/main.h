@@ -55,7 +55,8 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 void ledInterval(void);
 void usbInterval(void);
-void usbPrintln(UART_HandleTypeDef *huart, char _out[]);
+void usbPrintln(char _out[]);
+void usbPrint(char _out[]);
 
 /* USER CODE END EFP */
 
