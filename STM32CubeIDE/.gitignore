@@ -1,5 +1,8 @@
 # https://github.com/github/gitignore/blob/master/C.gitignore
 
+# Exclusions
+!22*
+
 # Prerequisites
 *.d
 
