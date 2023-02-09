@@ -1,0 +1,15 @@
+!SESSION 2023-02-08 20:50:31.045 -----------------------------------------------
+eclipse.buildId=Version 1.11.0
+java.version=11.0.16
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-02-08 20:51:09.827
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-02-08 20:51:09.892
+!MESSAGE Log4j initialized with config file /home/gx1400/repos/data_dfm17_RE/STM32CubeIDE/dfm17_demo/.metadata/.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-02-08 20:51:14.400
+!MESSAGE Started RMI Server, listening on port 41337
