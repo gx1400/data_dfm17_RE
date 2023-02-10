@@ -15,7 +15,7 @@
 // Battery Management PON
 #define battPON PC_0
 
-
+bool bootFail = false;
 
 
 //                      RX    TX
@@ -53,32 +53,16 @@ void setup() {
   SerialUSB.begin(9600);
   SerialUSB.println("Starting UART...");
 
-  for(int delayus = 0; delayus <= 1500; delayus += 50) {
-    digitalWrite(LED_GREEN, LOW);
-    digitalWrite(LED_RED, LOW);
+  // Boot radio
+  deassertRadioShutdown();
+  delayMicroseconds(200);
 
-    SerialUSB.print("delay: " );
-    SerialUSB.println(delayus);
+  // wait for CTS, if no CTS then abort
+  if(!waitForCTS()) {
+    setSetupError();
+    return;
+  } 
 
-    // Boot radio
-    deassertRadioShutdown();
-    delayMicroseconds(delayus);
-
-    // Check for boot CTS
-    int lcount = -100;
-    if(!waitForCTS(lcount)) {
-      digitalWrite(LED_GREEN, HIGH);
-    } else {
-      digitalWrite(LED_RED, HIGH);
-    }
-
-    assertRadioShutdown();
-
-    SerialUSB.print("loop: " );
-    SerialUSB.println(lcount);
-    delay(100);
-  }
-  
 
 }
 
@@ -88,11 +72,24 @@ void setup() {
 
 
 void loop() {
-  
+
+  if(bootFail) {
+    return;
+  }
+
+  digitalWrite(LED_YELLOW, HIGH);
+  delay(500);
+  digitalWrite(LED_YELLOW, LOW);
+  delay(500);
+}
+
+void setSetupError() {
+  digitalWrite(LED_RED, HIGH);
+  bootFail = true;
 }
 
 // true is good, 
-bool waitForCTS(int& loopcount) {
+bool waitForCTS() {
   for(int x = 0; x < 100; x++ ) {
 
     assertCS();    
@@ -102,13 +99,11 @@ bool waitForCTS(int& loopcount) {
     deassertCS();
         
     if(resp == 0xFF) {
-      loopcount = x;
       return true;
     }
     delayMicroseconds(50);
   }
 
-  loopcount=-1;
   // error
   return false;
 }
