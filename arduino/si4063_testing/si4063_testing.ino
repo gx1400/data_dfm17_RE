@@ -12,6 +12,9 @@
 #define spiMISO PA6   // Data output for Si4063, MISO
 #define spiSCLK PA5   // SPI Clock
 
+// Battery Management PON
+#define battPON PC_0
+
 
 
 
@@ -19,238 +22,120 @@
 HardwareSerial SerialUSB(PA10, PA9);
 HardwareSerial SerialGPS(PA3, PA2);
 
-// LED timing variables
-unsigned long greenLastms = 0;
-unsigned long redLastms = 0;
-unsigned long yellowLastms = 0;
-
-const long greenInterval = 500;
-const long redInterval = 1000;
-const long yellowInterval = 2000;
-
-// LED state variables
-bool greenState = false;
-bool redState = false;
-bool yellowState = false;
-
-// Serial debug messages
-const bool debugLedMsgs = false;
-
-bool executeonce = false;
 
 void setup() {
+  //Setup BMS PON pin
+  pinMode(battPON, OUTPUT);
+  digitalWrite(battPON, HIGH);
+
   // Setup LED pins
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_YELLOW, OUTPUT);
   pinMode(LED_RED, OUTPUT);
 
+  digitalWrite(LED_GREEN, LOW);
+  digitalWrite(LED_RED, LOW);
+  digitalWrite(LED_YELLOW, LOW);
+
   // Setup Si4063 pins
   pinMode(siSDN, OUTPUT);
   pinMode(spiCS, OUTPUT);
-  //pinMode(spiMOSI, OUTPUT);
-  //pinMode(spiSCLK, OUTPUT);
-  //pinMode(spiMOSI, OUTPUT);
-
-  //SPI.setMISO(spiMISO);
-  //SPI.setMOSI(spiMOSI);
-  //SPI.setSCLK(spiSCLK);
-  //SPI.setBitOrder(MSBFIRST);
-  //SPI.setSSEL(spiCS);
   
+  //reset radio on startup
+  deassertRadioShutdown();
+  delay(10);
+  assertRadioShutdown();
+  delay(10);
 
-  //SPI.begin();
   SPI.beginTransaction(SPISettings(500000, MSBFIRST, SPI_MODE0));
 
   // Setup USB UART
   SerialUSB.begin(9600);
-  SerialUSB.println("Hello World!");
+  SerialUSB.println("Starting UART...");
 
-  digitalWrite(siSDN, HIGH);
-  digitalWrite(spiCS, HIGH);
+  for(int delayus = 0; delayus <= 1500; delayus += 50) {
+    digitalWrite(LED_GREEN, LOW);
+    digitalWrite(LED_RED, LOW);
 
-  //delay(100);
+    SerialUSB.print("delay: " );
+    SerialUSB.println(delayus);
+
+    // Boot radio
+    deassertRadioShutdown();
+    delayMicroseconds(delayus);
+
+    // Check for boot CTS
+    int lcount = -100;
+    if(!waitForCTS(lcount)) {
+      digitalWrite(LED_GREEN, HIGH);
+    } else {
+      digitalWrite(LED_RED, HIGH);
+    }
+
+    assertRadioShutdown();
+
+    SerialUSB.print("loop: " );
+    SerialUSB.println(lcount);
+    delay(100);
+  }
+  
+
 }
+
+
 
 
 
 
 void loop() {
-  ledInterval();
-
-  //for testing SPI just execute once
-  if (!executeonce && (millis() >= 2000)) {
-    executeonce = true;
-    //sendSPITest();
-    //testPins();
-    testSPIbasic();
-  }
+  
 }
 
 // true is good, 
-bool waitForCTS() {
+bool waitForCTS(int& loopcount) {
   for(int x = 0; x < 100; x++ ) {
-    digitalWrite(spiCS, LOW);
 
+    assertCS();    
     SPI.transfer( 0x44);
-
     byte resp = 0x00;
     resp = SPI.transfer( 0xFF);
-    
-
-    digitalWrite(spiCS, HIGH);
+    deassertCS();
         
     if(resp == 0xFF) {
+      loopcount = x;
       return true;
     }
     delayMicroseconds(50);
   }
 
+  loopcount=-1;
   // error
   return false;
 }
 
-void testSPIbasic() {
-  digitalWrite(siSDN, LOW);
-  delayMicroseconds(10);
-  
-  waitForCTS();
+void resetRadio() {
+  assertRadioShutdown();
+  delayMicroseconds(50);
+  deassertRadioShutdown();
+}
 
-  delay(1);
-
-  // send power  up
-  digitalWrite(spiCS, LOW);
-  SPI.transfer( 0x02);
-  SPI.transfer( 0x01);
-  SPI.transfer( 0x01);
-  SPI.transfer( 0x01);
-  SPI.transfer( 0x86);
-  SPI.transfer( 0xA0);
-  SPI.transfer( 0x00);
-
-  digitalWrite(spiCS, HIGH);
-
-  for(int x = 0; x < 100; x++ ) {
-    digitalWrite(spiCS, LOW);
-
-    SPI.transfer( 0x44);
-
-    byte resp = 0x00;
-    resp = SPI.transfer( 0xFF);
-        
-    if(resp == 0xFF) {
-      digitalWrite(spiCS, HIGH);
-      break;
-    }
-    digitalWrite(spiCS, HIGH);
-    delayMicroseconds(50);
-  }
-
-  delay(1);
-
-  // send info request
-  digitalWrite(spiCS, LOW);
-  SPI.transfer( 0x01);
-  digitalWrite(spiCS, HIGH);
-
-  for(int x = 0; x < 100; x++ ) {
-    digitalWrite(spiCS, LOW);
-
-    SPI.transfer( 0x44);
-
-    byte resp = 0x00;
-    byte resp1 = 0x00;
-    byte resp2 = 0x00;
-    byte resp3 = 0x00;
-    byte resp4 = 0x00;
-    byte resp5 = 0x00;
-    byte resp6 = 0x00;
-    byte resp7 = 0x00;
-    byte resp8 = 0x00;
-
-    resp = SPI.transfer( 0xFF);
-    
-        
-    if(resp == 0xFF) {
-      
-      resp1 = SPI.transfer( 0xFF);
-      resp2 = SPI.transfer( 0xFF);
-      resp3 = SPI.transfer( 0xFF);
-      resp4 = SPI.transfer( 0xFF);
-      resp5 = SPI.transfer( 0xFF);
-      resp6 = SPI.transfer( 0xFF);
-      resp7 = SPI.transfer( 0xFF);
-      resp8 = SPI.transfer( 0xFF);
-      digitalWrite(spiCS, HIGH);
-
-      // SerialUSB.print("Response from 0x44: \t");
-      // SerialUSB.println(resp,HEX);
-      // SerialUSB.print("Response1 from 0x33: \t");
-      // SerialUSB.println(resp1,HEX);
-      // SerialUSB.print("Response2 from 0x33: \t");
-      // SerialUSB.println(resp2,HEX);
-      // SerialUSB.print("Response3 from 0x33: \t");
-      // SerialUSB.println(resp3,HEX);
-      // SerialUSB.print("Response4 from 0x33: \t");
-      // SerialUSB.println(resp4,HEX);
-      // SerialUSB.print("Response5 from 0x33: \t");
-      // SerialUSB.println(resp5,HEX);
-      // SerialUSB.print("Response6 from 0x33: \t");
-      // SerialUSB.println(resp6,HEX);
-      // SerialUSB.print("Response7 from 0x33: \t");
-      // SerialUSB.println(resp7,HEX);
-      // SerialUSB.print("Response8 from 0x33: \t");
-      // SerialUSB.println(resp8,HEX);
-      break;
-    }
-    digitalWrite(spiCS, HIGH);
-    //SerialUSB.print("Response from 0x44: \t");
-    //SerialUSB.println(resp,HEX);
-
-    delayMicroseconds(50);
-  }
-  
-  
-
-  delayMicroseconds(10);
+void assertRadioShutdown() {
   digitalWrite(siSDN, HIGH);
 }
 
+void deassertRadioShutdown() {
+  digitalWrite(siSDN, LOW);
+}
 
-// toggle led per the interval
-void ledInterval() {
-  unsigned long currentms = millis();
+void assertCS() {
+  digitalWrite(spiCS, LOW);
+}
 
-  if ((currentms - greenLastms) >= greenInterval) {
-    greenLastms = currentms;
-    toggleLED(LED_GREEN, greenState);
-    
-    if(debugLedMsgs) {
-      SerialUSB.println("Green Toggle!");
-    }
-  }
-
-  if ((currentms - redLastms) >= redInterval) {
-    redLastms = currentms;
-    toggleLED(LED_RED, redState);
-
-    if(debugLedMsgs) {
-      SerialUSB.println("Red Toggle!");
-    }
-  }
-
-  if ((currentms - yellowLastms) >= yellowInterval) {
-    yellowLastms = currentms;
-    toggleLED(LED_YELLOW, yellowState);
-    
-    if(debugLedMsgs) {
-      SerialUSB.println("Yellow Toggle!");
-    }
-  }
+void deassertCS() {
+  digitalWrite(spiCS, HIGH);
 }
 
 
-void toggleLED(int led, bool& state) {
-  digitalWrite(led, !state);
-  state = !state;
-}
+
+
 
