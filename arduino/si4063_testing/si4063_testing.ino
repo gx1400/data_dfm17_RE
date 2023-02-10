@@ -93,9 +93,9 @@ void setup() {
   delay(10);
 
   SPI.beginTransaction(SPISettings(500000, MSBFIRST, SPI_MODE0));
-
   digitalWrite(spiMOSI, LOW);
   digitalWrite(spiMISO, LOW);
+  digitalWrite(spiSCLK, LOW);
 
   // Setup USB UART
   SerialUSB.begin(9600);
