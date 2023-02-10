@@ -100,6 +100,11 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_SET);
+  HAL_Delay(10);
+  assertBattPOn();
+  HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_RESET);
+
 
 
   /* USER CODE END 2 */
@@ -202,16 +207,16 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, oBattPOn_Pin|oLED_G_Pin|oLED_Y_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(oLED_R_GPIO_Port, oLED_R_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, oLED_G_Pin|oLED_Y_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : oSiSDN_Pin oLED_G_Pin oLED_Y_Pin */
-  GPIO_InitStruct.Pin = oSiSDN_Pin|oLED_G_Pin|oLED_Y_Pin;
+  /*Configure GPIO pins : oBattPOn_Pin oSiSDN_Pin oLED_G_Pin oLED_Y_Pin */
+  GPIO_InitStruct.Pin = oBattPOn_Pin|oSiSDN_Pin|oLED_G_Pin|oLED_Y_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -224,11 +229,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(oLED_R_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : intGpsPPS_Pin */
-  GPIO_InitStruct.Pin = intGpsPPS_Pin;
+  /*Configure GPIO pin : intButton_Pin */
+  GPIO_InitStruct.Pin = intButton_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(intGpsPPS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(intButton_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
@@ -239,20 +244,26 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    if(GPIO_Pin == intGpsPPS_Pin) // INT Source is pin A9
+    if(GPIO_Pin == intButton_Pin) // INT Source is pin A9
     {
-    	GPIO_PinState sButton = HAL_GPIO_ReadPin(intGpsPPS_GPIO_Port, intGpsPPS_Pin);
-    	HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin); // Toggle LED
+    	GPIO_PinState sButton = HAL_GPIO_ReadPin(intButton_GPIO_Port, intButton_Pin);
+    	HAL_GPIO_WritePin(oLED_Y_GPIO_Port, oLED_Y_Pin, sButton); // Toggle LED
     }
+}
+
+void assertBattPOn(void) {
+	HAL_GPIO_WritePin(oBattPOn_GPIO_Port, oBattPOn_Pin, GPIO_PIN_SET);
 }
 
 void ledInterval(void) {
 	uint32_t currentms = HAL_GetTick();
 
+
 	if( (currentms - greenLastms) >= greenIntervalMs) {
 			greenLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
 	}
+
 	if( (currentms - redLastms) >= redIntervalMs) {
 			redLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
