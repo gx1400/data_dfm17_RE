@@ -32,6 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define ERR_CTSFAIL 8000
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,6 +57,7 @@ uint16_t greenIntervalMs	= 500;
 uint16_t redIntervalMs		= 1000;
 uint16_t yellowIntervalMs	= 2000;
 uint16_t usbIntervalMs		= 2000;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -111,9 +113,8 @@ int main(void)
   assertBattPOn();
 
   //radio boot
-  resetRadio();
-  delay_us(50);
-  radioWaitForCTS();
+  int resultSetup = 0;
+  resultSetup = bootRadio();
 
 
 
@@ -129,7 +130,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  //ledInterval();
 	  //usbInterval();
-	  testToggleLED();
+	  //testToggleLED();
 
   }
   /* USER CODE END 3 */
@@ -408,6 +409,22 @@ int radioWaitForCTS(void) {
 	return -1;
 }
 
+int bootRadio(void) {
+	resetRadio();
+	delay_us(50);
+
+	if (!radioWaitForCTS()) {
+		return ErrSetupCTS();
+	}
+
+
+	return 0;
+}
+
+int ErrSetupCTS(void) {
+	HAL_GPIO_WritePin(oLED_R_GPIO_Port, oLED_R_Pin, GPIO_PIN_SET);
+	return ERR_CTSFAIL;
+}
 
 void resetRadio(void) {
 	assertRadioShutdown();
