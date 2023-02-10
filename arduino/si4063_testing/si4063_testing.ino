@@ -11,6 +11,7 @@
 #define spiMOSI PA7   // Data input for Si4063, MOSI
 #define spiMISO PA6   // Data output for Si4063, MISO
 #define spiSCLK PA5   // SPI Clock
+#define spiGPIO3 PA4
 
 // Battery Management PON
 #define battPON PC_0
@@ -40,6 +41,7 @@ void setup() {
   // Setup Si4063 pins
   pinMode(siSDN, OUTPUT);
   pinMode(spiCS, OUTPUT);
+  pinMode(spiGPIO3, OUTPUT);
   
   //reset radio on startup
   deassertRadioShutdown();
@@ -136,10 +138,14 @@ void loop() {
     return;
   }
 
-  digitalWrite(LED_YELLOW, HIGH);
-  delay(500);
-  digitalWrite(LED_YELLOW, LOW);
-  delay(500);
+  digitalWrite(spiGPIO3, HIGH);
+  delayMicroseconds(400);
+  digitalWrite(spiGPIO3, LOW);
+  delayMicroseconds(400);
+  //digitalWrite(LED_YELLOW, HIGH);
+  //delay(500);
+  //digitalWrite(LED_YELLOW, LOW);
+  //delay(500);
 }
 
 void setSetupError() {
