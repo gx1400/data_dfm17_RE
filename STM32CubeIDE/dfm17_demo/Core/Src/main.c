@@ -131,6 +131,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  //ledInterval();
 	  //usbInterval();
+	  testToggleLED();
 
   }
   /* USER CODE END 3 */
@@ -365,6 +366,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     	GPIO_PinState sButton = HAL_GPIO_ReadPin(intButton_GPIO_Port, intButton_Pin);
     	HAL_GPIO_WritePin(oLED_Y_GPIO_Port, oLED_Y_Pin, sButton); // Toggle LED
     }
+}
+
+void delay_us(uint16_t us) {
+	__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
+	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
+}
+
+void testToggleLED(void) {
+	HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_SET);
+	HAL_Delay(500);
+	HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_RESET);
+	HAL_Delay(250);
 }
 
 int radioWaitForCTS(void) {

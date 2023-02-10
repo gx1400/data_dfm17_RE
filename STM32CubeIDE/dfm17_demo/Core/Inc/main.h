@@ -59,6 +59,8 @@ void usbInterval(void);
 void usbPrintln(char _out[]);
 void usbPrint(char _out[]);
 
+void delay_us(uint16_t us);
+void testToggleLED(void);
 int radioWaitForCTS(void);
 void radioShortDelay(void);
 void resetRadio(void);
