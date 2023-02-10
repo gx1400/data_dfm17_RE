@@ -125,8 +125,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  ledInterval();
-	  usbInterval();
+	  //ledInterval();
+	  //usbInterval();
 
   }
   /* USER CODE END 3 */
@@ -314,33 +314,39 @@ int radioWaitForCTS(void) {
 	HAL_StatusTypeDef hal_status;
 	uint8_t tx_data[2];
 	uint8_t rx_data[2];
-	uint8_t resp;
-	resp = 0xF0;
+
 
 	tx_data[0] = 0x44;
 	tx_data[1] = 0xFF;
 
+	for(int x = 0; x < 20; x++ ) {
+		uint8_t resp;
+		resp = 0xF0;
+		assertRadioCS();
+		hal_status = HAL_SPI_TransmitReceive(&hspi1, tx_data, rx_data, 2, HAL_MAX_DELAY);
+		deassertRadioCS();
 
-	assertRadioCS();
-	hal_status = HAL_SPI_TransmitReceive(&hspi1, tx_data, rx_data, 2, HAL_MAX_DELAY);
+		if(hal_status == HAL_OK) {
+			resp = rx_data[1];
 
-	if(hal_status == HAL_OK) {
-		resp = rx_data[1];
+			if (resp == 0xFF) {
+				return 0;
+			}
+		}
+		radioShortDelay();
 	}
 
-	deassertRadioCS();
-
-	return hal_status;
+	return -1;
 }
 
 void radioShortDelay(void) {
 	int x;
-	for(x = 0; x < 100; x++);
+	for(x = 0; x < 50; x++);
 }
 
 void resetRadio(void) {
 	assertRadioShutdown();
-	HAL_Delay(10);
+	radioShortDelay();
 	deassertRadioShutdown();
 }
 
