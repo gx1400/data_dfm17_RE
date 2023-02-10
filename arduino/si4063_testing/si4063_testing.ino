@@ -88,7 +88,7 @@ void setup() {
   
   //reset radio on startup
   deassertRadioShutdown();
-  delay(10);
+  delay(1000);
   assertRadioShutdown();
   delay(10);
 
@@ -103,7 +103,7 @@ void setup() {
 
   // Boot radio
   deassertRadioShutdown();
-  delayMicroseconds(200);
+  delayMicroseconds(60);
 
   // wait for CTS, if no CTS then abort
   if(!waitForCTS()) {
