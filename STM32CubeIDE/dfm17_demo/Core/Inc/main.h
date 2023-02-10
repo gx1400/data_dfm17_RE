@@ -59,6 +59,14 @@ void usbInterval(void);
 void usbPrintln(char _out[]);
 void usbPrint(char _out[]);
 
+int radioWaitForCTS(void);
+void radioShortDelay(void);
+void resetRadio(void);
+void assertRadioShutdown(void);
+void deassertRadioShutdown(void);
+void assertRadioCS(void);
+void deassertRadioCS(void);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -66,6 +74,14 @@ void usbPrint(char _out[]);
 #define oBattPOn_GPIO_Port GPIOC
 #define oSiSDN_Pin GPIO_PIN_3
 #define oSiSDN_GPIO_Port GPIOC
+#define oSpiSCLK_Pin GPIO_PIN_5
+#define oSpiSCLK_GPIO_Port GPIOA
+#define oSpiMISO_Pin GPIO_PIN_6
+#define oSpiMISO_GPIO_Port GPIOA
+#define oSpiMOSI_Pin GPIO_PIN_7
+#define oSpiMOSI_GPIO_Port GPIOA
+#define oSpiCS_Pin GPIO_PIN_2
+#define oSpiCS_GPIO_Port GPIOB
 #define oLED_R_Pin GPIO_PIN_12
 #define oLED_R_GPIO_Port GPIOB
 #define oLED_G_Pin GPIO_PIN_6
