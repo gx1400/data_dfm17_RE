@@ -107,14 +107,12 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start(&htim1); //start timer 1
   assertBattPOn();
 
   //radio boot
-  deassertRadioShutdown();
-  HAL_Delay(50);
   resetRadio();
-  radioShortDelay();
+  delay_us(50);
   radioWaitForCTS();
 
 
@@ -375,9 +373,10 @@ void delay_us(uint16_t us) {
 
 void testToggleLED(void) {
 	HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_SET);
-	HAL_Delay(500);
+	delay_us(100);
 	HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_RESET);
-	HAL_Delay(250);
+	delay_us(200);
+
 }
 
 int radioWaitForCTS(void) {
@@ -403,20 +402,16 @@ int radioWaitForCTS(void) {
 				return 0;
 			}
 		}
-		radioShortDelay();
+		delay_us(25);
 	}
 
 	return -1;
 }
 
-void radioShortDelay(void) {
-	int x;
-	for(x = 0; x < 50; x++);
-}
 
 void resetRadio(void) {
 	assertRadioShutdown();
-	radioShortDelay();
+	delay_us(30);
 	deassertRadioShutdown();
 }
 
