@@ -81,6 +81,9 @@ void SPI_TransmitReceive (uint8_t* txdata, uint8_t *rxdata, int size);
 
 int radio_RequestDeviceState(void);
 
+void SPI_Enable(void);
+void SPI_Disable(void);
+
 
 /* USER CODE END EFP */
 

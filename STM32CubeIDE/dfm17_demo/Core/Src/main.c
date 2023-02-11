@@ -122,6 +122,8 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  SPI_Enable();
+
   debug_msg("Starting timer.\r\n");
   HAL_TIM_Base_Start(&htim1); //start timer 1
 
@@ -547,34 +549,32 @@ void radioToggleToneGPIO(uint16_t delay) {
 	delay_us(delay);
 }
 
+void SPI_Enable(void) {
+	SPI1->CR1 |= (1<<6);   // SPE=1, Peripheral enabled
+}
+
+void SPI_Disable(void) {
+	SPI1->CR1 &= ~(1<<6);   // SPE=0, Peripheral Disabled
+}
+
 int radioWaitForCTS(void) {
-	HAL_StatusTypeDef hal_status;
-	uint8_t tx_data[2];
-	uint8_t rx_data[2];
+	uint8_t cmdRequest[] = {radioCmd_REQUEST_DEVICE_STATE};
 
-
-	tx_data[0] = radioCmd_READ_CMD_BUFF;
-	tx_data[1] = radioCmd_FILLER;
-
-	debug_msg("      ...Wait for CTS:\r\n");
+	uint8_t reqCTS[1] = {radioCmd_READ_CMD_BUFF};
+	uint8_t respCTS[1] = {0};
 	for(int x = 0; x <= 100; x++ ) {
-		uint8_t resp;
-		resp = 0xF0;
 		assertRadioCS();
-		hal_status = HAL_SPI_TransmitReceive(&hspi1, tx_data, rx_data, 2, HAL_MAX_DELAY);
+		SPI_Transmit(reqCTS, 1);
+		SPI_Receive(respCTS, 1);
 		deassertRadioCS();
 
-		if(hal_status == HAL_OK) {
-			resp = rx_data[1];
-
-			if (resp == 0xFF) {
-				debug_msg("      ...Found CTS at msg#%d\r\n", x);
-
-				return 0;
-			}
+		if(respCTS[0] == 0xFF) {
+			debug_msg("      ...Found CTS at msg#%d\r\n", x);
+			return 0;
 		}
 		delay_us(25);
 	}
+
 
 	debug_msg("     ...ERROR: CTS not found\r\n");
 	return ERR_CTSFAIL;
@@ -616,75 +616,75 @@ int bootRadio(void) {
 
 
 
-	debug_msg("Send cmdRF_POWER_UP...\r\n");
+	//debug_msg("Send cmdRF_POWER_UP...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_POWER_UP), cmdRF_POWER_UP);
 
 
-	debug_msg("Send cmdRF_GPIO_PIN_CFG...\r\n");
+	//debug_msg("Send cmdRF_GPIO_PIN_CFG...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_GPIO_PIN_CFG), cmdRF_GPIO_PIN_CFG);
 
-	debug_msg("Send cmdRF_GLOBAL_XO_TUNE_2...\r\n");
+	//debug_msg("Send cmdRF_GLOBAL_XO_TUNE_2...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_XO_TUNE_2), cmdRF_GLOBAL_XO_TUNE_2);
 
-	debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
+	//debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);
 
-	debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
+	//debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);
 
-	debug_msg("Send cmdRF_INT_CTL_ENABLE_1...\r\n");
+	//debug_msg("Send cmdRF_INT_CTL_ENABLE_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_INT_CTL_ENABLE_1), cmdRF_INT_CTL_ENABLE_1);
 
-	debug_msg("Send cmdRF_FRR_CTL_A_MODE_4...\r\n");
+	//debug_msg("Send cmdRF_FRR_CTL_A_MODE_4...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_FRR_CTL_A_MODE_4), cmdRF_FRR_CTL_A_MODE_4);
 
-	debug_msg("Send cmdRF_PREAMBLE_CONFIG_1...\r\n");
+	//debug_msg("Send cmdRF_PREAMBLE_CONFIG_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_PREAMBLE_CONFIG_1), cmdRF_PREAMBLE_CONFIG_1);
 
-	debug_msg("Send cmdRF_MODEM_MOD_TYPE_12...\r\n");
+	//debug_msg("Send cmdRF_MODEM_MOD_TYPE_12...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_MOD_TYPE_12), cmdRF_MODEM_MOD_TYPE_12);
 
-	debug_msg("Send cmdRF_MODEM_FREQ_DEV_0_1...\r\n");
+	//debug_msg("Send cmdRF_MODEM_FREQ_DEV_0_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_FREQ_DEV_0_1), cmdRF_MODEM_FREQ_DEV_0_1);
 
-	debug_msg("Send cmdRF_MODEM_TX_RAMP_DELAY_12...\r\n");
+	//debug_msg("Send cmdRF_MODEM_TX_RAMP_DELAY_12...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_TX_RAMP_DELAY_12), cmdRF_MODEM_TX_RAMP_DELAY_12);
 
-	debug_msg("Send cmdRF_MODEM_BCR_NCO_OFFSET_2_12...\r\n");
+	//debug_msg("Send cmdRF_MODEM_BCR_NCO_OFFSET_2_12...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_BCR_NCO_OFFSET_2_12), cmdRF_MODEM_BCR_NCO_OFFSET_2_12);
 
-	debug_msg("Send cmdRF_MODEM_AFC_LIMITER_1_3...\r\n");
+	//debug_msg("Send cmdRF_MODEM_AFC_LIMITER_1_3...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AFC_LIMITER_1_3), cmdRF_MODEM_AFC_LIMITER_1_3);
 
-	debug_msg("Send cmdRF_MODEM_AGC_CONTROL_1...\r\n");
+	//debug_msg("Send cmdRF_MODEM_AGC_CONTROL_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_CONTROL_1), cmdRF_MODEM_AGC_CONTROL_1);
 
-	debug_msg("Send cmdRF_MODEM_AGC_WINDOW_SIZE_12...\r\n");
+	//debug_msg("Send cmdRF_MODEM_AGC_WINDOW_SIZE_12...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_WINDOW_SIZE_12), cmdRF_MODEM_AGC_WINDOW_SIZE_12);
 
-	debug_msg("Send cmdRF_MODEM_RAW_CONTROL_3...\r\n");
+	//debug_msg("Send cmdRF_MODEM_RAW_CONTROL_3...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_CONTROL_3), cmdRF_MODEM_RAW_CONTROL_3);
 
-	debug_msg("Send cmdRF_MODEM_RAW_SEARCH2_2...\r\n");
+	//debug_msg("Send cmdRF_MODEM_RAW_SEARCH2_2...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_SEARCH2_2), cmdRF_MODEM_RAW_SEARCH2_2);
 
-	debug_msg("Send cmdRF_MODEM_SPIKE_DET_1...\r\n");
+	//debug_msg("Send cmdRF_MODEM_SPIKE_DET_1...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_MODEM_SPIKE_DET_1), cmdRF_MODEM_SPIKE_DET_1);
 
-	debug_msg("Send cmdRF_PA_MODE_4...\r\n");
+	//debug_msg("Send cmdRF_PA_MODE_4...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_PA_MODE_4), cmdRF_PA_MODE_4);
 
-	debug_msg("Send cmdRF_SYNTH_PFDCP_CPFF_7...\r\n");
+	//debug_msg("Send cmdRF_SYNTH_PFDCP_CPFF_7...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_SYNTH_PFDCP_CPFF_7), cmdRF_SYNTH_PFDCP_CPFF_7);
 
-	debug_msg("Send cmdRF_FREQ_CONTROL_INTE_7...\r\n");
+	//debug_msg("Send cmdRF_FREQ_CONTROL_INTE_7...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_FREQ_CONTROL_INTE_7), cmdRF_FREQ_CONTROL_INTE_7);
 
-	debug_msg("Get Status of Radio\r\n");
+	//debug_msg("Get Status of Radio\r\n");
 	int radioStateReady = radio_RequestDeviceState();
-	debug_msg("Radio State is %d\r\n.", radioStateReady);
+	//debug_msg("Radio State is %d\r\n.", radioStateReady);
 
-	debug_msg("Change state to Ready\r\n");
+	//debug_msg("Change state to Ready\r\n");
 	uint8_t changeReadyCmd[] = {0x34, 0x03};
 	radio_comm_SendCmdNoCTS(sizeof(changeReadyCmd), changeReadyCmd);
 
@@ -694,12 +694,12 @@ int bootRadio(void) {
 	//uint8_t pkt82Cmd[] = {0x11, 0x20, 0x02, 0x0B, 0x01, 0x33};
 
 
-	debug_msg("Send last config packets\r\n");
+	//debug_msg("Send last config packets\r\n");
 	//radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);   // commenting out this command will center TX at approx 400Mhz
 	//radio_comm_SendCmd(sizeof(pkt81Cmd), pkt81Cmd);
 	//radio_comm_SendCmd(sizeof(pkt82Cmd), pkt82Cmd);
 
-	debug_msg("Change state to Tx\r\n");
+	//debug_msg("Change state to Tx\r\n");
 	uint8_t changeTxCmd[] = {0x34, 0x07};
 	radio_comm_SendCmdNoCTS(sizeof(changeTxCmd), changeTxCmd);
 
@@ -709,7 +709,7 @@ int bootRadio(void) {
 	HAL_Delay(10);
 
 	int radioStateTX = radio_RequestDeviceState();
-	debug_msg("Radio State is %d\r\n.", radioStateTX);
+	///debug_msg("Radio State is %d\r\n.", radioStateTX);
 
 
 
@@ -720,13 +720,13 @@ int bootRadio(void) {
 }
 
 int sendPatchCmds(void) {
-	debug_msg("   ...Starting patch decode\r\n");
+	//debug_msg("   ...Starting patch decode\r\n");
 	uint8_t Si446xPatchCommands[][9] = { SI446X_PATCH_CMDS };
 	uint8_t SingleCmd[8] = {0};
 
 	uint8_t cmdCount = 0;
 	cmdCount = PATCHLEN(Si446xPatchCommands);
-	debug_msg("      ...Found %d patch commands\r\n", cmdCount);
+	//debug_msg("      ...Found %d patch commands\r\n", cmdCount);
 
 	volatile uint16_t line = 0;
 	volatile uint8_t row = 0;
@@ -736,12 +736,12 @@ int sendPatchCmds(void) {
 		for (row=1; row<9; row++) {
 			SingleCmd[row-1] = Si446xPatchCommands[line][row];
 		}
-		debug_msg("      ...Sending patch command %d\r\n", line);
+		//debug_msg("      ...Sending patch command %d\r\n", line);
 		radio_comm_SendCmd(sizeof(SingleCmd), SingleCmd);
 	}
 
 
-	debug_msg("      ...Done Sending Patch Commands\r\n");
+	//debug_msg("      ...Done Sending Patch Commands\r\n");
 	return 0;
 }
 
@@ -753,28 +753,28 @@ int sendPatchCmds(void) {
 //}
 
 void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData) {
-	debug_msg("   ...Start Command\r\n");
+	//debug_msg("   ...Start Command\r\n");
 	radioWaitForCTS();
 
-	debug_msg("      ...Start Command Send\r\n");
+	//debug_msg("      ...Start Command Send\r\n");
 
 	assertRadioCS();
 	SPI_Transmit(pData, byteCount);
 	deassertRadioCS();
-	debug_msg("      ...Command Send Done\r\n");
+	//debug_msg("      ...Command Send Done\r\n");
 
 
 }
 
 void radio_comm_SendCmdNoCTS(uint8_t byteCount, uint8_t* pData) {
-	debug_msg("   ...Start Command w/o CTS\r\n");
+	//debug_msg("   ...Start Command w/o CTS\r\n");
 
-	debug_msg("      ...Start Command Send\r\n");
+	//debug_msg("      ...Start Command Send\r\n");
 	assertRadioCS();
 	SPI_Transmit(pData, byteCount);
 	deassertRadioCS();
 
-	debug_msg("      ...Command Send Done\r\n");
+	//debug_msg("      ...Command Send Done\r\n");
 
 
 }
