@@ -75,6 +75,12 @@ void radioToggleToneGPIO(uint16_t delay);
 
 void debug_msg(const char *fmt, ...);
 
+void SPI_Transmit (uint8_t *data, int size);
+void SPI_Receive (uint8_t *data, int size);
+void SPI_TransmitReceive (uint8_t* txdata, uint8_t *rxdata, int size);
+
+int radio_RequestDeviceState(void);
+
 
 /* USER CODE END EFP */
 
