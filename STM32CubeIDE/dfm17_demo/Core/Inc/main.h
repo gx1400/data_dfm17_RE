@@ -58,18 +58,19 @@ void usbInterval(void);
 void usbPrintln(char _out[]);
 void usbPrint(char _out[]);
 void delay_us(uint16_t us);
+
 int radioWaitForCTS(void);
 int bootRadio(void);
 void resetRadio(void);
-int ErrSetupCTS(void);
 int sendPatchCmds(void);
 void assertRadioShutdown(void);
 void deassertRadioShutdown(void);
 void assertRadioCS(void);
 void deassertRadioCS(void);
-int xmitCmdRadio(uint8_t cmd[]);
+//uint8_t radio_comm_SendCmdGetResp(uint8_t cmdByteCount, uint8_t* pCmdData, uint8_t respByteCount, uint8_t* pRespData);
+void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData);
 
-void debug_msg(char* msg);
+void debug_msg(const char *fmt, ...);
 
 
 /* USER CODE END EFP */

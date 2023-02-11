@@ -25,6 +25,10 @@
 #include "radioPatch.h"
 #include "led.h"
 #include "stdio.h"
+#include "stdarg.h"
+
+#define PATCHLEN(arr) ((int) (sizeof (arr) / sizeof (arr)[0]))
+
 
 /* USER CODE END Includes */
 
@@ -392,9 +396,11 @@ void delay_us(uint16_t us) {
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
 }
 
-void debug_msg(char* msg) {
-	printf(msg);
-
+void debug_msg(const char *fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	vprintf(fmt, args);
+	va_end(args);
 }
 
 int radioWaitForCTS(void) {
@@ -406,7 +412,7 @@ int radioWaitForCTS(void) {
 	tx_data[0] = 0x44;
 	tx_data[1] = 0xFF;
 
-	debug_msg("... Waiting for CTS:\r\n");
+	debug_msg("   ...Wait for CTS:\r\n");
 	for(int x = 0; x <= 100; x++ ) {
 		uint8_t resp;
 		resp = 0xF0;
@@ -418,7 +424,7 @@ int radioWaitForCTS(void) {
 			resp = rx_data[1];
 
 			if (resp == 0xFF) {
-				debug_msg("Found CTS at msg#\r\n");
+				//debug_msg("      ...Found CTS at msg#%d\r\n", x);
 
 				return 0;
 			}
@@ -426,6 +432,7 @@ int radioWaitForCTS(void) {
 		delay_us(25);
 	}
 
+	debug_msg("     ...ERROR: CTS not found\r\n");
 	return ERR_CTSFAIL;
 }
 
@@ -441,37 +448,59 @@ int bootRadio(void) {
 
 
 
-	//sendPatchCmds();
+	sendPatchCmds();
 	return 0;
-}
-
-int ErrSetupCTS(void) {
-
-	return ERR_CTSFAIL;
 }
 
 int sendPatchCmds(void) {
-	/*
+	debug_msg("   ...Starting patch decode\r\n");
 	uint8_t Si446xPatchCommands[][9] = { SI446X_PATCH_CMDS };
-	uint8_t SingleCmd[8];
+	uint8_t SingleCmd[8] = {0};
+
+	uint8_t cmdCount = 0;
+	cmdCount = PATCHLEN(Si446xPatchCommands);
+	debug_msg("      ...Found %d patch commands\r\n", cmdCount);
 
 	volatile uint16_t line = 0;
 	volatile uint8_t row = 0;
-	for (line = 0; line < (sizeof(Si446xPatchCommands) / 8u); line++) {
-		for (row=0; row<8; row++) {
-			SingleCmd[row] = Si446xPatchCommands[line][row+1];
+
+	for (line = 0; line < cmdCount; line++) {
+		memset(SingleCmd, 0, sizeof(SingleCmd));
+		for (row=1; row<9; row++) {
+			SingleCmd[row-1] = Si446xPatchCommands[line][row];
 		}
-		xmitCmdRadio(SingleCmd);
+		//debug_msg("      ...Sending patch command %d\r\n", line);
+		radio_comm_SendCmd(sizeof(SingleCmd), SingleCmd);
 		//return 0; // TEMP send only one command
 	}
-	*/
+
+
+	debug_msg("      ...Done Sending Patch Commands\r\n");
 	return 0;
 }
 
-int xmitCmdRadio(uint8_t cmd[]){
+//uint8_t radio_comm_SendCmd(uint8_t cmdByteCount, uint8_t* pCmdData, uint8_t respByteCount, uint8_t* pRespData)
+//{
+//    radio_comm_SendCmd(cmdByteCount, pCmdData);
+//    return 0;
+//    //return radio_comm_GetResp(respByteCount, pRespData);
+//}
 
-	return 0;
+void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData)
+{
+	//debug_msg("   ...Start Command\r\n");
+	radioWaitForCTS();
+
+	//debug_msg("      ...Start Command Send\r\n");
+	assertRadioCS();
+	HAL_SPI_Transmit(&hspi1, pData, byteCount, HAL_MAX_DELAY);
+	deassertRadioCS();
+	//debug_msg("      ...Command Send Done\r\n");
+
+
 }
+
+
 
 void resetRadio(void) {
 	assertRadioShutdown();
