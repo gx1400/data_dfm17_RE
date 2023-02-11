@@ -58,6 +58,7 @@
 SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart1;
 
@@ -76,6 +77,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 
@@ -118,6 +120,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_SPI1_Init();
   MX_TIM1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   debug_msg("Starting timer.\r\n");
   HAL_TIM_Base_Start(&htim1); //start timer 1
@@ -148,9 +151,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  ledInterval(oLED_R_GPIO_Port, oLED_R_Pin, oLED_Y_GPIO_Port, oLED_Y_Pin);
+	  //ledInterval(oLED_R_GPIO_Port, oLED_R_Pin, oLED_Y_GPIO_Port, oLED_Y_Pin);
 	  //usbInterval();
 	  //testToggleLED(oLED_Y_GPIO_Port, oLED_Y_Pin);
+
+	  HAL_GPIO_TogglePin(oSpiGPIO3_GPIO_Port, oSpiGPIO3_Pin);
+	  delay_us(500);
 
 
 
@@ -277,6 +283,51 @@ static void MX_TIM1_Init(void)
   /* USER CODE BEGIN TIM1_Init 2 */
 
   /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 0;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 65535;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
 
 }
 
@@ -570,7 +621,7 @@ int bootRadio(void) {
 	uint8_t changeTxCmd[] = {0x34, 0x07};
 
 	debug_msg("Send last config packets\r\n");
-	//radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);
+	//radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);   // commenting out this command will center TX at approx 400Mhz
 	radio_comm_SendCmd(sizeof(pkt81Cmd), pkt81Cmd);
 	radio_comm_SendCmd(sizeof(pkt82Cmd), pkt82Cmd);
 
