@@ -69,6 +69,8 @@ void assertRadioCS(void);
 void deassertRadioCS(void);
 int xmitCmdRadio(uint8_t cmd[]);
 
+void debug_msg(char* msg);
+
 
 /* USER CODE END EFP */
 

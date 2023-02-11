@@ -24,7 +24,7 @@
 #include "string.h"
 #include "radioPatch.h"
 #include "led.h"
-#include "time.h"
+#include "stdio.h"
 
 /* USER CODE END Includes */
 
@@ -65,6 +65,14 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM1_Init(void);
+
+int _write(int file, char *ptr, int len) {
+	int i=0;
+	for(i=0; i<len; i++){
+		ITM_SendChar((*ptr++));
+	}
+	return len;
+}
 /* USER CODE BEGIN PFP */
 
 
@@ -89,6 +97,7 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+  debug_msg("Starting stm...\r\n");
 
   /* USER CODE BEGIN Init */
 
@@ -108,11 +117,15 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  debug_msg("Starting timer.\r\n");
   HAL_TIM_Base_Start(&htim1); //start timer 1
+
+  debug_msg("Setting BattPON.\r\n");
   assertBattPOn();
 
   //radio boot
   int resultSetup = 0;
+  debug_msg("Start booting radio...\r\n");
   resultSetup = bootRadio();
 
   if (!resultSetup) {
@@ -127,6 +140,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  debug_msg("Starting main loop...");
   while (1)
   {
     /* USER CODE END WHILE */
@@ -135,6 +149,8 @@ int main(void)
 	  ledInterval(oLED_R_GPIO_Port, oLED_R_Pin, oLED_Y_GPIO_Port, oLED_Y_Pin);
 	  //usbInterval();
 	  //testToggleLED(oLED_Y_GPIO_Port, oLED_Y_Pin);
+
+
 
   }
   /* USER CODE END 3 */
@@ -374,6 +390,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 void delay_us(uint16_t us) {
 	__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
+}
+
+void debug_msg(char* msg) {
+	printf(msg);
+
 }
 
 int radioWaitForCTS(void) {
