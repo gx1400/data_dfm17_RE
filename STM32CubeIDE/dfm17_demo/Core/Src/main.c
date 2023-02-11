@@ -406,6 +406,7 @@ int radioWaitForCTS(void) {
 	tx_data[0] = 0x44;
 	tx_data[1] = 0xFF;
 
+	debug_msg("... Waiting for CTS:\r\n");
 	for(int x = 0; x <= 100; x++ ) {
 		uint8_t resp;
 		resp = 0xF0;
@@ -417,6 +418,8 @@ int radioWaitForCTS(void) {
 			resp = rx_data[1];
 
 			if (resp == 0xFF) {
+				debug_msg("Found CTS at msg#\r\n");
+
 				return 0;
 			}
 		}
