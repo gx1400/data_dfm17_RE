@@ -76,14 +76,6 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM1_Init(void);
-
-int _write(int file, char *ptr, int len) {
-	int i=0;
-	for(i=0; i<len; i++){
-		ITM_SendChar((*ptr++));
-	}
-	return len;
-}
 /* USER CODE BEGIN PFP */
 
 
@@ -108,7 +100,6 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-  debug_msg("Starting stm...\r\n");
 
   /* USER CODE BEGIN Init */
 
@@ -332,6 +323,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -343,10 +335,19 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(oSpiGPIO3_GPIO_Port, oSpiGPIO3_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(oLED_R_GPIO_Port, oLED_R_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : iSpiGPIO2_Pin */
+  GPIO_InitStruct.Pin = iSpiGPIO2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(iSpiGPIO2_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : oBattPOn_Pin oLED_G_Pin oLED_Y_Pin */
   GPIO_InitStruct.Pin = oBattPOn_Pin|oLED_G_Pin|oLED_Y_Pin;
@@ -361,6 +362,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(oSiSDN_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : oSpiGPIO3_Pin */
+  GPIO_InitStruct.Pin = oSpiGPIO3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(oSpiGPIO3_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : oSpiCS_Pin */
   GPIO_InitStruct.Pin = oSpiCS_Pin;
@@ -381,6 +389,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(intButton_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure peripheral I/O remapping */
+  __HAL_AFIO_REMAP_PD01_ENABLE();
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
@@ -559,7 +570,7 @@ int bootRadio(void) {
 	uint8_t changeTxCmd[] = {0x34, 0x07};
 
 	debug_msg("Send last config packets\r\n");
-	radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);
+	//radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);
 	radio_comm_SendCmd(sizeof(pkt81Cmd), pkt81Cmd);
 	radio_comm_SendCmd(sizeof(pkt82Cmd), pkt82Cmd);
 

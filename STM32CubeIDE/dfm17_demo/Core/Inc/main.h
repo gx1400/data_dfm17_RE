@@ -78,10 +78,14 @@ void debug_msg(const char *fmt, ...);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define iSpiGPIO2_Pin GPIO_PIN_0
+#define iSpiGPIO2_GPIO_Port GPIOD
 #define oBattPOn_Pin GPIO_PIN_0
 #define oBattPOn_GPIO_Port GPIOC
 #define oSiSDN_Pin GPIO_PIN_3
 #define oSiSDN_GPIO_Port GPIOC
+#define oSpiGPIO3_Pin GPIO_PIN_4
+#define oSpiGPIO3_GPIO_Port GPIOA
 #define oSpiSCLK_Pin GPIO_PIN_5
 #define oSpiSCLK_GPIO_Port GPIOA
 #define oSpiMISO_Pin GPIO_PIN_6
