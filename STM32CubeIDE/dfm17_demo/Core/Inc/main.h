@@ -57,7 +57,6 @@ void assertBattPOn(void);
 void usbInterval(void);
 void usbPrintln(char _out[]);
 void usbPrint(char _out[]);
-
 void delay_us(uint16_t us);
 int radioWaitForCTS(void);
 int bootRadio(void);
