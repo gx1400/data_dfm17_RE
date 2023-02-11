@@ -1,6 +1,6 @@
 # Frequency Calculation
 
-## Default Setup
+## Calculation
 
 $RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
 
@@ -13,6 +13,16 @@ Whereas:
 
 $RF_{Channel_{Hz}}=400,000,000 Hz$
 
+## Calculation Steps
+
+1) $RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
+2) $RF_{Channel_{Hz}}=\left(77+\frac{589,824}{2^{19}}\right) \times \left(\frac{2 \times 25,600,000}{10}\right)$
+3) $RF_{Channel_{Hz}}=\left(77+{1.125}\right) \times \left(\frac{51,200,000}{10}\right)$
+4) $RF_{Channel_{Hz}}=78.125 \times 5,120,000$
+5) $RF_{Channel_{Hz}}=400,000,000 Hz = 400Mhz$
+
+
+## Values
 ### FREQ_CONTROL_INTE Value
 
 
@@ -71,6 +81,6 @@ OUTDIV determined by BAND which is bit 2:0 : 0b001
 
 BAND = 1
 
-*\*NOTE* - API Documents show BAND 1 as BAND ENUM: FVCO_DIV_6, but outdiv 
+*\*NOTE* - API Documents show BAND 1 as BAND ENUM: FVCO_DIV_6, but outdiv is 10, confirmed in WDS3
 
 *OUTDIV* = **10**
