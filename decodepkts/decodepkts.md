@@ -6,6 +6,10 @@
 - [API documentation (zip file)](../docs/EZRadioPRO_REVC2_API.zip)
 - [Errata with PATCH information](../docs/ezradio-ezradiopro-c2a-a2a-errata.pdf)
 
+# Calcuations
+
+- [Frequency Calculation](/calculations/freq.md)
+
 #  Packets from Firmware
 
 ## PATCH DATA Packets
