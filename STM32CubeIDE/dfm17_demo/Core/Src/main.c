@@ -26,6 +26,7 @@
 #include "led.h"
 #include "stdio.h"
 #include "stdarg.h"
+#include "radio_config_Si4063.h"
 
 #define PATCHLEN(arr) ((int) (sizeof (arr) / sizeof (arr)[0]))
 
@@ -39,7 +40,12 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define ERR_CTSFAIL 8000
+#define ERR_CTSFAIL 		8000
+#define ERR_SPIRECEIVE		8100
+
+#define radioCmd_REQUEST_DEVICE_STATE 	0x33
+#define radioCmd_READ_CMD_BUFF			0x44
+#define radioCmd_FILLER					0xFF
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -409,8 +415,8 @@ int radioWaitForCTS(void) {
 	uint8_t rx_data[2];
 
 
-	tx_data[0] = 0x44;
-	tx_data[1] = 0xFF;
+	tx_data[0] = radioCmd_READ_CMD_BUFF;
+	tx_data[1] = radioCmd_FILLER;
 
 	debug_msg("      ...Wait for CTS:\r\n");
 	for(int x = 0; x <= 100; x++ ) {
@@ -447,8 +453,96 @@ int bootRadio(void) {
 	if (result) {return result;}
 
 
-
 	sendPatchCmds();
+
+	uint8_t cmdRF_POWER_UP[] = {RF_POWER_UP};
+	uint8_t cmdRF_GPIO_PIN_CFG[] = {RF_GPIO_PIN_CFG};
+	uint8_t cmdRF_GLOBAL_XO_TUNE_2[] = {RF_GLOBAL_XO_TUNE_2};
+	uint8_t cmdRF_GLOBAL_CONFIG_1[] = {RF_GLOBAL_CONFIG_1};
+	uint8_t cmdRF_INT_CTL_ENABLE_1[] = {RF_INT_CTL_ENABLE_1};
+	uint8_t cmdRF_FRR_CTL_A_MODE_4[] = {RF_FRR_CTL_A_MODE_4};
+	uint8_t cmdRF_PREAMBLE_CONFIG_1[] = {RF_PREAMBLE_CONFIG_1};
+	uint8_t cmdRF_MODEM_MOD_TYPE_12[] = {RF_MODEM_MOD_TYPE_12};
+	uint8_t cmdRF_MODEM_FREQ_DEV_0_1[] = {RF_MODEM_FREQ_DEV_0_1};
+	uint8_t cmdRF_MODEM_TX_RAMP_DELAY_12[] = {RF_MODEM_TX_RAMP_DELAY_12};
+	uint8_t cmdRF_MODEM_BCR_NCO_OFFSET_2_12[] = {RF_MODEM_BCR_NCO_OFFSET_2_12};
+	uint8_t cmdRF_MODEM_AFC_LIMITER_1_3[] = {RF_MODEM_AFC_LIMITER_1_3};
+	uint8_t cmdRF_MODEM_AGC_CONTROL_1[] = {RF_MODEM_AGC_CONTROL_1};
+	uint8_t cmdRF_MODEM_AGC_WINDOW_SIZE_12[] = {RF_MODEM_AGC_WINDOW_SIZE_12};
+	uint8_t cmdRF_MODEM_RAW_CONTROL_3[] = {RF_MODEM_RAW_CONTROL_3};
+	uint8_t cmdRF_MODEM_RAW_SEARCH2_2[] = {RF_MODEM_RAW_SEARCH2_2};
+	uint8_t cmdRF_MODEM_SPIKE_DET_1[] = {RF_MODEM_SPIKE_DET_1};
+	uint8_t cmdRF_PA_MODE_4[] = {RF_PA_MODE_4};
+	uint8_t cmdRF_SYNTH_PFDCP_CPFF_7[] = {RF_SYNTH_PFDCP_CPFF_7};
+	uint8_t cmdRF_FREQ_CONTROL_INTE_7[] = {RF_FREQ_CONTROL_INTE_7};
+
+
+
+	debug_msg("Send cmdRF_POWER_UP...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_POWER_UP), cmdRF_POWER_UP);
+
+	debug_msg("Send cmdRF_GPIO_PIN_CFG...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_GPIO_PIN_CFG), cmdRF_GPIO_PIN_CFG);
+
+	debug_msg("Send cmdRF_GLOBAL_XO_TUNE_2...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_XO_TUNE_2), cmdRF_GLOBAL_XO_TUNE_2);
+
+	debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);
+
+	debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);
+
+	debug_msg("Send cmdRF_INT_CTL_ENABLE_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_INT_CTL_ENABLE_1), cmdRF_INT_CTL_ENABLE_1);
+
+	debug_msg("Send cmdRF_FRR_CTL_A_MODE_4...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_FRR_CTL_A_MODE_4), cmdRF_FRR_CTL_A_MODE_4);
+
+	debug_msg("Send cmdRF_PREAMBLE_CONFIG_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_PREAMBLE_CONFIG_1), cmdRF_PREAMBLE_CONFIG_1);
+
+	debug_msg("Send cmdRF_MODEM_MOD_TYPE_12...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_MOD_TYPE_12), cmdRF_MODEM_MOD_TYPE_12);
+
+	debug_msg("Send cmdRF_MODEM_FREQ_DEV_0_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_FREQ_DEV_0_1), cmdRF_MODEM_FREQ_DEV_0_1);
+
+	debug_msg("Send cmdRF_MODEM_TX_RAMP_DELAY_12...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_TX_RAMP_DELAY_12), cmdRF_MODEM_TX_RAMP_DELAY_12);
+
+	debug_msg("Send cmdRF_MODEM_BCR_NCO_OFFSET_2_12...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_BCR_NCO_OFFSET_2_12), cmdRF_MODEM_BCR_NCO_OFFSET_2_12);
+
+	debug_msg("Send cmdRF_MODEM_AFC_LIMITER_1_3...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AFC_LIMITER_1_3), cmdRF_MODEM_AFC_LIMITER_1_3);
+
+	debug_msg("Send cmdRF_MODEM_AGC_CONTROL_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_CONTROL_1), cmdRF_MODEM_AGC_CONTROL_1);
+
+	debug_msg("Send cmdRF_MODEM_AGC_WINDOW_SIZE_12...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_WINDOW_SIZE_12), cmdRF_MODEM_AGC_WINDOW_SIZE_12);
+
+	debug_msg("Send cmdRF_MODEM_RAW_CONTROL_3...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_CONTROL_3), cmdRF_MODEM_RAW_CONTROL_3);
+
+	debug_msg("Send cmdRF_MODEM_RAW_SEARCH2_2...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_SEARCH2_2), cmdRF_MODEM_RAW_SEARCH2_2);
+
+	debug_msg("Send cmdRF_MODEM_SPIKE_DET_1...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_SPIKE_DET_1), cmdRF_MODEM_SPIKE_DET_1);
+
+	debug_msg("Send cmdRF_PA_MODE_4...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_PA_MODE_4), cmdRF_PA_MODE_4);
+
+	debug_msg("Send cmdRF_SYNTH_PFDCP_CPFF_7...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_SYNTH_PFDCP_CPFF_7), cmdRF_SYNTH_PFDCP_CPFF_7);
+
+	debug_msg("Send cmdRF_FREQ_CONTROL_INTE_7...\r\n");
+	radio_comm_SendCmd(sizeof(cmdRF_FREQ_CONTROL_INTE_7), cmdRF_FREQ_CONTROL_INTE_7);
+
+
+
 	return 0;
 }
 
@@ -485,8 +579,7 @@ int sendPatchCmds(void) {
 //    //return radio_comm_GetResp(respByteCount, pRespData);
 //}
 
-void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData)
-{
+void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData) {
 	debug_msg("   ...Start Command\r\n");
 	radioWaitForCTS();
 
@@ -496,6 +589,33 @@ void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData)
 	deassertRadioCS();
 	debug_msg("      ...Command Send Done\r\n");
 
+
+}
+
+void radio_comm_SendCmdNoCTS(uint8_t byteCount, uint8_t* pData) {
+	debug_msg("   ...Start Command w/o CTS\r\n");
+
+	debug_msg("      ...Start Command Send\r\n");
+	assertRadioCS();
+	HAL_SPI_Transmit(&hspi1, pData, byteCount, HAL_MAX_DELAY);
+	deassertRadioCS();
+	debug_msg("      ...Command Send Done\r\n");
+
+
+}
+
+int radio_comm_GetResp(uint8_t respByteCount, uint8_t* pRespData) {
+	HAL_StatusTypeDef hal_status;
+
+	assertRadioCS();
+	hal_status = HAL_SPI_Receive(&hspi1, pRespData, respByteCount, HAL_MAX_DELAY);
+	deassertRadioCS();
+
+	if (hal_status == HAL_OK) {
+		return 0;
+	} else {
+		return ERR_SPIRECEIVE;
+	}
 
 }
 
