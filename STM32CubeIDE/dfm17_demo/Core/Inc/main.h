@@ -71,6 +71,7 @@ void deassertRadioCS(void);
 void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData);
 void radio_comm_SendCmdNoCTS(uint8_t byteCount, uint8_t* pData);
 int radio_comm_GetResp(uint8_t respByteCount, uint8_t* pRespData);
+void radioToggleToneGPIO(uint16_t delay);
 
 void debug_msg(const char *fmt, ...);
 
