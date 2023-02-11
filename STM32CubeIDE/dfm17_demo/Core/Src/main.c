@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "string.h"
 #include "radioPatch.h"
+#include "led.h"
 
 /* USER CODE END Includes */
 
@@ -51,12 +52,10 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 uint32_t greenLastms 		= 0;
 uint32_t redLastms 			= 0;
-uint32_t yellowLastms 		= 0;
 uint32_t usbLastms			= 0;
 
 uint16_t greenIntervalMs	= 500;
 uint16_t redIntervalMs		= 1000;
-uint16_t yellowIntervalMs	= 2000;
 uint16_t usbIntervalMs		= 2000;
 
 /* USER CODE END PV */
@@ -136,7 +135,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  //ledInterval();
 	  //usbInterval();
-	  //testToggleLED();
+	  testToggleLED(oLED_Y_GPIO_Port, oLED_Y_Pin);
 
   }
   /* USER CODE END 3 */
@@ -378,13 +377,7 @@ void delay_us(uint16_t us) {
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
 }
 
-void testToggleLED(void) {
-	HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_SET);
-	delay_us(100);
-	HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_RESET);
-	delay_us(200);
 
-}
 
 int radioWaitForCTS(void) {
 	HAL_StatusTypeDef hal_status;
@@ -427,7 +420,7 @@ int bootRadio(void) {
 
 
 
-	sendPatchCmds();
+	//sendPatchCmds();
 	return 0;
 }
 
@@ -437,6 +430,7 @@ int ErrSetupCTS(void) {
 }
 
 int sendPatchCmds(void) {
+	/*
 	uint8_t Si446xPatchCommands[][9] = { SI446X_PATCH_CMDS };
 	uint8_t SingleCmd[8];
 
@@ -449,6 +443,7 @@ int sendPatchCmds(void) {
 		xmitCmdRadio(SingleCmd);
 		//return 0; // TEMP send only one command
 	}
+	*/
 	return 0;
 }
 
@@ -496,12 +491,6 @@ void ledInterval(void) {
 			redLastms = currentms;
 			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
 	}
-	/*
-	if( (currentms - yellowLastms) >= yellowIntervalMs) {
-			yellowLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_Y_GPIO_Port, oLED_Y_Pin);
-	}
-	*/
 }
 
 void usbInterval(void) {
@@ -523,6 +512,9 @@ void usbPrintln(char _out[]){
 void usbPrint(char _out[]){
 	HAL_UART_Transmit(&huart1, (uint8_t *) _out, strlen(_out), 10);
 }
+
+
+
 
 /* USER CODE END 4 */
 

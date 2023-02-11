@@ -60,7 +60,6 @@ void usbPrintln(char _out[]);
 void usbPrint(char _out[]);
 
 void delay_us(uint16_t us);
-void testToggleLED(void);
 int radioWaitForCTS(void);
 int bootRadio(void);
 void resetRadio(void);
@@ -71,6 +70,7 @@ void deassertRadioShutdown(void);
 void assertRadioCS(void);
 void deassertRadioCS(void);
 int xmitCmdRadio(uint8_t cmd[]);
+
 
 /* USER CODE END EFP */
 
