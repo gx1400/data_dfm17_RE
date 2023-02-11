@@ -412,7 +412,7 @@ int radioWaitForCTS(void) {
 	tx_data[0] = 0x44;
 	tx_data[1] = 0xFF;
 
-	debug_msg("   ...Wait for CTS:\r\n");
+	debug_msg("      ...Wait for CTS:\r\n");
 	for(int x = 0; x <= 100; x++ ) {
 		uint8_t resp;
 		resp = 0xF0;
@@ -424,7 +424,7 @@ int radioWaitForCTS(void) {
 			resp = rx_data[1];
 
 			if (resp == 0xFF) {
-				//debug_msg("      ...Found CTS at msg#%d\r\n", x);
+				debug_msg("      ...Found CTS at msg#%d\r\n", x);
 
 				return 0;
 			}
@@ -469,9 +469,8 @@ int sendPatchCmds(void) {
 		for (row=1; row<9; row++) {
 			SingleCmd[row-1] = Si446xPatchCommands[line][row];
 		}
-		//debug_msg("      ...Sending patch command %d\r\n", line);
+		debug_msg("      ...Sending patch command %d\r\n", line);
 		radio_comm_SendCmd(sizeof(SingleCmd), SingleCmd);
-		//return 0; // TEMP send only one command
 	}
 
 
@@ -488,14 +487,14 @@ int sendPatchCmds(void) {
 
 void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData)
 {
-	//debug_msg("   ...Start Command\r\n");
+	debug_msg("   ...Start Command\r\n");
 	radioWaitForCTS();
 
-	//debug_msg("      ...Start Command Send\r\n");
+	debug_msg("      ...Start Command Send\r\n");
 	assertRadioCS();
 	HAL_SPI_Transmit(&hspi1, pData, byteCount, HAL_MAX_DELAY);
 	deassertRadioCS();
-	//debug_msg("      ...Command Send Done\r\n");
+	debug_msg("      ...Command Send Done\r\n");
 
 
 }
