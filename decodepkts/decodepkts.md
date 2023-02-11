@@ -51,16 +51,16 @@ Note the response packets below do not have including the "0xFF 0xxFF" response 
 | 77            | 01    | Command      | 33         | REQUEST_DEVICE_STATE |
 | 78            | 02    | Response     | 03 00      | state READY | 
 | 79            | 02    | Command      | 34 03      | CHANGE_STATE to READY |
-| 80            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | SET_PROPERTY FREQ_CONTROL_CHANNEL_STEP_SIZE |
+| 80            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | SET_PROPERTY FREQ_CONTROL |
 | 81            | 06    | Command      | 11 20 02 0D 00 00 | SET_PROPERTY MODEM_DSM_CTRL? |
 | 82            | 06    | Command      | 11 20 02 0B 01 33 | SET_PROPERTY MODEM_DSM_CTRL? |
 | 83            | 02    | Command      | 34 07      | CHANGE_STATE to TX |
 | 84            | 01    | Command      | 33         | REQUEST_DEVICE_STATE |
 | 85            | 02    | Response     | 07 00      | state TX |
 | 86            | 02    | Command      | 34 03      | CHANGE_STATE to READY |
-| 87            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | SET_PROPERTY FREQ_CONTROL_CHANNEL_STEP_SIZE |
+| 87            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | SET_PROPERTY FREQ_CONTROL |
 | 88            | 02    | Command      | 34 07      | CHANGE_STATE to TX |
-| 92            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | SET_PROPERTY FREQ_CONTROL_CHANNEL_STEP_SIZE |
+| 92            | 0B    | Command      | 11 40 04 00 4D 05 B4 00 04 00 20 | SET_PROPERTY FREQ_CONTROL |
 
 ### State Enum
 | State Name | Value | 
