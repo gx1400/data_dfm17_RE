@@ -437,17 +437,17 @@ int ErrSetupCTS(void) {
 }
 
 int sendPatchCmds(void) {
-	uint8_t Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS };
-	uint8_t SingleCmd[16];
+	uint8_t Si446xPatchCommands[][9] = { SI446X_PATCH_CMDS };
+	uint8_t SingleCmd[8];
 
 	volatile uint16_t line = 0;
 	volatile uint8_t row = 0;
 	for (line = 0; line < (sizeof(Si446xPatchCommands) / 8u); line++) {
 		for (row=0; row<8; row++) {
-			SingleCmd[row] = Si446xPatchCommands[line][row];
+			SingleCmd[row] = Si446xPatchCommands[line][row+1];
 		}
 		xmitCmdRadio(SingleCmd);
-		return 0; // TEMP send only one command
+		//return 0; // TEMP send only one command
 	}
 	return 0;
 }
