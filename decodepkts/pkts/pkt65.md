@@ -1,14 +1,23 @@
 # Pkt 65 - SET_PROPERTY - MODEM (1 Property)
 
+**Summary**
+```
+Set properties:           RF_MODEM_FREQ_DEV_0_1
+Number of properties:     1
+Group ID:                 0x20
+Start ID:                 0x0C
+Default values:           0xD3, 
+Descriptions:
+  MODEM_FREQ_DEV_0 - 17-bit unsigned TX frequency deviation word.
+```
+*\*Note - 0C is bottom words of MODEM_FREQ_DEV.  [Pkt 64](pkt64.md) has first and second word.*
+
+**Packet**
 ```
 LENGTH:     0x 05
 DATA:       0x 11 20 01 0C 33
 ```
-- Group:            20  MODEM
-- Property Count:   01
-  - Property:       0C  MODEM_FREQ_DEV [0]*
 
-*\*Note - 0C is bottom words of MODEM_FREQ_DEV.  [Pkt 64](pkt64.md) has first and second word.*
 
 | Property | Bits | Value            | Function       | Decode   |
 | -------: | ---: | ----:            | :-------       | :-----   |

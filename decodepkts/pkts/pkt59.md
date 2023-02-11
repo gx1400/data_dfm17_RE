@@ -1,14 +1,18 @@
 # Pkt 59 - SET_PROPERTY - GLOBAL (2 Properties)
 
-**Function:**   SET_PROPERTY
+**Summary:** 
+```
+Set properties:           RF_GLOBAL_XO_TUNE_2
+Number of properties:     2
+Group ID:                 0x00
+Start ID:                 0x00
+Default values:           0x40, 0x00, 
+Descriptions:
+  GLOBAL_XO_TUNE - Configure the internal capacitor frequency tuning bank for the crystal oscillator.
+  GLOBAL_CLK_CFG - Clock configuration options.
+```
 
-**Summary:**    Sets the value of one or more properties.
-
-- Group:            00  GLOBAL
-- Property Count:   02
-  - Property:       00  GLOBAL_XO_TUNE
-  - Property:       01  GLOBAL_CLK_CFG
-
+**Packet**
 ```
 LENGTH:     0x 06 
 DATA:       0x 11 00 02 00 62 60

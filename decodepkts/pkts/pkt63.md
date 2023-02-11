@@ -1,15 +1,20 @@
 # Pkt 63 - SET_PROPERTY - PREAMBLE (1 Property)
+**Summary:** 
+```
+Set properties:           RF_PREAMBLE_CONFIG_1
+Number of properties:     1
+Group ID:                 0x10
+Start ID:                 0x04
+Default values:           0x21, 
+Descriptions:
+  PREAMBLE_CONFIG - General configuration bits for the Preamble field.
+```
 
+**Packet**
 ```
 LENGTH:     0x 05
 DATA:       0x 11 10 01 04 21
 ```
-- Group:            10  PREAMBLE
-- Property Count:   01
-  - Property:       04  PREAMBLE_CONFIG
-
-**Summary:**    General configuration bits for the Preamble field.
-
 **Byte:**       0x 21 = 0b 0010 0001
 
 | Property | Bits | Value      | Function           | Decode   |

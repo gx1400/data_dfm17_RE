@@ -1,5 +1,28 @@
 # Pkt 66 - SET_PROPERTY - MODEM (12 Properties)
 
+**Summary**
+```
+Set properties:           RF_MODEM_TX_RAMP_DELAY_12
+Number of properties:     12
+Group ID:                 0x20
+Start ID:                 0x18
+Default values:           0x01, 0x00, 0x08, 0x03, 0xC0, 0x00, 0x10, 0x20, 0x00, 0x00, 0x00, 0x4B, 
+Descriptions:
+  MODEM_TX_RAMP_DELAY - TX ramp-down delay setting.
+  MODEM_MDM_CTRL - MDM control.
+  MODEM_IF_CONTROL - Selects Fixed-IF, Scaled-IF, or Zero-IF mode of RX Modem operation.
+  MODEM_IF_FREQ_2 - the IF frequency setting (an 18-bit signed number).
+  MODEM_IF_FREQ_1 - the IF frequency setting (an 18-bit signed number).
+  MODEM_IF_FREQ_0 - the IF frequency setting (an 18-bit signed number).
+  MODEM_DECIMATION_CFG1 - Specifies three decimator ratios for the Cascaded Integrator Comb (CIC) filter.
+  MODEM_DECIMATION_CFG0 - Specifies miscellaneous parameters and decimator ratios for the Cascaded Integrator Comb (CIC) filter.
+  MODEM_DECIMATION_CFG2 - Specifies miscellaneous decimator filter selections.
+  MODEM_IFPKD_THRESHOLDS - 
+  MODEM_BCR_OSR_1 - RX BCR/Slicer oversampling rate (12-bit unsigned number).
+  MODEM_BCR_OSR_0 - RX BCR/Slicer oversampling rate (12-bit unsigned number).
+```
+
+**Packet**
 ```
 LENGTH:     0x 10
 DATA:       0x 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40

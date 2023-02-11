@@ -25,26 +25,26 @@
 
 | Packet Number | FW Address | Bytes | Transmit Data (HEX) | Command Type |
 | :-----------: | :--------- | ----: | :------------------ | :----------- |
-| 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | [POWER_UP](pkts/pkt57.md)     |
-| 58 | 0x0000a212 | 08 | 13 10 0F 07 04 00 0B 00 | [GPIO_PIN_CFG](pkts/pkt58.md) |
-| 59 | 0x0000a21b | 06 | 11 00 02 00 62 60       | [SET_PROPERTY - Group 00: GLOBAL](pkts/pkt59.md)       |
-| 60 | 0x0000a222 | 05 | 11 00 01 03 20          | [SET_PROPERTY - Group 00: GLOBAL](pkts/pkt60.md)       |
-| 61 | 0x0000a228 | 05 | 11 01 01 00 00          | [SET_PROPERTY - Group 01: INT_CTL](pkts/pkt61.md)      |
-| 62 | 0x0000a22e | 08 | 11 02 04 00 00 00 00 00 | [SET_PROPERTY - Group 02: FRR_CTL](pkts/pkt62.md)      |
-| 63 | 0x0000a237 | 05 | 11 10 01 04 21          | [SET_PROPERTY - Group 10: PREAMBLE](pkts/pkt63.md)     |
-| 64 | 0x0000a23d | 10 | 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01 | [SET_PROPERTY - Group 20: MODEM](pkts/pkt64.md) |
-| 65 | 0x0000a24e | 05 | 11 20 01 0C 33          | [SET_PROPERTY - Group 20: MODEM](pkts/pkt65.md)                         |
-| 66 | 0x0000a254 | 10 | 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40 | [SET_PROPERTY - Group 20: MODEM](pkts/pkt66.md) |
-| 67 | 0x0000a265 | 10 | 11 20 0C 24 01 99 9A 00 CD 00 C2 00 54 62 80 6B | [SET_PROPERTY - Group 20: MODEM](pkts/pkt67.md) |
-| 68 | 0x0000a276 | 07 | 11 20 03 30 01 E5 80    | SET_PROPERTY - Group 20: MODEM                         |
-| 69 | 0x0000a27e | 05 | 11 20 01 35 E0          | SET_PROPERTY - Group 20: MODEM                         |
-| 70 | 0x0000a284 | 10 | 11 20 0C 38 11 46 46 80 1A 99 9A 00 2A 0C 84 23 | SET PROPERTY - Group 20: MODEM |
-| 71 | 0x0000a295 | 07 | 11 20 03 45 8F 00 9C    | SET_PROPERTY - Group 20: MODEM                         |
-| 72 | 0x0000a29d | 06 | 11 20 02 50 94 09       | SET_PROPERTY - Group 20: MODEM                         |
-| 73 | 0x0000a2a4 | 05 | 11 20 01 54 03          | SET_PROPERTY - Group 20: MODEM                         |
-| 74 | 0x0000a2aa | 08 | 11 22 04 00 08 7F 00 1F | SET_PROPERTY - Group 22: PA                            |
-| 75 | 0x0000a2b3 | 0B | 11 23 07 00 2C 0E 0B 04 0C 73 03 | SET_PROPERTY - Group 23: SYNTH                |
-| 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | [SET_PROPERTY - Group 40: FREQ_CONTROL](pkts/pkt76.md)         |
+| 57 | 0x0000a20a | 07 | 02 81 01 01 86 A0 00    | [RF_POWER_UP](pkts/pkt57.md)     |
+| 58 | 0x0000a212 | 08 | 13 10 0F 07 04 00 0B 00 | [RF_GPIO_PIN_CFG](pkts/pkt58.md) |
+| 59 | 0x0000a21b | 06 | 11 00 02 00 62 60       | [RF_GLOBAL_XO_TUNE_2](pkts/pkt59.md)       |
+| 60 | 0x0000a222 | 05 | 11 00 01 03 20          | [RF_GLOBAL_CONFIG_1](pkts/pkt60.md)       |
+| 61 | 0x0000a228 | 05 | 11 01 01 00 00          | [RF_INT_CTL_ENABLE_1](pkts/pkt61.md)      |
+| 62 | 0x0000a22e | 08 | 11 02 04 00 00 00 00 00 | [RF_FRR_CTL_A_MODE_4](pkts/pkt62.md)      |
+| 63 | 0x0000a237 | 05 | 11 10 01 04 21          | [RF_PREAMBLE_CONFIG_1](pkts/pkt63.md)     |
+| 64 | 0x0000a23d | 10 | 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01 | [RF_MODEM_MOD_TYPE_12](pkts/pkt64.md) |
+| 65 | 0x0000a24e | 05 | 11 20 01 0C 33          | [RF_MODEM_FREQ_DEV_0_1](pkts/pkt65.md)                         |
+| 66 | 0x0000a254 | 10 | 11 20 0C 18 01 80 08 03 60 00 70 20 0C E8 01 40 | [RF_MODEM_TX_RAMP_DELAY_12](pkts/pkt66.md) |
+| 67 | 0x0000a265 | 10 | 11 20 0C 24 01 99 9A 00 CD 00 C2 00 54 62 80 6B | [RF_MODEM_BCR_NCO_OFFSET_2_12](pkts/pkt67.md) |
+| 68 | 0x0000a276 | 07 | 11 20 03 30 01 E5 80    | [RF_MODEM_AFC_LIMITER_1_3](pkts/pkt68.md)                        |
+| 69 | 0x0000a27e | 05 | 11 20 01 35 E0          | [RF_MODEM_AGC_CONTROL_1](pkts/pkt69.md)                         |
+| 70 | 0x0000a284 | 10 | 11 20 0C 38 11 46 46 80 1A 99 9A 00 2A 0C 84 23 | [RF_MODEM_AGC_WINDOW_SIZE_12](/pkts/pkt70.md) |
+| 71 | 0x0000a295 | 07 | 11 20 03 45 8F 00 9C    | [RF_MODEM_RAW_CONTROL_3](pkts/pkt71.md)                         |
+| 72 | 0x0000a29d | 06 | 11 20 02 50 94 09       | [RF_MODEM_RAW_SEARCH2_2](pkts/pkt72.md)                         |
+| 73 | 0x0000a2a4 | 05 | 11 20 01 54 03          | [RF_MODEM_SPIKE_DET_1](pkts/pkt73.md)                         |
+| 74 | 0x0000a2aa | 08 | 11 22 04 00 08 7F 00 1F | [RF_PA_MODE_4](pkts/pkt74.md)                         |
+| 75 | 0x0000a2b3 | 0B | 11 23 07 00 2C 0E 0B 04 0C 73 03 | [RF_SYNTH_PFDCP_CPFF_7](pkts/pkt75.md)                |
+| 76 | 0x0000a2bf | 0B | 11 40 07 00 4D 09 00 00 04 00 20 | [RF_FREQ_CONTROL_INTE_7](pkts/pkt76.md)         |
 
 ## Additional Setup Packets
 

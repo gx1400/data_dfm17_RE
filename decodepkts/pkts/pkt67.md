@@ -1,5 +1,28 @@
 # Pkt 67 - SET_PROPERTY - MODEM (12 Properties)
 
+**Summary**
+```
+Set properties:           RF_MODEM_BCR_NCO_OFFSET_2_12
+Number of properties:     12
+Group ID:                 0x20
+Start ID:                 0x24
+Default values:           0x06, 0xD3, 0xA0, 0x06, 0xD3, 0x02, 0xC0, 0x00, 0x00, 0x23, 0x83, 0x69, 
+Descriptions:
+  MODEM_BCR_NCO_OFFSET_2 - RX BCR NCO offset value (an unsigned 22-bit number).
+  MODEM_BCR_NCO_OFFSET_1 - RX BCR NCO offset value (an unsigned 22-bit number).
+  MODEM_BCR_NCO_OFFSET_0 - RX BCR NCO offset value (an unsigned 22-bit number).
+  MODEM_BCR_GAIN_1 - The unsigned 11-bit RX BCR loop gain value.
+  MODEM_BCR_GAIN_0 - The unsigned 11-bit RX BCR loop gain value.
+  MODEM_BCR_GEAR - RX BCR loop gear control.
+  MODEM_BCR_MISC1 - Miscellaneous control bits for the RX BCR loop.
+  MODEM_BCR_MISC0 - Miscellaneous RX BCR loop controls.
+  MODEM_AFC_GEAR - RX AFC loop gear control.
+  MODEM_AFC_WAIT - RX AFC loop wait time control.
+  MODEM_AFC_GAIN_1 - Sets the gain of the PLL-based AFC acquisition loop, and provides miscellaneous control bits for AFC functionality.
+  MODEM_AFC_GAIN_0 - Sets the gain of the PLL-based AFC acquisition loop, and provides miscellaneous control bits for AFC functionality.
+```
+
+**Packet**
 ```
 LENGTH:     0x 10
 DATA:       0x 11 20 0C 24 01 99 9A 00 CD 00 C2 00 54 62 80 6B

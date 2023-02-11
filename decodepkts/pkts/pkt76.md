@@ -1,26 +1,28 @@
-# Pkt 76 - SET_PROPERTY - FREQ_CONTROL (1 Property)
+# Pkt 76 - RF_FREQ_CONTROL_INTE_7
 
+**Summary**
+```
+Set properties:           RF_FREQ_CONTROL_INTE_7
+Number of properties:     7
+Group ID:                 0x40
+Start ID:                 0x00
+Default values:           0x3C, 0x08, 0x00, 0x00, 0x00, 0x00, 0x20, 
+Descriptions:
+  FREQ_CONTROL_INTE - Frac-N PLL Synthesizer integer divide number.
+  FREQ_CONTROL_FRAC_2 - Frac-N PLL fraction number.
+  FREQ_CONTROL_FRAC_1 - Frac-N PLL fraction number.
+  FREQ_CONTROL_FRAC_0 - Frac-N PLL fraction number.
+  FREQ_CONTROL_CHANNEL_STEP_SIZE_1 - EZ Frequency Programming channel step size.
+  FREQ_CONTROL_CHANNEL_STEP_SIZE_0 - EZ Frequency Programming channel step size.
+  FREQ_CONTROL_W_SIZE - Set window gating period (in number of crystal reference clock cycles) for counting VCO frequency during calibration.
+
+```
+
+**Packet***
 ```
 LENGTH:     0x 0B
 DATA:       0x 11 40 07 00 4D 09 00 00 04 00 20
 ```
-- Group:            40      FREQ_CONTROL
-- Property Count:   07
-  - Property:       00      FREQ_CONTROL_INTE
-  - Property:       01:03   FREQ_CONTROL_FRAC
-  - Property:       04:05   FREQ_CONTROL_CHANNEL_STEP_SIZE
-  - Property:       06      FREQ_CONTROL_W_SIZE
-
-$RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
-
-Whereas:
-- $fc_{inte} = 77$
-- $fc_{frac} = 589,824$
-- $N_{PRESC} = 2$
-- $freq\_xo = 25,600,000$
-- $outdiv = 10$
-
-$RF_{Channel_{Hz}}=400,000,000 Hz$
 
 ## Property 00 - FREQ_CONTROL_INTE
 

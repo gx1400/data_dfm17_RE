@@ -1,12 +1,23 @@
 # Pkt 60 - SET_PROPERTY - GLOBAL_CONFIG (1 Property)
 
+**Summary**
+```
+ Set properties:           RF_GLOBAL_CONFIG_1
+ Number of properties:     1
+ Group ID:                 0x00
+ Start ID:                 0x03
+ Default values:           0x20, 
+ Descriptions:
+   GLOBAL_CONFIG - Global configuration settings.
+```
+
+**Packet**
 ```
 LENGTH:     0x 05
 DATA:       0x 11 00 01 03 20
 ```
-- Group:            00  GLOBAL
-- Property Count:   01
-  - Property:       03  GLOBAL_CONFIG
+
+
   
 ## Property 03 - GLOBAL_CONFIG
 

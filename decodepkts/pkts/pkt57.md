@@ -1,9 +1,12 @@
 # Pkt 57 - POWER_UP
 
-**Function:**   POWER_UP
+**Summary**
+```
+Command:                  RF_POWER_UP
+Description:              Command to power-up the device and select the operational mode and functionality.
+```
 
-**Summary:**    Command to power-up the device and select the operational mode and functionality.
-
+**Packet**
 ```
 LENGTH:     0x 07
 DATA:       0x 02 81 01 01 86 A0 00

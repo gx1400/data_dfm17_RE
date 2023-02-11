@@ -1,20 +1,36 @@
-# Pkt 64 - SET_PROPERTY - MODEM (12 Properties)
+# Pkt 64 - RF_MODEM_MOD_TYPE_12
 
+**Summary**
+```
+Set properties:           RF_MODEM_MOD_TYPE_12
+Number of properties:     12
+Group ID:                 0x20
+Start ID:                 0x00
+Default values:           0x02, 0x80, 0x07, 0x0F, 0x42, 0x40, 0x01, 0xC9, 0xC3, 0x80, 0x00, 0x06, 
+Descriptions:
+  MODEM_MOD_TYPE - Selects the type of modulation. In TX mode, additionally selects the source of the modulation.
+  MODEM_MAP_CONTROL - Controls polarity and mapping of transmit and receive bits.
+  MODEM_DSM_CTRL - Miscellaneous control bits for the Delta-Sigma Modulator (DSM) in the PLL Synthesizer.
+  MODEM_DATA_RATE_2 - Unsigned 24-bit value used to determine the TX data rate
+  MODEM_DATA_RATE_1 - Unsigned 24-bit value used to determine the TX data rate
+  MODEM_DATA_RATE_0 - Unsigned 24-bit value used to determine the TX data rate
+  MODEM_TX_NCO_MODE_3 - TX Gaussian filter oversampling ratio and Byte 3 of unsigned 26-bit TX Numerically Controlled Oscillator (NCO) modulus.
+  MODEM_TX_NCO_MODE_2 - TX Gaussian filter oversampling ratio and Byte 3 of unsigned 26-bit TX Numerically Controlled Oscillator (NCO) modulus.
+  MODEM_TX_NCO_MODE_1 - TX Gaussian filter oversampling ratio and Byte 3 of unsigned 26-bit TX Numerically Controlled Oscillator (NCO) modulus.
+  MODEM_TX_NCO_MODE_0 - TX Gaussian filter oversampling ratio and Byte 3 of unsigned 26-bit TX Numerically Controlled Oscillator (NCO) modulus.
+  MODEM_FREQ_DEV_2 - 17-bit unsigned TX frequency deviation word.
+  MODEM_FREQ_DEV_1 - 17-bit unsigned TX frequency deviation word.
+```
+
+*\*Note - 0A & 0B are top two of three words of MODEM_FREQ_DEV.  [Pkt 65](pkt65.md) has third word.*
+*\*Note - See Packet 65 for MODEM_FREQ_DEV decode*
+
+**Packet**
 ```
 LENGTH:     0x 10
 DATA:       0x 11 20 0C 00 6B 00 07 01 86 A0 05 86 A0 00 00 01
 ```
-- Group:            20  MODEM
-- Property Count:   0C
-  - Property:       00      MODEM_MOD_TYPE
-  - Property:       01      MODEM_MAP_CONTROL
-  - Property:       02      MODEM_DSM_CTRL
-  - Property:       03:05   MODEM_DATA_RATE
-  - Property:       06:09   MODEM_TX_NCO_MODE
-  - Property:       0A:0B   MODEM_FREQ_DEV [2:1]*
 
-*\*Note - 0A & 0B are top two of three words of MODEM_FREQ_DEV.  [Pkt 65](pkt65.md) has third word.*
-*\*Note - See Packet 65 for MODEM_FREQ_DEV decode*
 
 ## Property 00 - MODEM_MOD_TYPE
 

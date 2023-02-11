@@ -1,10 +1,12 @@
 # Pkt 58 - GPIO_PIN_CFG
 
-**Function:**   GPIO_PIN_CFG
+**Summary:**    
+```
+Command:                  RF_GPIO_PIN_CFG
+Description:              Configures the GPIO pins.
+```
 
-**Summary:**    Configures the GPIO pins.
-
-
+**Packet**
 ```
 LENGTH:     0x 08
 DATA:       0x 13 10 0F 07 04 00 0B 00

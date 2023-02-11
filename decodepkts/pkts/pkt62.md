@@ -1,5 +1,19 @@
 # Pkt 62 - SET_PROPERTY - FRR_CTL (4 Properties)
+**Summary**
+```
+Set properties:           RF_FRR_CTL_A_MODE_4
+Number of properties:     4
+Group ID:                 0x02
+Start ID:                 0x00
+Default values:           0x01, 0x02, 0x09, 0x00, 
+Descriptions:
+  FRR_CTL_A_MODE - Fast Response Register A Configuration.
+  FRR_CTL_B_MODE - Fast Response Register B Configuration.
+  FRR_CTL_C_MODE - Fast Response Register C Configuration.
+  FRR_CTL_D_MODE - Fast Response Register D Configuration.
+```
 
+**Packet**
 ```
 LENGTH:     0x 08
 DATA:       0x 11 02 04 00 00 00 00 00
