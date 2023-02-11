@@ -739,14 +739,14 @@ void deassertRadioShutdown(void) {
 
 void assertRadioCS(void) {
 	// nSEL/CS is PB2
-	HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_RESET);
-	//GPIOC-> BSRR = (1U << 2);
+	//HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_RESET);
+	GPIOB-> BSRR = (1U << (16+2));
 }
 
 void deassertRadioCS(void) {
 	// nSEL/CS is PB2
-	HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_SET);
-	//GPIOC-> BSRR = (1U << (16+2));
+	//HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_SET);
+	GPIOB-> BSRR = (1U << 2);
 }
 
 void assertBattPOn(void) {
