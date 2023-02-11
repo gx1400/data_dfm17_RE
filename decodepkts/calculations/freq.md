@@ -84,3 +84,5 @@ BAND = 1
 *\*NOTE* - API Documents show BAND 1 as BAND ENUM: FVCO_DIV_6, but outdiv is 10, confirmed in WDS3
 
 *OUTDIV* = **10**
+
+![outdiv](../imgs/outdiv.png)
