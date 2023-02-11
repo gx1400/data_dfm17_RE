@@ -65,10 +65,12 @@ int radioWaitForCTS(void);
 int bootRadio(void);
 void resetRadio(void);
 int ErrSetupCTS(void);
+int sendPatchCmds(void);
 void assertRadioShutdown(void);
 void deassertRadioShutdown(void);
 void assertRadioCS(void);
 void deassertRadioCS(void);
+int xmitCmdRadio(uint8_t cmd[]);
 
 /* USER CODE END EFP */
 

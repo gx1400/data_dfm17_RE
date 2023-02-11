@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "string.h"
+#include "radioPatch.h"
 
 /* USER CODE END Includes */
 
@@ -116,6 +117,11 @@ int main(void)
   int resultSetup = 0;
   resultSetup = bootRadio();
 
+  if (!resultSetup) {
+	  HAL_GPIO_WritePin(oLED_G_GPIO_Port, oLED_G_Pin, GPIO_PIN_SET);
+  } else {
+	  HAL_GPIO_WritePin(oLED_R_GPIO_Port, oLED_R_Pin, GPIO_PIN_SET);
+  }
 
 
 
@@ -389,7 +395,7 @@ int radioWaitForCTS(void) {
 	tx_data[0] = 0x44;
 	tx_data[1] = 0xFF;
 
-	for(int x = 0; x < 20; x++ ) {
+	for(int x = 0; x <= 100; x++ ) {
 		uint8_t resp;
 		resp = 0xF0;
 		assertRadioCS();
@@ -406,24 +412,49 @@ int radioWaitForCTS(void) {
 		delay_us(25);
 	}
 
-	return -1;
+	return ERR_CTSFAIL;
 }
 
 int bootRadio(void) {
 	resetRadio();
 	delay_us(50);
 
-	if (!radioWaitForCTS()) {
-		return ErrSetupCTS();
-	}
+	int result = 0;
+
+	// wait for CTS to allow to boot
+	result = radioWaitForCTS();
+	if (result) {return result;}
 
 
+
+	sendPatchCmds();
 	return 0;
 }
 
 int ErrSetupCTS(void) {
-	HAL_GPIO_WritePin(oLED_R_GPIO_Port, oLED_R_Pin, GPIO_PIN_SET);
+
 	return ERR_CTSFAIL;
+}
+
+int sendPatchCmds(void) {
+	uint8_t Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS };
+	uint8_t SingleCmd[16];
+
+	volatile uint16_t line = 0;
+	volatile uint8_t row = 0;
+	for (line = 0; line < (sizeof(Si446xPatchCommands) / 8u); line++) {
+		for (row=0; row<8; row++) {
+			SingleCmd[row] = Si446xPatchCommands[line][row];
+		}
+		xmitCmdRadio(SingleCmd);
+		return 0; // TEMP send only one command
+	}
+	return 0;
+}
+
+int xmitCmdRadio(uint8_t cmd[]){
+
+	return 0;
 }
 
 void resetRadio(void) {
