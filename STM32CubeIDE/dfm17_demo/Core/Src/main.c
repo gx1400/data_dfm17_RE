@@ -155,7 +155,11 @@ int main(void)
 	  //usbInterval();
 	  //testToggleLED(oLED_Y_GPIO_Port, oLED_Y_Pin);
 
-	  HAL_GPIO_TogglePin(oSpiGPIO3_GPIO_Port, oSpiGPIO3_Pin);
+	  //HAL_GPIO_TogglePin(oSpiGPIO3_GPIO_Port, oSpiGPIO3_Pin);
+	  //GPIO3 is PA4
+	  GPIOA->BSRR = (1U << 4);
+	  delay_us(500);
+	  GPIOA->BSRR = (1U << (16+4));
 	  delay_us(500);
 
 
@@ -722,19 +726,27 @@ void resetRadio(void) {
 }
 
 void assertRadioShutdown(void) {
-	HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_SET);
+	// SDN is PC3
+	//HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_SET);
+	GPIOC->BSRR = (1U << 3);
 }
 
 void deassertRadioShutdown(void) {
-	HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_RESET);
+	// SDN is PC3
+	//HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_RESET);
+	GPIOC->BSRR = (1U << (16+3));
 }
 
 void assertRadioCS(void) {
+	// nSEL/CS is PB2
 	HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_RESET);
+	//GPIOC-> BSRR = (1U << 2);
 }
 
 void deassertRadioCS(void) {
+	// nSEL/CS is PB2
 	HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_SET);
+	//GPIOC-> BSRR = (1U << (16+2));
 }
 
 void assertBattPOn(void) {
