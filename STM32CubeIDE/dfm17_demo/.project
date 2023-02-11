@@ -30,11 +30,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Core/Inc/radio_config_Si4063.h</name>
-			<type>1</type>
-			<locationURI>PROJECT_LOC/Core/Src/radio_config_Si4063.h</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
