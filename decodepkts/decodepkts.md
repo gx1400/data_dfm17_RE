@@ -8,7 +8,7 @@
 
 # Calcuations
 
-- [Frequency Calculation](/calculations/freq.md)
+- [Frequency Calculation](calculations/freq.md)
 
 #  Packets from Firmware
 
