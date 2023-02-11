@@ -69,6 +69,8 @@ void assertRadioCS(void);
 void deassertRadioCS(void);
 //uint8_t radio_comm_SendCmdGetResp(uint8_t cmdByteCount, uint8_t* pCmdData, uint8_t respByteCount, uint8_t* pRespData);
 void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData);
+void radio_comm_SendCmdNoCTS(uint8_t byteCount, uint8_t* pData);
+int radio_comm_GetResp(uint8_t respByteCount, uint8_t* pRespData);
 
 void debug_msg(const char *fmt, ...);
 

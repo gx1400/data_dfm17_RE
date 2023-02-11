@@ -46,6 +46,7 @@
 #define radioCmd_REQUEST_DEVICE_STATE 	0x33
 #define radioCmd_READ_CMD_BUFF			0x44
 #define radioCmd_FILLER					0xFF
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -540,6 +541,37 @@ int bootRadio(void) {
 
 	debug_msg("Send cmdRF_FREQ_CONTROL_INTE_7...\r\n");
 	radio_comm_SendCmd(sizeof(cmdRF_FREQ_CONTROL_INTE_7), cmdRF_FREQ_CONTROL_INTE_7);
+
+	debug_msg("Get Status of Radio\r\n");
+	uint8_t statusCmd[] = {radioCmd_REQUEST_DEVICE_STATE};
+	radio_comm_SendCmdNoCTS(sizeof(statusCmd), statusCmd);
+	uint8_t statusResp[] = {radioCmd_READ_CMD_BUFF, radioCmd_FILLER, radioCmd_FILLER, radioCmd_FILLER};
+	radio_comm_SendCmdNoCTS(sizeof(statusResp), statusResp);
+
+	debug_msg("Change state to Ready\r\n");
+	uint8_t changeReadyCmd[] = {0x34, 0x03};
+	radio_comm_SendCmdNoCTS(sizeof(changeReadyCmd), changeReadyCmd);
+
+
+	uint8_t pkt80Cmd[] = {0x11, 0x40, 0x04, 0x00, 0x4D, 0x05, 0xB4, 0x00, 0x04, 0x00, 0x20};
+	uint8_t pkt81Cmd[] = {0x11, 0x20, 0x02, 0x0D, 0x00, 0x00};
+	uint8_t pkt82Cmd[] = {0x11, 0x20, 0x02, 0x0B, 0x01, 0x33};
+	uint8_t changeTxCmd[] = {0x34, 0x07};
+
+	debug_msg("Send last config packets\r\n");
+	radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);
+	radio_comm_SendCmd(sizeof(pkt81Cmd), pkt81Cmd);
+	radio_comm_SendCmd(sizeof(pkt82Cmd), pkt82Cmd);
+
+	debug_msg("Change state to Tx\r\n");
+	radio_comm_SendCmdNoCTS(sizeof(changeTxCmd), changeTxCmd);
+
+	debug_msg("Get Status of Radio\r\n");
+	radio_comm_SendCmdNoCTS(sizeof(statusCmd), statusCmd);
+	radio_comm_SendCmdNoCTS(sizeof(statusResp), statusResp);
+
+
+
 
 
 
