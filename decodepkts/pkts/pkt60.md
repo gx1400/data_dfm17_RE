@@ -1,4 +1,4 @@
-# Pkt 60 - SET_PROPERTY - GLOBAL_CONFIG (1 Property)
+# Pkt 60 - RF_GLOBAL_CONFIG_1
 
 **Summary**
 ```

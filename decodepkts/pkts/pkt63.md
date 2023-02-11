@@ -1,4 +1,5 @@
-# Pkt 63 - SET_PROPERTY - PREAMBLE (1 Property)
+# Pkt 63 - RF_PREAMBLE_CONFIG_1
+
 **Summary:** 
 ```
 Set properties:           RF_PREAMBLE_CONFIG_1

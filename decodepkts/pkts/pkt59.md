@@ -1,4 +1,4 @@
-# Pkt 59 - SET_PROPERTY - GLOBAL (2 Properties)
+# Pkt 59 - RF_GLOBAL_XO_TUNE_2
 
 **Summary:** 
 ```

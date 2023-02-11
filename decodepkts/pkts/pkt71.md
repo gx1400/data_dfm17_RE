@@ -15,6 +15,6 @@
 
 **Packet**
 ```
-LENGTH:     0x 
-DATA:       0x 
+LENGTH:     0x 07
+DATA:       0x 11 20 03 45 8F 00 9C
 ```

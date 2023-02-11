@@ -1,4 +1,5 @@
-# Pkt 62 - SET_PROPERTY - FRR_CTL (4 Properties)
+# Pkt 62 - RF_FRR_CTL_A_MODE_4
+
 **Summary**
 ```
 Set properties:           RF_FRR_CTL_A_MODE_4

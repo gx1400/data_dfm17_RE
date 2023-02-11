@@ -1,4 +1,4 @@
-# Pkt 57 - POWER_UP
+# Pkt 57 - RF_POWER_UP
 
 **Summary**
 ```

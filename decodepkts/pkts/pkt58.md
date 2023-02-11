@@ -1,4 +1,4 @@
-# Pkt 58 - GPIO_PIN_CFG
+# Pkt 58 - RF_GPIO_PIN_CFG
 
 **Summary:**    
 ```

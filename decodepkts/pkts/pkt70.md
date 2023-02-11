@@ -24,6 +24,6 @@ Descriptions:
 
 **Packet**
 ```
-LENGTH:     0x 
+LENGTH:     0x 10
 DATA:       0x 11 20 0C 38 11 46 46 80 1A 99 9A 00 2A 0C 84 23
 ```

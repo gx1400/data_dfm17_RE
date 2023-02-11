@@ -1,4 +1,4 @@
-# Pkt 67 - SET_PROPERTY - MODEM (12 Properties)
+# Pkt 67 - RF_MODEM_BCR_NCO_OFFSET_2_12
 
 **Summary**
 ```
@@ -27,16 +27,6 @@ Descriptions:
 LENGTH:     0x 10
 DATA:       0x 11 20 0C 24 01 99 9A 00 CD 00 C2 00 54 62 80 6B
 ```
-- Group:            20  MODEM
-- Property Count:   0C
-  - Property:       24:26   MODEM_BCR_NCO_OFFSET  
-  - Property:       27:28   MODEM_BCR_GAIN  
-  - Property:       29      MODEM_BCR_GEAR
-  - Property:       2A      MODEM_BCR_MISC1
-  - Property:       2B      MODEM_BCR_MISC0
-  - Property:       2C      MODEM_AFC_GEAR
-  - Property:       2D      MODEM_AFC_WAIT
-  - Property:       2E:2F   MODEM_AFC_GAIN
 
 ## Property 24:26 - MODEM_BCR_NC0_OFFSET
 

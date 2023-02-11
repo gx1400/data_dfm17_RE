@@ -1,4 +1,5 @@
-# Pkt 66 - SET_PROPERTY - MODEM (12 Properties)
+# Pkt 66 - RF_MODEM_TX_RAMP_DELAY_12
+
 
 **Summary**
 ```

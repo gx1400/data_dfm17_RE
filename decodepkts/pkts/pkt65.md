@@ -1,4 +1,4 @@
-# Pkt 65 - SET_PROPERTY - MODEM (1 Property)
+# Pkt 65 - RF_MODEM_FREQ_DEV_0_1
 
 **Summary**
 ```

@@ -1,4 +1,6 @@
-# Pkt 61 - SET_PROPERTY - INT_CTL (1 Property)
+# Pkt 61 - RF_INT_CTL_ENABLE_1
+
+**Summary**
 ```
 Set properties:           RF_INT_CTL_ENABLE_1
 Number of properties:     1
@@ -9,6 +11,7 @@ Descriptions:
   INT_CTL_ENABLE - This property provides for global enabling of the three interrupt groups (Chip, Modem and Packet Handler) in order to generate HW interrupts at the NIRQ pin.
 ```
 
+**Packet**
 ```
 LENGTH:     0x 05
 DATA:       0x 11 01 01 00 00
