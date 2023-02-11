@@ -54,7 +54,6 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 void assertBattPOn(void);
-void ledInterval(void);
 void usbInterval(void);
 void usbPrintln(char _out[]);
 void usbPrint(char _out[]);

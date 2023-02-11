@@ -50,12 +50,10 @@ TIM_HandleTypeDef htim1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-uint32_t greenLastms 		= 0;
-uint32_t redLastms 			= 0;
+
 uint32_t usbLastms			= 0;
 
-uint16_t greenIntervalMs	= 500;
-uint16_t redIntervalMs		= 1000;
+
 uint16_t usbIntervalMs		= 2000;
 
 /* USER CODE END PV */
@@ -133,9 +131,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //ledInterval();
+	  ledInterval(oLED_R_GPIO_Port, oLED_R_Pin, oLED_Y_GPIO_Port, oLED_Y_Pin);
 	  //usbInterval();
-	  testToggleLED(oLED_Y_GPIO_Port, oLED_Y_Pin);
+	  //testToggleLED(oLED_Y_GPIO_Port, oLED_Y_Pin);
 
   }
   /* USER CODE END 3 */
@@ -478,20 +476,7 @@ void assertBattPOn(void) {
 	HAL_GPIO_WritePin(oBattPOn_GPIO_Port, oBattPOn_Pin, GPIO_PIN_SET);
 }
 
-void ledInterval(void) {
-	uint32_t currentms = HAL_GetTick();
 
-
-	if( (currentms - greenLastms) >= greenIntervalMs) {
-			greenLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_G_GPIO_Port, oLED_G_Pin);
-	}
-
-	if( (currentms - redLastms) >= redIntervalMs) {
-			redLastms = currentms;
-			HAL_GPIO_TogglePin(oLED_R_GPIO_Port, oLED_R_Pin);
-	}
-}
 
 void usbInterval(void) {
 	uint32_t currentms = HAL_GetTick();
