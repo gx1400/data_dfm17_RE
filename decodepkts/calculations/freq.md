@@ -5,7 +5,7 @@
 $RF_{Channel_{Hz}}=\left(fc_{inte}+\frac{fc_{frac}}{2^{19}}\right) \times \left(\frac{N_{PRESC} \times freq\_xo}{outdiv}\right)$
 
 Whereas:
-- FREQ_CONTROL_INTE: $fc_{inte}$ = 77
+- FREQ_CONTROL_INTE: $fc_{inte} = 77$
 - FREQ_CONTROL_FRAC: $fc_{frac} = 589,824$
 - N_PRESC: $N_{PRESC} = 2$
 - FREQ_XO: $freq\_xo = 25,600,000$
