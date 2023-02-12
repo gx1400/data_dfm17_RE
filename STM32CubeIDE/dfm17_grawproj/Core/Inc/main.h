@@ -82,6 +82,10 @@ void Error_Handler(void);
 #define intButton_Pin GPIO_PIN_8
 #define intButton_GPIO_Port GPIOC
 #define intButton_EXTI_IRQn EXTI9_5_IRQn
+#define usbTX_Pin GPIO_PIN_9
+#define usbTX_GPIO_Port GPIOA
+#define usbRX_Pin GPIO_PIN_10
+#define usbRX_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
