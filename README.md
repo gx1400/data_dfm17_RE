@@ -2,6 +2,10 @@
 
 This project is to assist in the DFM-17 rev engineering effort
 
+## STM32 Project
+
+[Si Dev Example project - dfm17_grawproj](STM32CubeIDE/dfm17_grawproj/) 
+
 ## Pages
 
 [Si4063 Start-up SPI capture](/capture/capture.md)
