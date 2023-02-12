@@ -24,7 +24,7 @@
 #include "stm32f1xx_hal.h"
 
 
-void radioToggleToneGPIO(uint16_t delay);
+
 void assertRadioShutdown(void);
 void deassertRadioShutdown(void);
 void assertRadioCS(void);

@@ -83,7 +83,7 @@ int radio_RequestDeviceState(void);
 
 void SPI_Enable(void);
 void SPI_Disable(void);
-
+void radioToggleToneGPIO(uint16_t delay);
 
 /* USER CODE END EFP */
 

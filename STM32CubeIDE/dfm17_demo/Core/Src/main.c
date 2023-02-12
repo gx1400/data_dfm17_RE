@@ -674,6 +674,14 @@ int bootRadio(void) {
 	return 0;
 }
 
+void radioToggleToneGPIO(uint16_t delay) {
+	//GPIO3 is PA4
+	GPIOA->BSRR = (1U << 4);
+	delay_us(delay);
+	GPIOA->BSRR = (1U << (16+4));
+	delay_us(delay);
+}
+
 int sendPatchCmds(void) {
 	//debug_msg("   ...Starting patch decode\r\n");
 	uint8_t Si446xPatchCommands[][9] = { SI446X_PATCH_CMDS };
