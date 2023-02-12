@@ -11,8 +11,8 @@
 #define APPLICATION_DEFS_H_
 
 
-#define lSys_SysClockFreq_c (24500000.0)
-#define lSys_RadioCrystalFreq_c (30000000.0)
+#define lSys_SysClockFreq_c (16000000.0)
+#define lSys_RadioCrystalFreq_c (25600000.0)
 
 
 #endif /* APPLICATION_DEFS_H_ */

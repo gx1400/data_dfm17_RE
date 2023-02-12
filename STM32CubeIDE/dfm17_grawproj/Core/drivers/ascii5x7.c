@@ -7,7 +7,7 @@
  * @n http://www.silabs.com
  */
 
-#include "..\bsp.h"
+#include "../bsp.h"
 
 /*! ASCII character table for the LCD */
 const SEGMENT_VARIABLE(ascii_table5x7[][5u], U8, SEG_CODE) = 

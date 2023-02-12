@@ -20,7 +20,6 @@
 #include "main.h"
 #include "led.h"
 
-#define PLATFORM_GRAW_DFM17 "yup"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -99,6 +98,9 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  // Start Transmitting PN9 sequence
+  vRadio_StartTx(pRadioConfighuration->Radio_ChannelNumber, NULL);
 
   /* USER CODE END 2 */
 

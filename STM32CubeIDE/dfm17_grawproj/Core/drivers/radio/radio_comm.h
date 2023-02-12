@@ -35,7 +35,7 @@ extern SEGMENT_VARIABLE(radioCmd[16u], U8, SEG_XDATA);
                  *  F U N C T I O N   P R O T O T Y P E S  *
                  * ======================================= */
 
-#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455)
+#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455 || (defined SILABS_RADIO_SI406X))
   U8 radio_comm_GetResp(U8 byteCount, U8* pData);
   void radio_comm_SendCmd(U8 byteCount, U8* pData);
   void radio_comm_ReadData(U8 cmd, BIT pollCts, U8 byteCount, U8* pData);

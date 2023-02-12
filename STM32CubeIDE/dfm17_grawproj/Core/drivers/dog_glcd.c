@@ -7,7 +7,7 @@
  * @n http://www.silabs.com
  */
 
-#include "..\bsp.h"
+#include "../bsp.h"
 
 
 #ifdef SILABS_LCD_DOG_GLCD

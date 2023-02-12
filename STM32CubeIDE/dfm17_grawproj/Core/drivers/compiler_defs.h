@@ -724,7 +724,7 @@ typedef union UU32
 
 //-----------------------------------------------------------------------------
 
-// Wickenhäuser
+// Wickenhï¿½user
 // http://www.wickenhaeuser.de
 
 #elif defined __UC__
@@ -741,7 +741,7 @@ typedef union UU32
 // Unknown compiler
 
 #else
-# warning unrecognized compiler
+//# warning unrecognized compiler
 
 #define SEG_FAR
 #define SEG_DATA

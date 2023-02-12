@@ -20,7 +20,7 @@
 #endif
 
 // Patch file
-#include "..\drivers\radio\Si446x\si446x_patch.h"
+#include "../drivers/radio/Si446x/si446x_patch.h"
 #include "stm32f1xx_hal.h"
 
 

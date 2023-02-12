@@ -30,34 +30,41 @@
 #undef  UART_DRIVER_EXTENDED_SUPPORT
 
 
+#define PLATFORM_GRAW_DFM17
+#define SILABS_RADIO_SI406X
+
 
 /*------------------------------------------------------------------------*/
 /*            Application specific includes                               */
 /*------------------------------------------------------------------------*/
 
-#include "drivers\compiler_defs.h"
+#include "drivers/compiler_defs.h"
 #include "platform_defs.h"
 #include "hardware_defs.h"
 
-#include "src\application_defs.h"
+#include "Src/application_defs.h"
 
-#include "drivers\cdd_common.h"
-#include "drivers\spi.h"
-#include "drivers\control_IO.h"
-#include "drivers\smbus.h"
-#include "drivers\uart.h"
+//#include "drivers/cdd_common.h"
+//#include "drivers/spi.h"
+//#include "drivers/control_IO.h"
+//#include "drivers/smbus.h"
+//#include "drivers/uart.h"
 
 
-#include "src\radio.h"
-#include "src\radio_config.h"
+#include "Src/radio.h"
+#include "Src/radio_config.h"
 
-#include "drivers\radio\radio_hal.h"
-#include "drivers\radio\radio_comm.h"
+#include "drivers/radio/radio_hal.h"
+#include "drivers/radio/radio_comm.h"
 
-#ifdef SILABS_RADIO_SI446X
-#include "drivers\radio\Si446x\si446x_api_lib.h"
-#include "drivers\radio\Si446x\si446x_defs.h"
-#include "drivers\radio\Si446x\si446x_nirq.h"
+#ifdef PLATFORM_GRAW_DFM17
+#include "stm32f1xx_hal.h"
+#endif
+
+#if ((defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI406X))
+#include "drivers/radio/Si446x/si446x_api_lib.h"
+#include "drivers/radio/Si446x/si446x_defs.h"
+#include "drivers/radio/Si446x/si446x_nirq.h"
 //#include "drivers\radio\Si446x\si446x_patch.h"
 #endif
 

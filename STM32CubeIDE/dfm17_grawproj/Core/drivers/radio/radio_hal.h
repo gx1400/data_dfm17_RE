@@ -40,6 +40,14 @@ U8 radio_hal_SpiReadByte(void);
 void radio_hal_SpiWriteData(U8 byteCount, U8* pData);
 void radio_hal_SpiReadData(U8 byteCount, U8* pData);
 
+#ifdef PLATFORM_GRAW_DFM17
+void SPI_Transmit(U8* data, int size);
+void SPI_Receive (U8* data, int size);
+void SpiWriteData(int size, U8* data);
+void SpiReadData(int size, U8* data);
+U8 SpiReadWrite(U8 data);
+#endif
+
 #ifdef DRIVERS_EXTENDED_SUPPORT
   BIT radio_hal_Gpio0Level(void);
   BIT radio_hal_Gpio1Level(void);

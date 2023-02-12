@@ -21,7 +21,7 @@
 
 
 #include "main.h"
-#include "..\drivers\radio\Si446x\si446x_patch.h"
+#include "../drivers/radio/Si446x/si446x_patch.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -65,7 +65,7 @@
 
 /* USER CODE END PD */
 
-/* Private macro -------------------------------------------------------------*/
+/* Private macro -------------------------------G------------------------------*/
 /* USER CODE BEGIN PM */
 
 /* USER CODE END PM */

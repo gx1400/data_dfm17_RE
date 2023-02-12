@@ -38,7 +38,7 @@
 #define RADIO_CONFIGURATION_DATA_RADIO_STATE_AFTER_POWER_UP        0x03
 #define RADIO_CONFIGURATION_DATA_RADIO_DELAY_CNT_AFTER_RESET       0xF000
 
-#include "..\drivers\radio\Si446x\si446x_patch.h"
+#include "../drivers/radio/Si446x/si446x_patch.h"
 
 // CONFIGURATION COMMANDS
 

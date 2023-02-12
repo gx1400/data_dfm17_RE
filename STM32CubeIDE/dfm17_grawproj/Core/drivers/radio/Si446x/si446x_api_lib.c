@@ -9,7 +9,7 @@
  * Copyright 2011 Silicon Laboratories, Inc.
  */
 
-#include "..\..\..\bsp.h"
+#include "../../../bsp.h"
 #include <stdarg.h>
 
 SEGMENT_VARIABLE( Si446xCmd, union si446x_cmd_reply_union, SEG_XDATA );

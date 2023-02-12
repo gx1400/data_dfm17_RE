@@ -7,7 +7,7 @@
  * @n http://www.silabs.com
  */
 
-#include "..\bsp.h"
+#include "../bsp.h"
 
 #if !( (defined SILABS_MCU_F930) || (defined SILABS_MCU_F912) )
   #error Check implementation for given MCU!
