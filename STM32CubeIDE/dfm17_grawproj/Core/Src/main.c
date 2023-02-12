@@ -115,7 +115,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
+	#if (RADIO_MODE_SELECT == 1)
+	radioToneForGraw();
+
+	#else
+	ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
+	#endif
 
   }
   /* USER CODE END 3 */
@@ -368,6 +373,17 @@ static void MX_GPIO_Init(void)
 void delay_us(U8 us) {
 	__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
+}
+
+void radioToneForGraw() {
+	//U8 tonedelay = 200;
+	for(int tonedelay = 500; tonedelay >= 300; tonedelay--){
+		//GPIO3 is PA4
+		GPIOA->BSRR = (1U << 4);
+		delay_us(tonedelay);
+		GPIOA->BSRR = (1U << (16+4));
+		delay_us(tonedelay);
+	}
 }
 
 /* USER CODE END 4 */

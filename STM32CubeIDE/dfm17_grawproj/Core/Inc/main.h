@@ -54,6 +54,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -88,6 +89,8 @@ void Error_Handler(void);
 #define usbRX_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
+
+void radioToneForGraw();
 
 /* USER CODE END Private defines */
 
