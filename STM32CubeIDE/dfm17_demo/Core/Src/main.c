@@ -17,18 +17,44 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#define USE_CW    0
+#define USE_GRAW  1
+#define USE_PN9   2
+
+#define CONFIG_TO_USE USE_PN9
+
+#ifndef CONFIG_TO_USE
+#define CONFIG_TO_USE USE_GRAW
+#endif
+
+
+//#define USE_GRAW
+//#define USE_PN9
+
+#if CONFIG_TO_USE == USE_CW
+#include <radio_config_Si4063_CW.h>
+
+#elif CONFIG_TO_USE == USE_GRAW
+#include <radio_config_Si4063_GRAW.h>
+
+#elif CONFIG_TO_USE == USE_PN9
+#include <radio_config_Si4063_PN9.h>
+#endif
+
+
 #include "main.h"
+#include "..\drivers\radio\Si446x\si446x_patch.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "string.h"
-#include "radioPatch.h"
 #include "led.h"
 #include "stdio.h"
 #include "stdarg.h"
 
-#include "radio_config_Si4063.h"
-//#include "radio_config_Si4063_PN.h"
+
+
+
 
 #define PATCHLEN(arr) ((int) (sizeof (arr) / sizeof (arr)[0]))
 

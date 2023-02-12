@@ -19,13 +19,13 @@
 
 // INPUT DATA
 /*
-// Crys_freq(Hz): 25600000    Crys_tol(ppm): 20    IF_mode: 2    High_perf_Ch_Fil: 1    OSRtune: 0    Ch_Fil_Bw_AFC: 0    ANT_DIV: 0    PM_pattern: 15    
-// MOD_type: 3    Rsymb(sps): 2500    Fdev(Hz): 3000    RXBW(Hz): 150000    Manchester: 0    AFC_en: 0    Rsymb_error: 0.0    Chip-Version: 2    
-// RF Freq.(MHz): 400    API_TC: 29    fhst: 10000    inputBW: 0    BERT: 0    RAW_dout: 0    D_source: 13    Hi_pfm_div: 1    
+// Crys_freq(Hz): 25600000    Crys_tol(ppm): 20    IF_mode: 2    High_perf_Ch_Fil: 1    OSRtune: 0    Ch_Fil_Bw_AFC: 0    ANT_DIV: 0    PM_pattern: 0    
+// MOD_type: 0    Rsymb(sps): 2500    Fdev(Hz): 3000    RXBW(Hz): 150000    Manchester: 0    AFC_en: 0    Rsymb_error: 0.0    Chip-Version: 2    
+// RF Freq.(MHz): 400    API_TC: 31    fhst: 10000    inputBW: 0    BERT: 0    RAW_dout: 0    D_source: 1    Hi_pfm_div: 1    
 // API_ARR_Det_en: 0    Fdev_error: 0    API_ETSI: 0    
 // 
 // # RX IF frequency is  -400000 Hz
-// # WB filter 2 (BW =  43.97 kHz);  NB-filter 2 (BW = 43.97 kHz)
+// # WB filter 3 (BW =  39.51 kHz);  NB-filter 3 (BW = 39.51 kHz)
 // 
 // Modulation index: 2.4
 */
@@ -38,8 +38,8 @@
 #define RADIO_CONFIGURATION_DATA_RADIO_STATE_AFTER_POWER_UP        0x03
 #define RADIO_CONFIGURATION_DATA_RADIO_DELAY_CNT_AFTER_RESET       0xF000
 
-//#include "..\drivers\radio\Si446x\si446x_patch.h"
-#include "radioPatch.h"
+#include "..\drivers\radio\Si446x\si446x_patch.h"
+
 
 // CONFIGURATION COMMANDS
 
@@ -134,7 +134,7 @@
 //   MODEM_FREQ_DEV_2 - 17-bit unsigned TX frequency deviation word.
 //   MODEM_FREQ_DEV_1 - 17-bit unsigned TX frequency deviation word.
 */
-#define RF_MODEM_MOD_TYPE_12 0x11, 0x20, 0x0C, 0x00, 0x6B, 0x00, 0x07, 0x01, 0x86, 0xA0, 0x05, 0x86, 0xA0, 0x00, 0x00, 0x01
+#define RF_MODEM_MOD_TYPE_12 0x11, 0x20, 0x0C, 0x00, 0x08, 0x00, 0x07, 0x00, 0x61, 0xA8, 0x01, 0x86, 0xA0, 0x00, 0x00, 0x01
 
 /*
 // Set properties:           RF_MODEM_FREQ_DEV_0_1
@@ -167,8 +167,7 @@
 //   MODEM_BCR_OSR_1 - RX BCR/Slicer oversampling rate (12-bit unsigned number).
 //   MODEM_BCR_OSR_0 - RX BCR/Slicer oversampling rate (12-bit unsigned number).
 */
-//#define RF_MODEM_TX_RAMP_DELAY_12 0x11, 0x20, 0x0C, 0x18, 0x01, 0x80, 0x08, 0x03, 0x60, 0x00, 0x30, 0x20, 0x0C, 0xE8, 0x02, 0x80
-#define RF_MODEM_TX_RAMP_DELAY_12 0x11, 0x20, 0x0C, 0x18, 0x01, 0x80, 0x08, 0x03, 0x60, 0x00, 0x70, 0x20, 0x0C, 0xE8, 0x01, 0x40
+#define RF_MODEM_TX_RAMP_DELAY_12 0x11, 0x20, 0x0C, 0x18, 0x00, 0x00, 0x08, 0x03, 0x60, 0x00, 0x30, 0x20, 0x0C, 0xE8, 0x02, 0x80
 
 /*
 // Set properties:           RF_MODEM_BCR_NCO_OFFSET_2_12
@@ -190,8 +189,7 @@
 //   MODEM_AFC_GAIN_1 - Sets the gain of the PLL-based AFC acquisition loop, and provides miscellaneous control bits for AFC functionality.
 //   MODEM_AFC_GAIN_0 - Sets the gain of the PLL-based AFC acquisition loop, and provides miscellaneous control bits for AFC functionality.
 */
-//#define RF_MODEM_BCR_NCO_OFFSET_2_12 0x11, 0x20, 0x0C, 0x24, 0x00, 0xCC, 0xCD, 0x00, 0x66, 0x00, 0xC2, 0x00, 0x54, 0x23, 0x80, 0xD5
-#define RF_MODEM_BCR_NCO_OFFSET_2_12 0x11, 0x20, 0x0C, 0x24, 0x01, 0x99, 0x9A, 0x00, 0xCD, 0x00, 0xC2, 0x00, 0x54, 0x62, 0x80, 0x6B
+#define RF_MODEM_BCR_NCO_OFFSET_2_12 0x11, 0x20, 0x0C, 0x24, 0x00, 0xCC, 0xCD, 0x00, 0x55, 0x02, 0x00, 0x00, 0x00, 0x12, 0x80, 0x20
 
 /*
 // Set properties:           RF_MODEM_AFC_LIMITER_1_3
@@ -204,8 +202,7 @@
 //   MODEM_AFC_LIMITER_0 - Set the AFC limiter value.
 //   MODEM_AFC_MISC - Specifies miscellaneous AFC control bits.
 */
-//#define RF_MODEM_AFC_LIMITER_1_3 0x11, 0x20, 0x03, 0x30, 0x01, 0xB6, 0x80
-#define RF_MODEM_AFC_LIMITER_1_3 0x11, 0x20, 0x03, 0x30, 0x01, 0xE5, 0x80
+#define RF_MODEM_AFC_LIMITER_1_3 0x11, 0x20, 0x03, 0x30, 0x0A, 0x3B, 0xA0
 
 /*
 // Set properties:           RF_MODEM_AGC_CONTROL_1
@@ -238,8 +235,8 @@
 //   MODEM_OOK_CNT1 - OOK control.
 //   MODEM_OOK_MISC - Selects the detector(s) used for demodulation of an OOK signal, or for demodulation of a (G)FSK signal when using the asynchronous demodulator.
 */
-//#define RF_MODEM_AGC_WINDOW_SIZE_12 0x11, 0x20, 0x0C, 0x38, 0x11, 0x8C, 0x8C, 0x80, 0x1A, 0x99, 0x9A, 0x00, 0x2B, 0x0C, 0x84, 0x23
-#define RF_MODEM_AGC_WINDOW_SIZE_12 0x11, 0x20, 0x0C, 0x38, 0x11, 0x46, 0x46, 0x80, 0x1A, 0x99, 0x9A, 0x00, 0x2A, 0x0C, 0x84, 0x23
+#define RF_MODEM_AGC_WINDOW_SIZE_12 0x11, 0x20, 0x0C, 0x38, 0x11, 0x8C, 0x8C, 0x80, 0x02, 0x99, 0x9A, 0x00, 0x2B, 0x0C, 0xA4, 0x23
+
 /*
 // Set properties:           RF_MODEM_RAW_CONTROL_3
 // Number of properties:     3
@@ -251,9 +248,7 @@
 //   MODEM_RAW_EYE_1 - 11 bit eye-open detector threshold.
 //   MODEM_RAW_EYE_0 - 11 bit eye-open detector threshold.
 */
-//#define RF_MODEM_RAW_CONTROL_3 0x11, 0x20, 0x03, 0x45, 0x8F, 0x00, 0x4E
-#define RF_MODEM_RAW_CONTROL_3 0x11, 0x20, 0x03, 0x45, 0x8F, 0x00, 0x9C
-
+#define RF_MODEM_RAW_CONTROL_3 0x11, 0x20, 0x03, 0x45, 0x03, 0x00, 0x78
 
 /*
 // Set properties:           RF_MODEM_RAW_SEARCH2_2
@@ -265,7 +260,7 @@
 //   MODEM_RAW_SEARCH2 - Defines and controls the search period length for the Moving Average and Min-Max detectors.
 //   MODEM_CLKGEN_BAND - Select PLL Synthesizer output divider ratio as a function of frequency band.
 */
-#define RF_MODEM_RAW_SEARCH2_2 0x11, 0x20, 0x02, 0x50, 0x94, 0x09
+#define RF_MODEM_RAW_SEARCH2_2 0x11, 0x20, 0x02, 0x50, 0x84, 0x09
 
 /*
 // Set properties:           RF_MODEM_SPIKE_DET_1
@@ -290,9 +285,18 @@
 //   PA_BIAS_CLKDUTY - Configuration of the PA Bias and duty cycle of the TX clock source.
 //   PA_TC - Configuration of PA ramping parameters.
 */
-//#define RF_PA_MODE_4 0x11, 0x22, 0x04, 0x00, 0x08, 0x7F, 0x00, 0x1D
 #define RF_PA_MODE_4 0x11, 0x22, 0x04, 0x00, 0x08, 0x7F, 0x00, 0x1F
 
+/*
+// Set properties:           RF_PA_RAMP_DOWN_DELAY_1
+// Number of properties:     1
+// Group ID:                 0x22
+// Start ID:                 0x05
+// Default values:           0x23, 
+// Descriptions:
+//   PA_RAMP_DOWN_DELAY - Delay from the start of the PA ramp down to disabling of the PA output.
+*/
+#define RF_PA_RAMP_DOWN_DELAY_1 0x11, 0x22, 0x01, 0x05, 0x25
 
 /*
 // Set properties:           RF_SYNTH_PFDCP_CPFF_7
@@ -354,6 +358,7 @@
         0x06, RF_MODEM_RAW_SEARCH2_2, \
         0x05, RF_MODEM_SPIKE_DET_1, \
         0x08, RF_PA_MODE_4, \
+        0x05, RF_PA_RAMP_DOWN_DELAY_1, \
         0x0B, RF_SYNTH_PFDCP_CPFF_7, \
         0x0B, RF_FREQ_CONTROL_INTE_7, \
         0x00 \
