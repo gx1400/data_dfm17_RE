@@ -8,9 +8,11 @@
 #ifndef INC_SPI_H_
 #define INC_SPI_H_
 
-void SpiWriteData(int size, uint8_t* data);
-void SpiReadData (int size, uint8_t *data);
-uint8_t SpiReadWrite(uint8_t byte);
+void SpiEnable(void);
+void SpiDisable(void);
+void SpiWriteData(int size, U8* data);
+void SpiReadData (int size, U8 *data);
+U8 SpiReadWrite(U8 byte);
 
 
 #endif /* INC_SPI_H_ */

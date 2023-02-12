@@ -8,7 +8,15 @@
 
 #include "../bsp.h"
 
-void SpiWriteData (int size, uint8_t* data) {
+void SpiEnable(void) {
+	SPI1->CR1 |= (1<<6);   // SPE=1, Peripheral enabled
+}
+
+void SpiDisable(void) {
+	SPI1->CR1 &= ~(1<<6);   // SPE=0, Peripheral Disabled
+}
+
+void SpiWriteData (int size, U8* data) {
 
 	/************** STEPS TO FOLLOW *****************
 	1. Wait for the TXE bit to set in the Status Register
@@ -40,7 +48,7 @@ void SpiWriteData (int size, uint8_t* data) {
 
 }
 
-void SpiReadData (int size, uint8_t *data) {
+void SpiReadData (int size, U8 *data) {
 	/************** STEPS TO FOLLOW *****************
 	1. Wait for the BSY bit to reset in Status Register
 	2. Send some Dummy data before reading the DATA
@@ -57,7 +65,7 @@ void SpiReadData (int size, uint8_t *data) {
 }
 
 
-uint8_t SpiReadWrite (uint8_t byte) {
+U8 SpiReadWrite (U8 byte) {
 	/************** STEPS TO FOLLOW *****************
 	1. Wait for the BSY bit to reset in Status Register
 	2. Send some Dummy data before reading the DATA

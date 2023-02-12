@@ -49,6 +49,7 @@
 //#include "drivers/control_IO.h"
 //#include "drivers/smbus.h"
 //#include "drivers/uart.h"
+#include "drivers/spi.h"
 
 
 #include "Src/radio.h"

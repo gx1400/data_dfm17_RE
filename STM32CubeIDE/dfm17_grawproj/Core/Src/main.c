@@ -99,6 +99,8 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  SpiEnable();
+  vRadio_Init();
 
   // Start Transmitting PN9 sequence
   vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
