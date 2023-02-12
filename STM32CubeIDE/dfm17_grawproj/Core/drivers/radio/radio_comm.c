@@ -162,16 +162,7 @@ void radio_comm_WriteData(U8 cmd, BIT pollCts, U8 byteCount, U8* pData)
  */
 U8 radio_comm_PollCTS(void)
 {
-#ifdef RADIO_USER_CFG_USE_GPIO1_FOR_CTS
-    while(!radio_hal_Gpio1Level())
-    {
-        /* Wait...*/
-    }
-    ctsWentHigh = 1;
-    return 0xFF;
-#else
     return radio_comm_GetResp(0, 0);
-#endif
 }
 
 /**
@@ -180,48 +171,6 @@ U8 radio_comm_PollCTS(void)
 void radio_comm_ClearCTS()
 {
   ctsWentHigh = 0;
-}
-
-#elif (defined SILABS_RADIO_SI4012)
-
-/*!
- * Gets a command response from the radio chip
- *
- * @param byteCount     Number of bytes to get from the radio chip
- * @param pData         Pointer to where to put the data
- *
- * @return CTS value
- */
-U8 radio_comm_GetResp(U8 byteCount, U8* pData)
-{
-  SEGMENT_VARIABLE(ctsVal = 0u, U8, SEG_DATA);
-
-  if (qSmbus_SMBusRead(SI4012_SMBUS_ADDRESS, byteCount, pData) != \
-                                                          SMBUS_RX_FINISHED) {
-    return FALSE;
-  }
-
-  if (pData[0] == 0x80) {
-    return TRUE;
-  }
-
-  return FALSE;
-}
-
-/*!
- * Sends a command to the radio chip
- *
- * @param byteCount     Number of bytes in the command to send to the radio device
- * @param pData         Pointer to the command to send.
- */
-U8 radio_comm_SendCmd(U8 byteCount, U8* pData)
-{
-  if (qSmbus_SMBusWrite(SI4012_SMBUS_ADDRESS, byteCount, pData) != \
-                                                      SMBUS_TRANSMISSION_OK) {
-    return FALSE;
-  }
-
-  return TRUE;
 }
 
 #endif
