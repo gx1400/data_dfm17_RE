@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "led.h"
+#include "../bsp.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -100,7 +101,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   // Start Transmitting PN9 sequence
-  vRadio_StartTx(pRadioConfighuration->Radio_ChannelNumber, NULL);
+  vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
 
   /* USER CODE END 2 */
 

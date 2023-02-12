@@ -104,12 +104,12 @@ void SpiReadData(int size, U8* data){
 }
 
 U8 SpiReadWrite(U8 data) {
-	return 1;
+	//TODO implement READWRITE
 }
 
 
 void SpiWriteData(int size, U8* data) {
-
+	SPI_Transmit(data, size);
 }
 
 

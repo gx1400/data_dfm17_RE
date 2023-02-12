@@ -7,7 +7,7 @@
  * @n http://www.silabs.com
  */
 
-#include "..\bsp.h"
+#include "../bsp.h"
 
 /*****************************************************************************
  *  Local Macros & Definitions
@@ -66,11 +66,9 @@ void vRadio_Init(void)
   while (SI446X_SUCCESS != si446x_configuration_init(pRadioConfiguration->Radio_ConfigurationArray))
   {
     /* Error hook */
-#if !(defined SILABS_PLATFORM_WMB912)
-    LED4 = !LED4;
-#else
-    vCio_ToggleLed(0x04);
-#endif
+
+    //vCio_ToggleLed(0x04); //
+
     for (wDelay = 0x7FFF; wDelay--; ) ;
 
     /* Power Up the radio chip */

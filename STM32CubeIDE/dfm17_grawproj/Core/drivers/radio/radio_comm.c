@@ -23,7 +23,7 @@
                  *     G L O B A L   V A R I A B L E S     *
                  * ======================================= */
 
-#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455)
+#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455 || (defined SILABS_RADIO_SI406X))
 BIT ctsWentHigh = 0;
 #endif
 
@@ -36,7 +36,7 @@ BIT ctsWentHigh = 0;
                  *     P U B L I C   F U N C T I O N S     *
                  * ======================================= */
 
-#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455)
+#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455 || (defined SILABS_RADIO_SI406X))
 
 /*!
  * Gets a command response from the radio chip
