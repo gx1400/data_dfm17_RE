@@ -560,13 +560,7 @@ void debug_msg(const char *fmt, ...) {
 	va_end(args);
 }
 
-void radioToggleToneGPIO(uint16_t delay) {
-	//GPIO3 is PA4
-	GPIOA->BSRR = (1U << 4);
-	delay_us(delay);
-	GPIOA->BSRR = (1U << (16+4));
-	delay_us(delay);
-}
+
 
 void SPI_Enable(void) {
 	SPI1->CR1 |= (1<<6);   // SPE=1, Peripheral enabled
@@ -633,107 +627,49 @@ int bootRadio(void) {
 	uint8_t cmdRF_SYNTH_PFDCP_CPFF_7[] = {RF_SYNTH_PFDCP_CPFF_7};
 	uint8_t cmdRF_FREQ_CONTROL_INTE_7[] = {RF_FREQ_CONTROL_INTE_7};
 
+	radio_comm_SendCmd(sizeof(cmdRF_POWER_UP), cmdRF_POWER_UP);										//Send cmdRF_POWER_UP
+	radio_comm_SendCmd(sizeof(cmdRF_GPIO_PIN_CFG), cmdRF_GPIO_PIN_CFG);								//Send cmdRF_GPIO_PIN_CFG
+	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_XO_TUNE_2), cmdRF_GLOBAL_XO_TUNE_2);						//Send cmdRF_GLOBAL_XO_TUNE_2
+	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);						//Send cmdRF_GLOBAL_CONFIG_1
+	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);						//Send cmdRF_GLOBAL_CONFIG_1
+	radio_comm_SendCmd(sizeof(cmdRF_INT_CTL_ENABLE_1), cmdRF_INT_CTL_ENABLE_1);						//Send cmdRF_INT_CTL_ENABLE_1
+	radio_comm_SendCmd(sizeof(cmdRF_FRR_CTL_A_MODE_4), cmdRF_FRR_CTL_A_MODE_4);						//Send cmdRF_FRR_CTL_A_MODE_4
+	radio_comm_SendCmd(sizeof(cmdRF_PREAMBLE_CONFIG_1), cmdRF_PREAMBLE_CONFIG_1);					//Send cmdRF_PREAMBLE_CONFIG_1
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_MOD_TYPE_12), cmdRF_MODEM_MOD_TYPE_12);					//Send cmdRF_MODEM_MOD_TYPE_12
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_FREQ_DEV_0_1), cmdRF_MODEM_FREQ_DEV_0_1);					//Send cmdRF_MODEM_FREQ_DEV_0_1
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_TX_RAMP_DELAY_12), cmdRF_MODEM_TX_RAMP_DELAY_12);			//Send cmdRF_MODEM_TX_RAMP_DELAY_12
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_BCR_NCO_OFFSET_2_12), cmdRF_MODEM_BCR_NCO_OFFSET_2_12);	//Send cmdRF_MODEM_BCR_NCO_OFFSET_2_12
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AFC_LIMITER_1_3), cmdRF_MODEM_AFC_LIMITER_1_3);			//Send cmdRF_MODEM_AFC_LIMITER_1_3
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_CONTROL_1), cmdRF_MODEM_AGC_CONTROL_1);				//Send cmdRF_MODEM_AGC_CONTROL_1
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_WINDOW_SIZE_12), cmdRF_MODEM_AGC_WINDOW_SIZE_12);		//Send cmdRF_MODEM_AGC_WINDOW_SIZE_12
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_CONTROL_3), cmdRF_MODEM_RAW_CONTROL_3);				//Send cmdRF_MODEM_RAW_CONTROL_3
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_SEARCH2_2), cmdRF_MODEM_RAW_SEARCH2_2);				//Send cmdRF_MODEM_RAW_SEARCH2_2
+	radio_comm_SendCmd(sizeof(cmdRF_MODEM_SPIKE_DET_1), cmdRF_MODEM_SPIKE_DET_1);					//Send cmdRF_MODEM_SPIKE_DET_1
+	radio_comm_SendCmd(sizeof(cmdRF_PA_MODE_4), cmdRF_PA_MODE_4);									//Send cmdRF_PA_MODE_4
+	radio_comm_SendCmd(sizeof(cmdRF_SYNTH_PFDCP_CPFF_7), cmdRF_SYNTH_PFDCP_CPFF_7);					//Send cmdRF_SYNTH_PFDCP_CPFF_7
+	radio_comm_SendCmd(sizeof(cmdRF_FREQ_CONTROL_INTE_7), cmdRF_FREQ_CONTROL_INTE_7);				//Send cmdRF_FREQ_CONTROL_INTE_7
 
-
-	//debug_msg("Send cmdRF_POWER_UP...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_POWER_UP), cmdRF_POWER_UP);
-
-
-	//debug_msg("Send cmdRF_GPIO_PIN_CFG...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_GPIO_PIN_CFG), cmdRF_GPIO_PIN_CFG);
-
-	//debug_msg("Send cmdRF_GLOBAL_XO_TUNE_2...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_XO_TUNE_2), cmdRF_GLOBAL_XO_TUNE_2);
-
-	//debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);
-
-	//debug_msg("Send cmdRF_GLOBAL_CONFIG_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_GLOBAL_CONFIG_1), cmdRF_GLOBAL_CONFIG_1);
-
-	//debug_msg("Send cmdRF_INT_CTL_ENABLE_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_INT_CTL_ENABLE_1), cmdRF_INT_CTL_ENABLE_1);
-
-	//debug_msg("Send cmdRF_FRR_CTL_A_MODE_4...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_FRR_CTL_A_MODE_4), cmdRF_FRR_CTL_A_MODE_4);
-
-	//debug_msg("Send cmdRF_PREAMBLE_CONFIG_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_PREAMBLE_CONFIG_1), cmdRF_PREAMBLE_CONFIG_1);
-
-	//debug_msg("Send cmdRF_MODEM_MOD_TYPE_12...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_MOD_TYPE_12), cmdRF_MODEM_MOD_TYPE_12);
-
-	//debug_msg("Send cmdRF_MODEM_FREQ_DEV_0_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_FREQ_DEV_0_1), cmdRF_MODEM_FREQ_DEV_0_1);
-
-	//debug_msg("Send cmdRF_MODEM_TX_RAMP_DELAY_12...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_TX_RAMP_DELAY_12), cmdRF_MODEM_TX_RAMP_DELAY_12);
-
-	//debug_msg("Send cmdRF_MODEM_BCR_NCO_OFFSET_2_12...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_BCR_NCO_OFFSET_2_12), cmdRF_MODEM_BCR_NCO_OFFSET_2_12);
-
-	//debug_msg("Send cmdRF_MODEM_AFC_LIMITER_1_3...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AFC_LIMITER_1_3), cmdRF_MODEM_AFC_LIMITER_1_3);
-
-	//debug_msg("Send cmdRF_MODEM_AGC_CONTROL_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_CONTROL_1), cmdRF_MODEM_AGC_CONTROL_1);
-
-	//debug_msg("Send cmdRF_MODEM_AGC_WINDOW_SIZE_12...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_AGC_WINDOW_SIZE_12), cmdRF_MODEM_AGC_WINDOW_SIZE_12);
-
-	//debug_msg("Send cmdRF_MODEM_RAW_CONTROL_3...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_CONTROL_3), cmdRF_MODEM_RAW_CONTROL_3);
-
-	//debug_msg("Send cmdRF_MODEM_RAW_SEARCH2_2...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_RAW_SEARCH2_2), cmdRF_MODEM_RAW_SEARCH2_2);
-
-	//debug_msg("Send cmdRF_MODEM_SPIKE_DET_1...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_MODEM_SPIKE_DET_1), cmdRF_MODEM_SPIKE_DET_1);
-
-	//debug_msg("Send cmdRF_PA_MODE_4...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_PA_MODE_4), cmdRF_PA_MODE_4);
-
-	//debug_msg("Send cmdRF_SYNTH_PFDCP_CPFF_7...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_SYNTH_PFDCP_CPFF_7), cmdRF_SYNTH_PFDCP_CPFF_7);
-
-	//debug_msg("Send cmdRF_FREQ_CONTROL_INTE_7...\r\n");
-	radio_comm_SendCmd(sizeof(cmdRF_FREQ_CONTROL_INTE_7), cmdRF_FREQ_CONTROL_INTE_7);
-
-	//debug_msg("Get Status of Radio\r\n");
+	//Get Status of Radio
 	int radioStateReady = radio_RequestDeviceState();
-	//debug_msg("Radio State is %d\r\n.", radioStateReady);
 
-	//debug_msg("Change state to Ready\r\n");
+	//Change state to Ready
 	uint8_t changeReadyCmd[] = {0x34, 0x03};
 	radio_comm_SendCmdNoCTS(sizeof(changeReadyCmd), changeReadyCmd);
 
 
+	//Send last config packets
 	//uint8_t pkt80Cmd[] = {0x11, 0x40, 0x04, 0x00, 0x4D, 0x05, 0xB4, 0x00, 0x04, 0x00, 0x20};
 	//uint8_t pkt81Cmd[] = {0x11, 0x20, 0x02, 0x0D, 0x00, 0x00};
 	//uint8_t pkt82Cmd[] = {0x11, 0x20, 0x02, 0x0B, 0x01, 0x33};
-
-
-	//debug_msg("Send last config packets\r\n");
 	//radio_comm_SendCmd(sizeof(pkt80Cmd), pkt80Cmd);   // commenting out this command will center TX at approx 400Mhz
 	//radio_comm_SendCmd(sizeof(pkt81Cmd), pkt81Cmd);
 	//radio_comm_SendCmd(sizeof(pkt82Cmd), pkt82Cmd);
 
-	//debug_msg("Change state to Tx\r\n");
 	uint8_t changeTxCmd[] = {0x34, 0x07};
 	radio_comm_SendCmdNoCTS(sizeof(changeTxCmd), changeTxCmd);
 
-
-
-
 	HAL_Delay(10);
-
 	int radioStateTX = radio_RequestDeviceState();
-	///debug_msg("Radio State is %d\r\n.", radioStateTX);
-
-
-
-
-
 
 	return 0;
 }
@@ -851,25 +787,7 @@ void resetRadio(void) {
 	deassertRadioShutdown();
 }
 
-void assertRadioShutdown(void) {
-	// SDN is PC3
-	GPIOC->BSRR = (1U << 3);
-}
 
-void deassertRadioShutdown(void) {
-	// SDN is PC3
-	GPIOC->BSRR = (1U << (16+3));
-}
-
-void assertRadioCS(void) {
-	// nSEL/CS is PB2
-	GPIOB-> BSRR = (1U << (16+2));
-}
-
-void deassertRadioCS(void) {
-	// nSEL/CS is PB2
-	GPIOB-> BSRR = (1U << 2);
-}
 
 void assertBattPOn(void) {
 	// PC0
