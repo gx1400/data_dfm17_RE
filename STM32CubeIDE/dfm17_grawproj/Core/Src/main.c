@@ -84,6 +84,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -99,7 +100,7 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  SpiEnable();
+
   vRadio_Init();
 
   // Start Transmitting PN9 sequence
@@ -237,6 +238,7 @@ static void MX_TIM1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM1_Init 2 */
+  HAL_TIM_Base_Start(&htim1); //start timer 1
 
   /* USER CODE END TIM1_Init 2 */
 
@@ -270,7 +272,7 @@ static void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-
+  SpiEnable();
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -362,6 +364,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void delay_us(U8 us) {
+	__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
+	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
+}
 
 /* USER CODE END 4 */
 

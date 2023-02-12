@@ -44,6 +44,7 @@ void SpiWriteData (int size, U8* data) {
 	//  Clear the Overrun flag by reading DR and SR
 	U8 temp = SPI1->DR;
 	temp = SPI1->SR;
+	(void)temp; // silence not used warning
 
 
 }
