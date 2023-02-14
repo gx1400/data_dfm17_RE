@@ -27,11 +27,12 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-
-#include "../bsp.h"
+#include "stm32f1xx_hal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "../bsp.h"
+
 
 /* USER CODE END Includes */
 
