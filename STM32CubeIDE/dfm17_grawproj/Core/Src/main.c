@@ -18,8 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "led.h"
-#include "../bsp.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -49,6 +47,9 @@ TIM_HandleTypeDef htim1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+
+uint32_t timeLastTick;
+uint16_t tickCt;
 
 /* USER CODE END PV */
 
@@ -106,6 +107,8 @@ int main(void)
   // Start Transmitting PN9 sequence
   vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
 
+  timeLastTick = HAL_GetTick();
+  tickCt = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,10 +120,11 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	#if (RADIO_MODE_SELECT == 1)
 	radioToneForGraw();
-
 	#else
 	ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
 	#endif
+
+	test1SecFunc();
 
   }
   /* USER CODE END 3 */
@@ -375,7 +379,7 @@ void delay_us(U8 us) {
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
 }
 
-void radioToneForGraw() {
+void radioToneForGraw(void) {
 	//U8 tonedelay = 200;
 	for(int tonedelay = 500; tonedelay >= 300; tonedelay--){
 		//GPIO3 is PA4
@@ -384,6 +388,32 @@ void radioToneForGraw() {
 		GPIOA->BSRR = (1U << (16+4));
 		delay_us(tonedelay);
 	}
+}
+
+void test1SecFunc(void) {
+	uint32_t tick = HAL_GetTick();
+	if((tick - timeLastTick) > 2000) {
+		timeLastTick = tick;
+		tickCt += 1;
+
+		char msg[] = "Test transmit\r\n";
+		HAL_UART_Transmit(&huart1, msg, sizeof(msg), HAL_MAX_DELAY);
+
+		printf("SWO Test! %d", tickCt);
+	}
+}
+
+int __io_putchar(int ch) {
+ // Write character to ITM ch.0
+ ITM_SendChar(ch);
+ return(ch);
+}
+
+int _write(int file, char *ptr, int len) {
+    for (int DataIdx = 0; DataIdx < len; DataIdx++)
+        ITM_SendChar(*ptr++);
+
+    return len;
 }
 
 /* USER CODE END 4 */

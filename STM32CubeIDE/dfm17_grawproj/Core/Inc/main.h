@@ -27,7 +27,8 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f1xx_hal.h"
+
+#include "../bsp.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -90,7 +91,11 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
-void radioToneForGraw();
+void radioToneForGraw(void);
+void delay_us(U8 us);
+void test1SecFunc(void);
+int __io_putchar(int ch);
+int _write(int file, char *ptr, int len);
 
 /* USER CODE END Private defines */
 
