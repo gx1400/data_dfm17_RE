@@ -19,7 +19,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <GNSS.h>
@@ -475,6 +474,7 @@ void test1SecFunc(void) {
 		GNSS_ParseBuffer(&GNSS_Handle);
 		HAL_Delay(250);
 		GNSS_SetMode(&GNSS_Handle,Automotiv);
+
 //		HAL_Delay(250);
 
 	}
