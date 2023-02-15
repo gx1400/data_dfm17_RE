@@ -54,6 +54,9 @@ DMA_HandleTypeDef hdma_usart2_tx;
 uint32_t timeLastTick;
 uint16_t tickCt;
 
+uint8_t txDone;
+uint8_t rxDone;
+
 GNSS_StateHandle GNSS_Handle;
 
 /* USER CODE END PV */
@@ -114,12 +117,15 @@ int main(void)
   vRadio_Init();
 
   // Start Transmitting PN9 sequence
-  vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
+  //vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
 
   timeLastTick = HAL_GetTick();
   tickCt = 0;
+  txDone = 0xFF;
+  rxDone = 0xFF;
 
-  GNSS_Init(&GNSS_Handle, &huart2);
+  printf("Starting ublox...");
+  GNSS_Init(&GNSS_Handle, &huart2, &txDone, &rxDone);
   HAL_Delay(1000);
   GNSS_LoadConfig(&GNSS_Handle);
   uint32_t Timer = HAL_GetTick();
@@ -440,6 +446,11 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)	{
+	printf("TxComplete callback!\r\n");
+	GNSS_Handle.txDone = 0x01;
+}
+
 void delay_us(U8 us) {
 	__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
 	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
@@ -471,6 +482,9 @@ void test1SecFunc(void) {
 		GNSS_ParseBuffer(&GNSS_Handle);
 		HAL_Delay(250);
 		GNSS_SetMode(&GNSS_Handle,Automotiv);
+		printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
+		printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
+		printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
 
 //		HAL_Delay(250);
 
