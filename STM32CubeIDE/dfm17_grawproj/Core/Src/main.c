@@ -462,10 +462,7 @@ void test1SecFunc(void) {
 		timeLastTick = tick;
 		tickCt += 1;
 
-		char msg[] = "Test transmit\r\n";
-		HAL_UART_Transmit(&huart1, msg, sizeof(msg), HAL_MAX_DELAY);
-
-		printf("SWO Test! %d", tickCt);
+		printf("UART Test! %d\r\n", tickCt);
 
 		GNSS_GetUniqID(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
@@ -487,9 +484,9 @@ int __io_putchar(int ch) {
 }
 
 int _write(int file, char *ptr, int len) {
-    for (int DataIdx = 0; DataIdx < len; DataIdx++)
-        ITM_SendChar(*ptr++);
-
+    //for (int DataIdx = 0; DataIdx < len; DataIdx++)
+    //    ITM_SendChar(*ptr++);
+	HAL_UART_Transmit(&huart1, ptr, len, HAL_MAX_DELAY);
     return len;
 }
 
