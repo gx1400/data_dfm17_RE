@@ -43,6 +43,7 @@
 SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -69,6 +70,7 @@ static void MX_SPI1_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -112,12 +114,14 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
+  printf("Initializing radio...\r\n");
   vRadio_Init();
 
-  // Start Transmitting PN9 sequence
-  //vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
+  printf("Starting radio...\r\n");
+  vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
 
   timeLastTick = HAL_GetTick();
   tickCt = 0;
@@ -270,6 +274,51 @@ static void MX_TIM1_Init(void)
   HAL_TIM_Base_Start(&htim1); //start timer 1
 
   /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 16-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 0xffff-1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+  HAL_TIM_Base_Start(&htim3); //start timer 1
+  /* USER CODE END TIM3_Init 2 */
 
 }
 
@@ -457,8 +506,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 }
 
 void delay_us(U8 us) {
-	__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
-	while (__HAL_TIM_GET_COUNTER(&htim1) < us);  // wait for the counter to reach the us input in the parameter
+	__HAL_TIM_SET_COUNTER(&htim3,0);  // set the counter value a 0
+	while (__HAL_TIM_GET_COUNTER(&htim3) < us);  // wait for the counter to reach the us input in the parameter
 }
 
 void radioToneForGraw(void) {
@@ -473,26 +522,32 @@ void radioToneForGraw(void) {
 }
 
 void test1SecFunc(void) {
-	uint32_t tick = HAL_GetTick();
-	if((tick - timeLastTick) > 2000) {
-		timeLastTick = tick;
+
+	if((HAL_GetTick() - timeLastTick) > 2000) {
+
 		tickCt += 1;
 
-		printf("UART Test! %d\r\n", tickCt);
+		printf("\r\nTick #%d!!\r\n", tickCt);
 
 		GNSS_GetUniqID(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
-		//HAL_Delay(250);
 		GNSS_GetPVTData(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
-		//HAL_Delay(250);
 		GNSS_SetMode(&GNSS_Handle,Automotiv);
-		//printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
-		//printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
-		//printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
+		printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
+		printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
+		printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
 
-//		HAL_Delay(250);
-
+		printf("Latitude: %f \r\n", GNSS_Handle.fLat);
+		printf("Longitude: %f \r\n",(float) GNSS_Handle.lon / 10000000.0);
+		printf("Height above ellipsoid: %d \r\n", GNSS_Handle.height);
+		printf("Height above mean sea level: %d \r\n", GNSS_Handle.hMSL);
+		printf("Ground Speed (2-D): %d \r\n", GNSS_Handle.gSpeed);
+		printf("Unique ID: %04X %04X %04X %04X %04X \r\n",
+				GNSS_Handle.uniqueID[0], GNSS_Handle.uniqueID[1],
+				GNSS_Handle.uniqueID[2], GNSS_Handle.uniqueID[3],
+				GNSS_Handle.uniqueID[4], GNSS_Handle.uniqueID[5]);
+		timeLastTick = HAL_GetTick();
 	}
 }
 
