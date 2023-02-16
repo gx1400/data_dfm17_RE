@@ -124,7 +124,7 @@ int main(void)
   txDone = 0xFF;
   rxDone = 0xFF;
 
-  printf("Starting ublox...");
+  printf("Starting ublox...\r\n");
   GNSS_Init(&GNSS_Handle, &huart2, &txDone, &rxDone);
   HAL_Delay(1000);
   GNSS_LoadConfig(&GNSS_Handle);
@@ -144,7 +144,7 @@ int main(void)
 	ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
 	#endif
 
-	test1SecFunc();
+	//test1SecFunc();
 
   }
   /* USER CODE END 3 */
@@ -447,8 +447,13 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)	{
-	printf("TxComplete callback!\r\n");
+	printf("  TxComplete callback!\r\n");
 	GNSS_Handle.txDone = 0x01;
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	printf("  RxComplete callback!\r\n");
+	GNSS_Handle.rxDone = 0x01;
 }
 
 void delay_us(U8 us) {

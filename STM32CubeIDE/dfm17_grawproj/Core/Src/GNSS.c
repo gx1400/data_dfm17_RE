@@ -286,27 +286,31 @@ void GNSS_ParsePOSLLHData(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_LoadConfig(GNSS_StateHandle *GNSS) {
-	printf("  Sending ubx config...\r\n");
+	printf("Sending ubx config...\r\n");
 	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, configUBX,
 			sizeof(configUBX) / sizeof(uint8_t));
-	//HAL_Delay(250);
-	while(GNSS->txDone == 0x00) {};
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 10);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 
-	printf("  Sending NMEA410 config...\r\n");
+	printf("Sending NMEA410 config...\r\n");
 	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, setNMEA410,
 			sizeof(setNMEA410) / sizeof(uint8_t));
-	//HAL_Delay(250);
-	while(GNSS->txDone == 0x00) {};
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 10);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 
-	printf("  Sending GNSS config...\r\n");
+	printf("Sending GNSS config...\r\n");
 	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, setGNSS,
 			sizeof(setGNSS) / sizeof(uint8_t));
-	//HAL_Delay(250);
-	while(GNSS->txDone == 0x00) {};
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 10);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 }
+
 
 
 
