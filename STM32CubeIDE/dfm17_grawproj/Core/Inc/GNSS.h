@@ -59,7 +59,7 @@ typedef struct
 {
 	UART_HandleTypeDef *huart;
 
-	uint8_t uniqueID[4];
+	uint8_t uniqueID[5];
 	uint8_t uartWorkingBuffer[101];
 
 	unsigned short year;
@@ -70,6 +70,7 @@ typedef struct
 	uint8_t min;
 	uint8_t sec;
 	uint8_t fixType;
+	uint8_t numSV;
 
 	signed long lon;
 	uint8_t lonBytes[4];

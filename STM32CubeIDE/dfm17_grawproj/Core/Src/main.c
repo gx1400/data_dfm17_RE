@@ -496,12 +496,12 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)	{
-	printf("  TxComplete callback!\r\n");
+	//printf("  TxComplete callback!\r\n");
 	GNSS_Handle.txDone = 0x01;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	printf("  RxComplete callback!\r\n");
+	//printf("  RxComplete callback!\r\n");
 	GNSS_Handle.rxDone = 0x01;
 }
 
@@ -529,24 +529,27 @@ void test1SecFunc(void) {
 
 		printf("\r\nTick #%d!!\r\n", tickCt);
 
-		GNSS_GetUniqID(&GNSS_Handle);
-		GNSS_ParseBuffer(&GNSS_Handle);
+		if( GNSS_Handle.uniqueID[0] == 0x00 && GNSS_Handle.uniqueID[1] == 0x00 &&
+				GNSS_Handle.uniqueID[2] == 0x00 && GNSS_Handle.uniqueID[3] == 0x00 &&
+				GNSS_Handle.uniqueID[4] == 0x00) {
+			GNSS_GetUniqID(&GNSS_Handle);
+			GNSS_ParseBuffer(&GNSS_Handle);
+		}
+
 		GNSS_GetPVTData(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
 		GNSS_SetMode(&GNSS_Handle,Automotiv);
-		printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
-		printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
+		printf("Day: %d-%02d-%02d \r\n", GNSS_Handle.year, GNSS_Handle.month,GNSS_Handle.day);
+		printf("Time: %02d:%02d:%02d UTC \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
 		printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
+		printf("Number of Sats: %d \r\n", GNSS_Handle.numSV);
 
 		printf("Latitude: %f \r\n", GNSS_Handle.fLat);
 		printf("Longitude: %f \r\n",(float) GNSS_Handle.lon / 10000000.0);
-		printf("Height above ellipsoid: %d \r\n", GNSS_Handle.height);
-		printf("Height above mean sea level: %d \r\n", GNSS_Handle.hMSL);
-		printf("Ground Speed (2-D): %d \r\n", GNSS_Handle.gSpeed);
-		printf("Unique ID: %04X %04X %04X %04X %04X \r\n",
+		printf("Unique ID: %02X %02X %02X %02X %02X \r\n",
 				GNSS_Handle.uniqueID[0], GNSS_Handle.uniqueID[1],
 				GNSS_Handle.uniqueID[2], GNSS_Handle.uniqueID[3],
-				GNSS_Handle.uniqueID[4], GNSS_Handle.uniqueID[5]);
+				GNSS_Handle.uniqueID[4]);
 		timeLastTick = HAL_GetTick();
 	}
 }

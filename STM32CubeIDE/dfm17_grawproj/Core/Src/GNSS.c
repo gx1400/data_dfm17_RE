@@ -49,6 +49,7 @@ void GNSS_Init(GNSS_StateHandle *GNSS, UART_HandleTypeDef *huart, uint8_t *txDon
 	GNSS->min = 0;
 	GNSS->sec = 0;
 	GNSS->fixType = 0;
+	GNSS->numSV = 0;
 	GNSS->lon = 0;
 	GNSS->lat = 0;
 	GNSS->height = 0;
@@ -57,6 +58,12 @@ void GNSS_Init(GNSS_StateHandle *GNSS, UART_HandleTypeDef *huart, uint8_t *txDon
 	GNSS->vAcc = 0;
 	GNSS->gSpeed = 0;
 	GNSS->headMot = 0;
+	GNSS->uniqueID[0] = 0;
+	GNSS->uniqueID[1] = 0;
+	GNSS->uniqueID[2] = 0;
+	GNSS->uniqueID[3] = 0;
+	GNSS->uniqueID[4] = 0;
+
 }
 
 /*!
@@ -203,6 +210,7 @@ void GNSS_ParsePVTData(GNSS_StateHandle *GNSS) {
 	GNSS->min = GNSS->uartWorkingBuffer[15];
 	GNSS->sec = GNSS->uartWorkingBuffer[16];
 	GNSS->fixType = GNSS->uartWorkingBuffer[26];
+	GNSS->numSV = GNSS->uartWorkingBuffer[29];
 
 	for (int var = 0; var < 4; ++var) {
 		iLong.bytes[var] = GNSS->uartWorkingBuffer[var + 30];
