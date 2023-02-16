@@ -563,16 +563,7 @@ void delay_us(U8 us) {
 	while (__HAL_TIM_GET_COUNTER(&htim3) < us);  // wait for the counter to reach the us input in the parameter
 }
 
-void radioToneForGraw(void) {
-	//U8 tonedelay = 200;
-	for(int tonedelay = 500; tonedelay >= 300; tonedelay--){
-		//GPIO3 is PA4
-		GPIOA->BSRR = (1U << 4);
-		delay_us(tonedelay);
-		GPIOA->BSRR = (1U << (16+4));
-		delay_us(tonedelay);
-	}
-}
+
 
 void gpsUpdate(void) {
 		printf("GPS Update!\r\n");

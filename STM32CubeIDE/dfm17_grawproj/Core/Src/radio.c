@@ -96,4 +96,12 @@ void vRadio_StartTx(U8 channel, U8 *pioFixRadioPacket)
   si446x_start_tx(channel, 0u, 0u);
 }
 
+void radioToneForGraw(void) {
+	for(int tonedelay = 500; tonedelay >= 300; tonedelay--){
+		//GPIO3 is PA4
+		GPIOA->ODR ^= (1U << 4);
+		delay_us(2*tonedelay);
+	}
+}
+
 
