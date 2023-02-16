@@ -64,7 +64,7 @@ void GNSS_Init(GNSS_StateHandle *GNSS, UART_HandleTypeDef *huart, uint8_t *txDon
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_ParseBuffer(GNSS_StateHandle *GNSS) {
-
+	printf("Parsing Buffer...\r\n");
 	for (int var = 0; var <= 100; ++var) {
 		if (GNSS->uartWorkingBuffer[var] == 0xB5
 				&& GNSS->uartWorkingBuffer[var + 1] == 0x62) {
@@ -90,9 +90,13 @@ void GNSS_ParseBuffer(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_GetUniqID(GNSS_StateHandle *GNSS) {
+	printf("Sending GetUniqID...\r\n");
+	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, getDeviceID,
 			sizeof(getDeviceID) / sizeof(uint8_t));
-	HAL_UART_Receive_IT(GNSS->huart, GNSS->uartWorkingBuffer, 17);
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 17);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 }
 
 /*!
@@ -100,9 +104,13 @@ void GNSS_GetUniqID(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_GetNavigatorData(GNSS_StateHandle *GNSS) {
+	printf("Sending GetNavigatorData...\r\n");
+	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, getNavigatorData,
 			sizeof(getNavigatorData) / sizeof(uint8_t));
-	HAL_UART_Receive_IT(GNSS->huart, GNSS->uartWorkingBuffer, 28);
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 28);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 }
 
 /*!
@@ -110,9 +118,13 @@ void GNSS_GetNavigatorData(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_GetPOSLLHData(GNSS_StateHandle *GNSS) {
+	printf("Sending GetPOSLLHData...\r\n");
+	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, getPOSLLHData,
 			sizeof(getPOSLLHData) / sizeof(uint8_t));
-	HAL_UART_Receive_IT(GNSS->huart, GNSS->uartWorkingBuffer, 36);
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 36);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 }
 
 /*!
@@ -120,9 +132,13 @@ void GNSS_GetPOSLLHData(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_GetPVTData(GNSS_StateHandle *GNSS) {
+	printf("Sending GetPVTData...\r\n");
+	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
 	HAL_UART_Transmit_DMA(GNSS->huart, getPVTData,
 			sizeof(getPVTData) / sizeof(uint8_t));
-	HAL_UART_Receive_IT(GNSS->huart, GNSS->uartWorkingBuffer, 100);
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 100);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 }
 
 /*!
@@ -131,6 +147,7 @@ void GNSS_GetPVTData(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_ParseUniqID(GNSS_StateHandle *GNSS) {
+	printf("Parsing GetUniqID...\r\n");
 	for (int var = 0; var < 5; ++var) {
 		GNSS->uniqueID[var] = GNSS->uartWorkingBuffer[10 + var];
 	}
@@ -141,6 +158,9 @@ void GNSS_ParseUniqID(GNSS_StateHandle *GNSS) {
  * Look at: 32.10.19 u-blox 8 Receiver description
  */
 void GNSS_SetMode(GNSS_StateHandle *GNSS, short gnssMode) {
+	GNSS->txDone = 0x00;
+	GNSS->rxDone = 0x00;
+
 	if (gnssMode == 0) {
 		HAL_UART_Transmit_DMA(GNSS->huart, setPortableMode,sizeof(setPortableMode) / sizeof(uint8_t));
 	} else if (gnssMode == 1) {
@@ -162,6 +182,8 @@ void GNSS_SetMode(GNSS_StateHandle *GNSS, short gnssMode) {
 	} else if (gnssMode == 9) {
 		HAL_UART_Transmit_DMA(GNSS->huart, setBikeMode,sizeof(setBikeMode) / sizeof(uint8_t));
 	}
+	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 10);
+	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
 }
 /*!
  * Parse data to navigation position velocity time solution standard.
@@ -169,6 +191,7 @@ void GNSS_SetMode(GNSS_StateHandle *GNSS, short gnssMode) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_ParsePVTData(GNSS_StateHandle *GNSS) {
+	printf("Parsing PVT Data...\r\n");
 	uShort.bytes[0] = GNSS->uartWorkingBuffer[10];
 	GNSS->yearBytes[0]=GNSS->uartWorkingBuffer[10];
 	uShort.bytes[1] = GNSS->uartWorkingBuffer[11];
@@ -232,6 +255,7 @@ void GNSS_ParsePVTData(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_ParseNavigatorData(GNSS_StateHandle *GNSS) {
+	printf("Parsing Navigator Data...\r\n");
 	uShort.bytes[0] = GNSS->uartWorkingBuffer[18];
 	uShort.bytes[1] = GNSS->uartWorkingBuffer[19];
 	GNSS->year = uShort.uShort;
@@ -248,6 +272,7 @@ void GNSS_ParseNavigatorData(GNSS_StateHandle *GNSS) {
  * @param GNSS Pointer to main GNSS structure.
  */
 void GNSS_ParsePOSLLHData(GNSS_StateHandle *GNSS) {
+	printf("Parsing POS LLH Data...\r\n");
 	for (int var = 0; var < 4; ++var) {
 		iLong.bytes[var] = GNSS->uartWorkingBuffer[var + 10];
 	}

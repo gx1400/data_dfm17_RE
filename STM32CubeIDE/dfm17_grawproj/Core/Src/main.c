@@ -144,7 +144,7 @@ int main(void)
 	ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
 	#endif
 
-	//test1SecFunc();
+	test1SecFunc();
 
   }
   /* USER CODE END 3 */
@@ -482,14 +482,14 @@ void test1SecFunc(void) {
 
 		GNSS_GetUniqID(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
-		HAL_Delay(250);
+		//HAL_Delay(250);
 		GNSS_GetPVTData(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
-		HAL_Delay(250);
+		//HAL_Delay(250);
 		GNSS_SetMode(&GNSS_Handle,Automotiv);
-		printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
-		printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
-		printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
+		//printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
+		//printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
+		//printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
 
 //		HAL_Delay(250);
 
