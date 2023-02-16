@@ -23,6 +23,11 @@
  *LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *THE SOFTWARE.
+ *
+ * Modified by Derek Rowland (gx1400@gmail.com) - 2023-02-15
+ * - changing receive to use DMA
+ * - Added enums
+ * - updated some spelling
  ******************************************************************************
  */
 
