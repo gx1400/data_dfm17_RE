@@ -14,6 +14,13 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
+  * Timers
+  *
+  * TIM1 - To be used with temperature/humidity mux
+  * TIM3 - used for Delay_us function (should probably be moved higher TIMx
+  * TIM6 - Tick timer for GPS updates
+  *
+  ******************************************************************************
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
@@ -52,10 +59,6 @@ DMA_HandleTypeDef hdma_usart2_rx;
 DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
-
-uint32_t timeLastTick;
-uint16_t tickCt;
-
 uint8_t txDone;
 uint8_t rxDone;
 
@@ -126,8 +129,6 @@ int main(void)
   printf("Starting radio...\r\n");
   vRadio_StartTx(pRadioConfiguration->Radio_ChannelNumber, NULL);
 
-  timeLastTick = HAL_GetTick();
-  tickCt = 0;
   txDone = 0xFF;
   rxDone = 0xFF;
 
@@ -136,6 +137,15 @@ int main(void)
   HAL_Delay(1000);
   GNSS_LoadConfig(&GNSS_Handle);
   uint32_t Timer = HAL_GetTick();
+
+  //Start Timer 6, 5sec interrupt timer for gps updates
+  if (HAL_TIM_Base_Start_IT(&htim6) != HAL_OK)
+  {
+	  /* Starting Error */
+  	  Error_Handler();
+  }
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -151,7 +161,7 @@ int main(void)
 	ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
 	#endif
 
-	test1SecFunc();
+	//test1SecFunc();
 
   }
   /* USER CODE END 3 */
@@ -358,11 +368,7 @@ static void MX_TIM6_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM6_Init 2 */
-  if (HAL_TIM_Base_Start_IT(&htim6) != HAL_OK)
-  {
-      /* Starting Error */
-	  Error_Handler();
-  }
+
 
   /* USER CODE END TIM6_Init 2 */
 
@@ -534,7 +540,7 @@ static void MX_GPIO_Init(void)
   __HAL_AFIO_REMAP_PD01_ENABLE();
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 4, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
@@ -567,13 +573,8 @@ void radioToneForGraw(void) {
 	}
 }
 
-void test1SecFunc(void) {
-
-	if((HAL_GetTick() - timeLastTick) > 10000) {
-
-		tickCt += 1;
-
-		printf("\r\nTick #%d!!\r\n", tickCt);
+void gpsUpdate(void) {
+		printf("GPS Update!\r\n");
 
 		if( GNSS_Handle.uniqueID[0] == 0x00 && GNSS_Handle.uniqueID[1] == 0x00 &&
 				GNSS_Handle.uniqueID[2] == 0x00 && GNSS_Handle.uniqueID[3] == 0x00 &&
@@ -600,8 +601,8 @@ void test1SecFunc(void) {
 				GNSS_Handle.uniqueID[0], GNSS_Handle.uniqueID[1],
 				GNSS_Handle.uniqueID[2], GNSS_Handle.uniqueID[3],
 				GNSS_Handle.uniqueID[4]);
-		timeLastTick = HAL_GetTick();
-	}
+
+		printf("\r\n");
 }
 
 int __io_putchar(int ch) {
