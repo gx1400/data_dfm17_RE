@@ -14,11 +14,14 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-  * Timers
+  * Timer  	Priority    Purpose
+  * TIM1 				To be used with temperature/humidity mux
+  * TIM3 				Delay_us function (should probably move)
+  * TIM6 	10			Tick timer for GPS updates
   *
-  * TIM1 - To be used with temperature/humidity mux
-  * TIM3 - used for Delay_us function (should probably be moved higher TIMx
-  * TIM6 - Tick timer for GPS updates
+  * DMA		Priority	Purpose
+  * 6		1			RX from GPS
+  * 7		2			TX to GPS
   *
   ******************************************************************************
   */
@@ -451,10 +454,10 @@ static void MX_DMA_Init(void)
 
   /* DMA interrupt init */
   /* DMA1_Channel6_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
   /* DMA1_Channel7_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
 
 }

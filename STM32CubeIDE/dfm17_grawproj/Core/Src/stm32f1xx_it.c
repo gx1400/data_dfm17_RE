@@ -268,7 +268,7 @@ void TIM6_DAC_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
-  printf("5sec IT timer tick!\r\n");
+  //printf("5sec IT timer tick!\r\n");
   gpsUpdate();
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
