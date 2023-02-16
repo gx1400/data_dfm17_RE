@@ -68,6 +68,16 @@ enum GNSSMode {
 	ModeNotSet		= -1
 };
 
+enum GNSSFixType {
+	NoFix 			= 0,
+	DeadReckoning   = 1,
+	Fix2D			= 2,
+	Fix3D 			= 3,
+	GNSSplusDeadRec = 4,
+	TimeOnlyFix     = 5,
+	FixNotSet       = -1
+};
+
 typedef struct
 {
 	UART_HandleTypeDef *huart;
@@ -82,7 +92,7 @@ typedef struct
 	uint8_t hour;
 	uint8_t min;
 	uint8_t sec;
-	uint8_t fixType;
+	enum GNSSFixType fixType;
 	uint8_t numSV;
 
 	signed long lon;
