@@ -11,10 +11,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
-
-
-void testToggleLED(GPIO_TypeDef* Port, uint16_t Pin);
-
-void ledInterval(GPIO_TypeDef* Port1, uint16_t Pin1, GPIO_TypeDef* Port2, uint16_t Pin2);
+void ledOnGreen(void);
+void ledOffGreen(void);
+void ledOnRed(void);
+void ledOffRed(void);
+void ledOnYellow(void);
+void ledOffYellow(void);
 
 #endif /* SRC_LED_H_ */

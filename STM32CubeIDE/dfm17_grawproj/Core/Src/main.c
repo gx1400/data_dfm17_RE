@@ -161,10 +161,15 @@ int main(void)
 	#if (RADIO_MODE_SELECT == 1)
 	radioToneForGraw();
 	#else
-	ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
+	//ledInterval(oLED_G_GPIO_Port, oLED_G_Pin, oLED_R_GPIO_Port, oLED_R_Pin);
 	#endif
 
-	//test1SecFunc();
+	ledOnYellow();
+	HAL_Delay(1000);
+	ledOffYellow();
+	HAL_Delay(1000);
+
+
 
   }
   /* USER CODE END 3 */
