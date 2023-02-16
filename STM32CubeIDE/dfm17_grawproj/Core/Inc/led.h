@@ -13,9 +13,12 @@
 
 void ledOnGreen(void);
 void ledOffGreen(void);
+void ledToggleGreen(void);
 void ledOnRed(void);
 void ledOffRed(void);
+void ledToggleRed(void);
 void ledOnYellow(void);
 void ledOffYellow(void);
+void ledToggleYellow(void);
 
 #endif /* SRC_LED_H_ */

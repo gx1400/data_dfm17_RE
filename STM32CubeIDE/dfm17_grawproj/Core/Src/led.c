@@ -14,37 +14,42 @@ uint16_t Pin2IntervalMs		= 1000;
 
 
 
-
+// Green LED is PC6
 void ledOnGreen(void) {
-	// Green LED is PC6
 	GPIOC->BSRR = (1 << 6);
 }
 
 void ledOffGreen(void) {
-	// Green LED is PC6
 	GPIOC->BSRR = (1 << (16+6));
 }
 
+void ledToggleGreen(void) {
+	GPIOC->ODR ^= (1 << 6);
+}
+
+// Red LED is PB12
 void ledOnRed(void) {
-	// Red LED is PB12
 	GPIOB->BSRR = (1 << 12);
 }
 
 void ledOffRed(void) {
-	// Red LED is PB12
 	GPIOB->BSRR = (1 << (16+12));
 }
 
+void ledToggleRed(void) {
+	GPIOB->ODR ^= (1 << 12);
+}
+
+// Yellow LED is PC7
 void ledOnYellow(void) {
-	// Yellow LED is PC7
 	GPIOC->BSRR = (1 << 7);
 }
 
 void ledOffYellow(void) {
-	// Yellow LED is PC7
 	GPIOC->BSRR = (1 << (16+7));
-
 }
 
-
+void ledToggleYellow(void) {
+	GPIOC->ODR ^= (1 << 7);
+}
 
