@@ -63,6 +63,7 @@ void GNSS_Init(GNSS_StateHandle *GNSS, UART_HandleTypeDef *huart, uint8_t *txDon
 	GNSS->uniqueID[2] = 0;
 	GNSS->uniqueID[3] = 0;
 	GNSS->uniqueID[4] = 0;
+	GNSS->selectedMode = ModeNotSet;
 
 }
 
@@ -185,12 +186,14 @@ void GNSS_SetMode(GNSS_StateHandle *GNSS, short gnssMode) {
 	} else if (gnssMode == 7) {
 		HAL_UART_Transmit_DMA(GNSS->huart, setAirbone4GMode,sizeof(setAirbone4GMode) / sizeof(uint8_t));
 	} else if (gnssMode == 8) {
-		HAL_UART_Transmit_DMA(GNSS->huart, setWirstMode,sizeof(setWirstMode) / sizeof(uint8_t));
+		HAL_UART_Transmit_DMA(GNSS->huart, setWristMode,sizeof(setWristMode) / sizeof(uint8_t));
 	} else if (gnssMode == 9) {
 		HAL_UART_Transmit_DMA(GNSS->huart, setBikeMode,sizeof(setBikeMode) / sizeof(uint8_t));
 	}
 	HAL_UART_Receive_DMA(GNSS->huart, GNSS->uartWorkingBuffer, 10);
 	while((GNSS->txDone == 0x00) || (GNSS->rxDone == 0x00)) {};
+
+	GNSS->selectedMode = gnssMode;
 }
 /*!
  * Parse data to navigation position velocity time solution standard.

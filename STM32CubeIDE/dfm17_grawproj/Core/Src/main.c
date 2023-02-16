@@ -538,7 +538,11 @@ void test1SecFunc(void) {
 
 		GNSS_GetPVTData(&GNSS_Handle);
 		GNSS_ParseBuffer(&GNSS_Handle);
-		GNSS_SetMode(&GNSS_Handle,Automotiv);
+
+		if(GNSS_Handle.selectedMode == ModeNotSet){
+			GNSS_SetMode(&GNSS_Handle,ModeAutomotive);
+		}
+
 		printf("Day: %d-%02d-%02d \r\n", GNSS_Handle.year, GNSS_Handle.month,GNSS_Handle.day);
 		printf("Time: %02d:%02d:%02d UTC \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
 		printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
