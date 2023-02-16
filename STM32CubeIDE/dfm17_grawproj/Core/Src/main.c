@@ -582,19 +582,26 @@ void gpsUpdate(void) {
 			GNSS_SetMode(&GNSS_Handle,ModeAutomotive);
 		}
 
-		printf("Day: %d-%02d-%02d \r\n", GNSS_Handle.year, GNSS_Handle.month,GNSS_Handle.day);
-		printf("Time: %02d:%02d:%02d UTC \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
 		printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
-		printf("Number of Sats: %d \r\n", GNSS_Handle.numSV);
 
-		printf("Latitude: %f \r\n", GNSS_Handle.fLat);
-		printf("Longitude: %f \r\n",(float) GNSS_Handle.lon / 10000000.0);
+		if(GNSS_Handle.fixType >= Fix2D) {
+			printf("Day: %d-%02d-%02d \r\n", GNSS_Handle.year, GNSS_Handle.month,GNSS_Handle.day);
+			printf("Time: %02d:%02d:%02d UTC \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
+
+			printf("Number of Sats: %d \r\n", GNSS_Handle.numSV);
+
+			printf("Latitude: %f \r\n", GNSS_Handle.fLat);
+			printf("Longitude: %f \r\n",(float) GNSS_Handle.lon / 10000000.0);
+
+
+
+		}
 		printf("Unique ID: %02X %02X %02X %02X %02X \r\n",
-				GNSS_Handle.uniqueID[0], GNSS_Handle.uniqueID[1],
-				GNSS_Handle.uniqueID[2], GNSS_Handle.uniqueID[3],
-				GNSS_Handle.uniqueID[4]);
-
+			GNSS_Handle.uniqueID[0], GNSS_Handle.uniqueID[1],
+			GNSS_Handle.uniqueID[2], GNSS_Handle.uniqueID[3],
+			GNSS_Handle.uniqueID[4]);
 		printf("\r\n");
+
 }
 
 int __io_putchar(int ch) {
