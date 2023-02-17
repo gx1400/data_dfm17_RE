@@ -83,8 +83,7 @@ enum GNSSFixType {
 	FixNotSet       = -1
 };
 
-typedef struct
-{
+typedef struct {
 	UART_HandleTypeDef *huart;
 
 	uint8_t uniqueID[5];

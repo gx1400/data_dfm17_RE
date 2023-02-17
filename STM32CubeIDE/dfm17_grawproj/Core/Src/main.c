@@ -331,7 +331,8 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM3_Init 2 */
-  HAL_TIM_Base_Start(&htim3); //start timer 1
+  delayTimerInit(&htim3);
+
   /* USER CODE END TIM3_Init 2 */
 
 }
@@ -391,7 +392,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 9600;
+  huart1.Init.BaudRate = 115200;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -558,10 +559,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	GNSS_Handle.rxDone = 0x01;
 }
 
-void delay_us(U8 us) {
-	__HAL_TIM_SET_COUNTER(&htim3,0);  // set the counter value a 0
-	while (__HAL_TIM_GET_COUNTER(&htim3) < us);  // wait for the counter to reach the us input in the parameter
-}
+
 
 
 
