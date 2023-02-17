@@ -115,6 +115,7 @@ void Error_Handler(void);
 
 int __io_putchar(int ch);
 int _write(int file, char *ptr, int len);
+void gpsUpdate(void);
 
 /* USER CODE END Private defines */
 

@@ -551,13 +551,13 @@ static void MX_GPIO_Init(void)
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)	{
 	//printf("  TxComplete callback!\r\n");
-	GNSS_Handle.txDone = 0x01;
+	GNSS_Handle.txDone = 1;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	//printf("  RxComplete callback!\r\n");
 	GNSS_ParseBuffer(&GNSS_Handle);
-	GNSS_Handle.rxDone = 0x01;
+	GNSS_Handle.rxDone = 1;
 }
 
 
