@@ -87,6 +87,8 @@ void Error_Handler(void);
 #define oBattPOn_GPIO_Port GPIOC
 #define oSiSDN_Pin GPIO_PIN_3
 #define oSiSDN_GPIO_Port GPIOC
+#define oMuxMainSwitch_Pin GPIO_PIN_1
+#define oMuxMainSwitch_GPIO_Port GPIOA
 #define oSpiGPIO3_Pin GPIO_PIN_4
 #define oSpiGPIO3_GPIO_Port GPIOA
 #define oSpiSCLK_Pin GPIO_PIN_5
@@ -99,6 +101,8 @@ void Error_Handler(void);
 #define oSpiCS_GPIO_Port GPIOB
 #define oLED_R_Pin GPIO_PIN_12
 #define oLED_R_GPIO_Port GPIOB
+#define oMuxMultiSwitch_Pin GPIO_PIN_13
+#define oMuxMultiSwitch_GPIO_Port GPIOB
 #define oLED_G_Pin GPIO_PIN_6
 #define oLED_G_GPIO_Port GPIOC
 #define oLED_Y_Pin GPIO_PIN_7
@@ -110,6 +114,16 @@ void Error_Handler(void);
 #define usbTX_GPIO_Port GPIOA
 #define usbRX_Pin GPIO_PIN_10
 #define usbRX_GPIO_Port GPIOA
+#define oMuxMultiSwitchC10_Pin GPIO_PIN_10
+#define oMuxMultiSwitchC10_GPIO_Port GPIOC
+#define oTemp1Disc_Pin GPIO_PIN_11
+#define oTemp1Disc_GPIO_Port GPIOC
+#define oMux20kDisc_Pin GPIO_PIN_2
+#define oMux20kDisc_GPIO_Port GPIOD
+#define oMux332kDisc_Pin GPIO_PIN_4
+#define oMux332kDisc_GPIO_Port GPIOB
+#define oTemp2Disc_Pin GPIO_PIN_5
+#define oTemp2Disc_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

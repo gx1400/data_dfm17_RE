@@ -477,19 +477,22 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, oBattPOn_Pin|oLED_G_Pin|oLED_Y_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, oBattPOn_Pin|oLED_G_Pin|oLED_Y_Pin|oMuxMultiSwitchC10_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(oSiSDN_GPIO_Port, oSiSDN_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC, oSiSDN_Pin|oTemp1Disc_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(oSpiGPIO3_GPIO_Port, oSpiGPIO3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, oMuxMainSwitch_Pin|oSpiGPIO3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(oSpiCS_GPIO_Port, oSpiCS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, oSpiCS_Pin|oMux332kDisc_Pin|oTemp2Disc_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(oLED_R_GPIO_Port, oLED_R_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, oLED_R_Pin|oMuxMultiSwitch_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(oMux20kDisc_GPIO_Port, oMux20kDisc_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : iSpiGPIO2_Pin */
   GPIO_InitStruct.Pin = iSpiGPIO2_Pin;
@@ -497,8 +500,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(iSpiGPIO2_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : oBattPOn_Pin oLED_G_Pin oLED_Y_Pin */
-  GPIO_InitStruct.Pin = oBattPOn_Pin|oLED_G_Pin|oLED_Y_Pin;
+  /*Configure GPIO pins : oBattPOn_Pin oLED_G_Pin oLED_Y_Pin oMuxMultiSwitchC10_Pin
+                           oTemp1Disc_Pin */
+  GPIO_InitStruct.Pin = oBattPOn_Pin|oLED_G_Pin|oLED_Y_Pin|oMuxMultiSwitchC10_Pin
+                          |oTemp1Disc_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -511,12 +516,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(oSiSDN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : oSpiGPIO3_Pin */
-  GPIO_InitStruct.Pin = oSpiGPIO3_Pin;
+  /*Configure GPIO pins : oMuxMainSwitch_Pin oSpiGPIO3_Pin */
+  GPIO_InitStruct.Pin = oMuxMainSwitch_Pin|oSpiGPIO3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(oSpiGPIO3_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : oSpiCS_Pin */
   GPIO_InitStruct.Pin = oSpiCS_Pin;
@@ -525,18 +530,25 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(oSpiCS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : oLED_R_Pin */
-  GPIO_InitStruct.Pin = oLED_R_Pin;
+  /*Configure GPIO pins : oLED_R_Pin oMuxMultiSwitch_Pin oMux332kDisc_Pin oTemp2Disc_Pin */
+  GPIO_InitStruct.Pin = oLED_R_Pin|oMuxMultiSwitch_Pin|oMux332kDisc_Pin|oTemp2Disc_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(oLED_R_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : intButton_Pin */
   GPIO_InitStruct.Pin = intButton_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(intButton_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : oMux20kDisc_Pin */
+  GPIO_InitStruct.Pin = oMux20kDisc_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(oMux20kDisc_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure peripheral I/O remapping */
   __HAL_AFIO_REMAP_PD01_ENABLE();
