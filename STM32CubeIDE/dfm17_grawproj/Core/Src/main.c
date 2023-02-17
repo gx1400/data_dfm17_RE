@@ -571,11 +571,11 @@ void gpsUpdate(void) {
 				GNSS_Handle.uniqueID[2] == 0x00 && GNSS_Handle.uniqueID[3] == 0x00 &&
 				GNSS_Handle.uniqueID[4] == 0x00) {
 			GNSS_GetUniqID(&GNSS_Handle);
-			//GNSS_ParseBuffer(&GNSS_Handle);
+
 		}
 
 		GNSS_GetPVTData(&GNSS_Handle);
-		//GNSS_ParseBuffer(&GNSS_Handle);
+
 
 		if(GNSS_Handle.selectedMode == ModeNotSet){
 			GNSS_SetMode(&GNSS_Handle,ModeAutomotive);
