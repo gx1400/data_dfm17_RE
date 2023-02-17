@@ -54,34 +54,34 @@
  * are to be used. Otherwise these macros would read/write bits that are
  * placed within that byte by the linker.
  */
-/*
-BITS(Si446xPhPend, 0);
-BITS(Si446xPhPend, 1);
-BITS(Si446xPhPend, 2);
-BITS(Si446xPhPend, 3);
-BITS(Si446xPhPend, 4);
-BITS(Si446xPhPend, 5);
-BITS(Si446xPhPend, 6);
-BITS(Si446xPhPend, 7);
 
-BITS(Si446xModemPend, 0);
-BITS(Si446xModemPend, 1);
-BITS(Si446xModemPend, 2);
-BITS(Si446xModemPend, 3);
-BITS(Si446xModemPend, 4);
-BITS(Si446xModemPend, 5);
-BITS(Si446xModemPend, 6);
-BITS(Si446xModemPend, 7);
+unsigned char Si446xPhPend0;
+unsigned char Si446xPhPend1;
+unsigned char Si446xPhPend2;
+unsigned char Si446xPhPend3;
+unsigned char Si446xPhPend4;
+unsigned char Si446xPhPend5;
+unsigned char Si446xPhPend6;
+unsigned char Si446xPhPend7;
 
-BITS(Si446xChipPend, 0);
-BITS(Si446xChipPend, 1);
-BITS(Si446xChipPend, 2);
-BITS(Si446xChipPend, 3);
-BITS(Si446xChipPend, 4);
-BITS(Si446xChipPend, 5);
-BITS(Si446xChipPend, 6);
-BITS(Si446xChipPend, 7);
-*/
+unsigned char Si446xModemPend0;
+unsigned char Si446xModemPend1;
+unsigned char Si446xModemPend2;
+unsigned char Si446xModemPend3;
+unsigned char Si446xModemPend4;
+unsigned char Si446xModemPend5;
+unsigned char Si446xModemPend6;
+unsigned char Si446xModemPend7;
+
+unsigned char Si446xChipPend0;
+unsigned char Si446xChipPend1;
+unsigned char Si446xChipPend2;
+unsigned char Si446xChipPend3;
+unsigned char Si446xChipPend4;
+unsigned char Si446xChipPend5;
+unsigned char Si446xChipPend6;
+unsigned char Si446xChipPend7;
+
 /*!
  * This function is used to handle the assertion of nIRQ of the si446x chip.
  *
@@ -89,11 +89,11 @@ BITS(Si446xChipPend, 7);
  * si446x chip.
  *
  */
-/*
 void si446x_nirq_process(void)
 {
 #ifdef SI446X_USER_CONFIG_USE_FRR_ABC_FOR_NIRQ
-    SEGMENT_VARIABLE(pendBits[3], U8, SEG_DATA);
+
+    uint8_t pendBits[3];
 
     si446x_frr_read();
 #else
@@ -101,9 +101,32 @@ void si446x_nirq_process(void)
 //    Si446xPhPend = Si446xCmd.GET_INT_STATUS.PH_PEND;
 //    Si446xModemPend = Si446xCmd.GET_INT_STATUS.MODEM_PEND;
 //    Si446xChipPend = Si446xCmd.GET_INT_STATUS.CHIP_PEND;
-    WRITE_TO_BIT_ARRAY(Si446xPhPend, Si446xCmd.GET_INT_STATUS.PH_PEND);
-    WRITE_TO_BIT_ARRAY(Si446xModemPend, Si446xCmd.GET_INT_STATUS.MODEM_PEND);
-    WRITE_TO_BIT_ARRAY(Si446xChipPend, Si446xCmd.GET_INT_STATUS.CHIP_PEND);
+
+
+    Si446xPhPend0 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x01; \
+		Si446xPhPend1 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x02; \
+		Si446xPhPend2 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x04; \
+		Si446xPhPend3 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x08; \
+		Si446xPhPend4 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x10; \
+		Si446xPhPend5 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x20; \
+		Si446xPhPend6 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x40; \
+		Si446xPhPend7 = Si446xCmd.GET_INT_STATUS.PH_PEND & 0x80;
+	Si446xModemPend0 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x01; \
+		Si446xModemPend1 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x02; \
+		Si446xModemPend2 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x04; \
+		Si446xModemPend3 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x08; \
+		Si446xModemPend4 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x10; \
+		Si446xModemPend5 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x20; \
+		Si446xModemPend6 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x40; \
+		Si446xModemPend7 = Si446xCmd.GET_INT_STATUS.MODEM_PEND & 0x80;
+	Si446xChipPend0 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x01; \
+		Si446xChipPend1 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x02; \
+		Si446xChipPend2 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x04; \
+		Si446xChipPend3 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x08; \
+		Si446xChipPend4 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x10; \
+		Si446xChipPend5 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x20; \
+		Si446xChipPend6 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x40; \
+		Si446xChipPend7 = Si446xCmd.GET_INT_STATUS.CHIP_PEND & 0x80;
 #endif
 }
-*/
+
