@@ -8,6 +8,7 @@
  */
 
 #include "radio.h"
+#include "time.h"
 
 /*****************************************************************************
  *  Local Macros & Definitions
@@ -34,7 +35,7 @@ void vRadio_PowerUp(void)
 {
 	uint16_t wDelay = 0;
 
-	uint8_t lBootOpt = 0;
+	//uint8_t lBootOpt = 0;
 
   /* Hardware reset the chip */
   si446x_reset();

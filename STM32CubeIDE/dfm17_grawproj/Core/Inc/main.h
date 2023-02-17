@@ -33,8 +33,10 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "led.h"
 #include "radio.h"
-//#include "time.h"
-#include "../drivers/compiler_defs.h"
+#include "time.h"
+#include "GNSS.h"
+
+
 
 // Select Radio Mode with the following define
 // 0 = use radio_config.h in Src folder

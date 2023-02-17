@@ -11,7 +11,7 @@
 #define RADIO_H_
 
 #include "main.h"
-#include "../drivers/compiler_defs.h"
+#include "../drivers/radio/radio_hal.h"
 #include "../drivers/radio/radio_comm.h"
 #include "../drivers/radio/Si446x/si446x_api_lib.h"
 #include "../drivers/radio/Si446x/si446x_defs.h"

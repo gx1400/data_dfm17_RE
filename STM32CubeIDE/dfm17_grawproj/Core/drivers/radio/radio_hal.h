@@ -32,7 +32,7 @@ void radio_hal_AssertShutdown(void);
 void radio_hal_DeassertShutdown(void);
 void radio_hal_ClearNsel(void);
 void radio_hal_SetNsel(void);
-BIT radio_hal_NirqLevel(void);
+unsigned char radio_hal_NirqLevel(void);
 
 void radio_hal_SpiWriteByte(uint8_t byteToWrite);
 uint8_t radio_hal_SpiReadByte(void);
@@ -40,19 +40,19 @@ uint8_t radio_hal_SpiReadByte(void);
 void radio_hal_SpiWriteData(uint8_t byteCount, uint8_t* pData);
 void radio_hal_SpiReadData(uint8_t byteCount, uint8_t* pData);
 
-#ifdef PLATFORM_GRAW_DFM17
-void SPI_Transmit(U8* data, int size);
-void SPI_Receive (U8* data, int size);
-void SpiWriteData(int size, U8* data);
-void SpiReadData(int size, U8* data);
-U8 SpiReadWrite(U8 data);
-#endif
+
+void SPI_Transmit(uint8_t* data, int size);
+void SPI_Receive (uint8_t* data, int size);
+void SpiWriteData(int size, uint8_t* data);
+void SpiReadData(int size, uint8_t* data);
+uint8_t SpiReadWrite(uint8_t data);
+
 
 #ifdef DRIVERS_EXTENDED_SUPPORT
-  BIT radio_hal_Gpio0Level(void);
-  BIT radio_hal_Gpio1Level(void);
-  BIT radio_hal_Gpio2Level(void);
-  BIT radio_hal_Gpio3Level(void);
+unsigned char radio_hal_Gpio0Level(void);
+unsigned char radio_hal_Gpio1Level(void);
+unsigned char radio_hal_Gpio2Level(void);
+unsigned char radio_hal_Gpio3Level(void);
 #endif
 
 #endif //_RADIO_HAL_H_
