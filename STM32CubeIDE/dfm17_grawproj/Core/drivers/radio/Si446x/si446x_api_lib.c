@@ -120,11 +120,11 @@ void si446x_part_info(void)
                               Pro2Cmd );
 
     Si446xCmd.PART_INFO.CHIPREV         = Pro2Cmd[0];
-    Si446xCmd.PART_INFO.PART            = ((U16)Pro2Cmd[1] << 8) & 0xFF00;
-    Si446xCmd.PART_INFO.PART           |= (U16)Pro2Cmd[2] & 0x00FF;
+    Si446xCmd.PART_INFO.PART            = ((uint16_t)Pro2Cmd[1] << 8) & 0xFF00;
+    Si446xCmd.PART_INFO.PART           |= (uint16_t)Pro2Cmd[2] & 0x00FF;
     Si446xCmd.PART_INFO.PBUILD          = Pro2Cmd[3];
-    Si446xCmd.PART_INFO.ID              = ((U16)Pro2Cmd[4] << 8) & 0xFF00;
-    Si446xCmd.PART_INFO.ID             |= (U16)Pro2Cmd[5] & 0x00FF;
+    Si446xCmd.PART_INFO.ID              = ((uint16_t)Pro2Cmd[4] << 8) & 0xFF00;
+    Si446xCmd.PART_INFO.ID             |= (uint16_t)Pro2Cmd[5] & 0x00FF;
     Si446xCmd.PART_INFO.CUSTOMER        = Pro2Cmd[6];
     Si446xCmd.PART_INFO.ROMID           = Pro2Cmd[7];
 }

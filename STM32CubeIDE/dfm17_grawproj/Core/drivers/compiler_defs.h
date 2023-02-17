@@ -150,7 +150,7 @@
 #define b3 3
 
 //typedef unsigned char U8;
-typedef unsigned int U16;
+//typedef unsigned int U16;
 typedef unsigned long U32;
 
 typedef signed char S8;
@@ -159,7 +159,7 @@ typedef signed long S32;
 
 typedef union UU16
 {
-    U16 U16;
+    uint16_t uint16_t;
     S16 S16;
     uint8_t U8[2];
     S8 S8[2];
@@ -170,7 +170,7 @@ typedef union UU32
     U32 U32;
     S32 S32;
     UU16 UU16[2];
-    U16 U16[2];
+    uint16_t uint16_t[2];
     S16 S16[2];
     uint8_t uint8_t[4];
     S8 S8[4];
