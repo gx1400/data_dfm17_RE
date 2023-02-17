@@ -16,7 +16,7 @@
 /*****************************************************************************
  *  Global Variables
  *****************************************************************************/
-const SEGMENT_VARIABLE(Radio_Configuration_Data_Array[], U8, SEG_CODE) = \
+const SEGMENT_VARIABLE(Radio_Configuration_Data_Array[], uint8_t, SEG_CODE) = \
               RADIO_CONFIGURATION_DATA_ARRAY;
 
 const SEGMENT_VARIABLE(RadioConfiguration, tRadioConfiguration, SEG_CODE) = \

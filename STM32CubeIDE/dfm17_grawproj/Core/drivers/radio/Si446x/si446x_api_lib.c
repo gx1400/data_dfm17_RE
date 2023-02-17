@@ -16,7 +16,7 @@ SEGMENT_VARIABLE( Si446xCmd, union si446x_cmd_reply_union, SEG_XDATA );
 SEGMENT_VARIABLE( Pro2Cmd[16], uint8_t, SEG_XDATA );
 
 #ifdef SI446X_PATCH_CMDS
-SEGMENT_VARIABLE( Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS }, U8, SEG_CODE);
+SEGMENT_VARIABLE( Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS }, uint8_t, SEG_CODE);
 #endif
 
 
@@ -28,7 +28,7 @@ SEGMENT_VARIABLE( Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS }, U8, SEG_CODE
  */
 void si446x_reset(void)
 {
-    U8 loopCount;
+	uint8_t loopCount;
 
     /* Put radio in shutdown, wait then release */
     radio_hal_AssertShutdown();
@@ -48,10 +48,10 @@ void si446x_power_up(uint8_t BOOT_OPTIONS, uint8_t XTAL_OPTIONS, uint32_t XO_FRE
     Pro2Cmd[0] = SI446X_CMD_ID_POWER_UP;
     Pro2Cmd[1] = BOOT_OPTIONS;
     Pro2Cmd[2] = XTAL_OPTIONS;
-    Pro2Cmd[3] = (U8)(XO_FREQ >> 24);
-    Pro2Cmd[4] = (U8)(XO_FREQ >> 16);
-    Pro2Cmd[5] = (U8)(XO_FREQ >> 8);
-    Pro2Cmd[6] = (U8)(XO_FREQ);
+    Pro2Cmd[3] = (uint8_t)(XO_FREQ >> 24);
+    Pro2Cmd[4] = (uint8_t)(XO_FREQ >> 16);
+    Pro2Cmd[5] = (uint8_t)(XO_FREQ >> 8);
+    Pro2Cmd[6] = (uint8_t)(XO_FREQ);
 
     radio_comm_SendCmd( SI446X_CMD_ARG_COUNT_POWER_UP, Pro2Cmd );
 }
@@ -60,10 +60,10 @@ void si446x_power_up(uint8_t BOOT_OPTIONS, uint8_t XTAL_OPTIONS, uint32_t XO_FRE
  * This function is used to load all properties and commands with a list of NULL terminated commands.
  * Before this function @si446x_reset should be called.
  */
-U8 si446x_configuration_init(const uint8_t* pSetPropCmd)
+uint8_t si446x_configuration_init(const uint8_t* pSetPropCmd)
 {
-  SEGMENT_VARIABLE(col, U8, SEG_DATA);
-  SEGMENT_VARIABLE(numOfBytes, U8, SEG_DATA);
+  SEGMENT_VARIABLE(col, uint8_t, SEG_DATA);
+  SEGMENT_VARIABLE(numOfBytes, uint8_t, SEG_DATA);
 
   /* While cycle as far as the pointer points to a command */
   while (*pSetPropCmd != 0x00)
@@ -140,8 +140,8 @@ void si446x_start_tx(uint8_t CHANNEL, uint8_t CONDITION, uint16_t TX_LEN)
     Pro2Cmd[0] = SI446X_CMD_ID_START_TX;
     Pro2Cmd[1] = CHANNEL;
     Pro2Cmd[2] = CONDITION;
-    Pro2Cmd[3] = (U8)(TX_LEN >> 8);
-    Pro2Cmd[4] = (U8)(TX_LEN);
+    Pro2Cmd[3] = (uint8_t)(TX_LEN >> 8);
+    Pro2Cmd[4] = (uint8_t)(TX_LEN);
     Pro2Cmd[5] = 0x00;
 
     // Don't repeat the packet, 
@@ -162,13 +162,13 @@ void si446x_start_tx(uint8_t CHANNEL, uint8_t CONDITION, uint16_t TX_LEN)
  * @param NEXT_STATE3 Next state when invalid packet received (e.g. CRC error).
  */
 void si446x_start_rx(uint8_t CHANNEL, uint8_t CONDITION,
-		uint16_t RX_LEN, U8 NEXT_STATE1, uint8_t NEXT_STATE2, uint8_t NEXT_STATE3)
+		uint16_t RX_LEN, uint8_t NEXT_STATE1, uint8_t NEXT_STATE2, uint8_t NEXT_STATE3)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_START_RX;
     Pro2Cmd[1] = CHANNEL;
     Pro2Cmd[2] = CONDITION;
-    Pro2Cmd[3] = (U8)(RX_LEN >> 8);
-    Pro2Cmd[4] = (U8)(RX_LEN);
+    Pro2Cmd[3] = (uint8_t)(RX_LEN >> 8);
+    Pro2Cmd[4] = (uint8_t)(RX_LEN);
     Pro2Cmd[5] = NEXT_STATE1;
     Pro2Cmd[6] = NEXT_STATE2;
     Pro2Cmd[7] = NEXT_STATE3;

@@ -61,22 +61,22 @@ BIT radio_hal_NirqLevel(void)
     return 1;
 }
 
-void radio_hal_SpiWriteByte(U8 byteToWrite)
+void radio_hal_SpiWriteByte(uint8_t byteToWrite)
 {
   SpiReadWrite(byteToWrite);
 }
 
-U8 radio_hal_SpiReadByte(void)
+uint8_t radio_hal_SpiReadByte(void)
 {
   return SpiReadWrite(0xFF);
 }
 
-void radio_hal_SpiWriteData(U8 byteCount, U8* pData)
+void radio_hal_SpiWriteData(uint8_t byteCount, uint8_t* pData)
 {
   SpiWriteData(byteCount, pData);
 }
 
-void radio_hal_SpiReadData(U8 byteCount, U8* pData)
+void radio_hal_SpiReadData(uint8_t byteCount, uint8_t* pData)
 {
   SpiReadData(byteCount, pData);
 }

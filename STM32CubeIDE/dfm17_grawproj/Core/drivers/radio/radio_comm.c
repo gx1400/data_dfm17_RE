@@ -92,7 +92,7 @@ uint8_t radio_comm_GetResp(uint8_t byteCount, uint8_t* pData)
  * @param byteCount     Number of bytes in the command to send to the radio device
  * @param pData         Pointer to the command to send.
  */
-void radio_comm_SendCmd(U8 byteCount, U8* pData)
+void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData)
 {
     while (!ctsWentHigh)
     {
@@ -112,7 +112,7 @@ void radio_comm_SendCmd(U8 byteCount, U8* pData)
  * @param byteCount     Number of bytes to get from the radio chip.
  * @param pData         Pointer to where to put the data.
  */
-void radio_comm_ReadData(U8 cmd, BIT pollCts, U8 byteCount, U8* pData)
+void radio_comm_ReadData(uint8_t cmd, BIT pollCts, uint8_t byteCount, uint8_t* pData)
 {
     if(pollCts)
     {
@@ -137,7 +137,7 @@ void radio_comm_ReadData(U8 cmd, BIT pollCts, U8 byteCount, U8* pData)
  * @param byteCount     Number of bytes to get from the radio chip
  * @param pData         Pointer to where to put the data
  */
-void radio_comm_WriteData(U8 cmd, BIT pollCts, U8 byteCount, U8* pData)
+void radio_comm_WriteData(uint8_t cmd, BIT pollCts, uint8_t byteCount, uint8_t* pData)
 {
     if(pollCts)
     {
@@ -183,7 +183,7 @@ void radio_comm_ClearCTS()
  *
  * @return CTS value
  */
-U8 radio_comm_SendCmdGetResp(U8 cmdByteCount, U8* pCmdData, U8 respByteCount, U8* pRespData)
+uint8_t radio_comm_SendCmdGetResp(uint8_t cmdByteCount, uint8_t* pCmdData, uint8_t respByteCount, uint8_t* pRespData)
 {
     radio_comm_SendCmd(cmdByteCount, pCmdData);
     return radio_comm_GetResp(respByteCount, pRespData);

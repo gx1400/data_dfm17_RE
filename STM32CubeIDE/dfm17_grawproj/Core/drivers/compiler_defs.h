@@ -131,21 +131,6 @@
 #define SEG_CODE
 #define SEG_BDATA
 
-#define SBIT(name, addr, bit)  volatile unsigned char  name
-#define SFR(name, addr)        volatile unsigned char  name
-#define SFRX(name, addr)       volatile unsigned char  name
-#define SFR16(name, addr)      volatile unsigned short name
-#define SFR16E(name, fulladdr) volatile unsigned short name
-#define SFR32(name, fulladdr)  volatile unsigned long  name
-#define SFR32E(name, fulladdr) volatile unsigned long  name
-#define INTERRUPT(name, vector) void name (void)
-#define INTERRUPT_USING(name, vector, regnum) void name (void)
-#define INTERRUPT_PROTO(name, vector) void name (void)
-#define INTERRUPT_PROTO_USING(name, vector, regnum) void name (void)
-#define FUNCTION_USING(name, return_value, parameter, regnum) return_value name (parameter)
-#define FUNCTION_PROTO_USING(name, return_value, parameter, regnum) return_value name (parameter)
-// Note: Parameter must be either 'void' or include a variable type and name. (Ex: char temp_variable)
-
 #define SEGMENT_VARIABLE(name, vartype, locsegment) vartype locsegment name
 #define VARIABLE_SEGMENT_POINTER(name, vartype, targsegment) vartype targsegment * name
 #define SEGMENT_VARIABLE_SEGMENT_POINTER(name, vartype, targsegment, locsegment) vartype targsegment * locsegment name
@@ -164,7 +149,7 @@
 #define b2 2
 #define b3 3
 
-typedef unsigned char U8;
+//typedef unsigned char U8;
 typedef unsigned int U16;
 typedef unsigned long U32;
 
@@ -176,7 +161,7 @@ typedef union UU16
 {
     U16 U16;
     S16 S16;
-    U8 U8[2];
+    uint8_t U8[2];
     S8 S8[2];
 } UU16;
 
@@ -187,7 +172,7 @@ typedef union UU32
     UU16 UU16[2];
     U16 U16[2];
     S16 S16[2];
-    U8 U8[4];
+    uint8_t uint8_t[4];
     S8 S8[4];
 } UU32;
 
