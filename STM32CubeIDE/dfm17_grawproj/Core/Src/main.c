@@ -556,6 +556,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)	{
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	//printf("  RxComplete callback!\r\n");
+	GNSS_ParseBuffer(&GNSS_Handle);
 	GNSS_Handle.rxDone = 0x01;
 }
 
@@ -570,11 +571,11 @@ void gpsUpdate(void) {
 				GNSS_Handle.uniqueID[2] == 0x00 && GNSS_Handle.uniqueID[3] == 0x00 &&
 				GNSS_Handle.uniqueID[4] == 0x00) {
 			GNSS_GetUniqID(&GNSS_Handle);
-			GNSS_ParseBuffer(&GNSS_Handle);
+			//GNSS_ParseBuffer(&GNSS_Handle);
 		}
 
 		GNSS_GetPVTData(&GNSS_Handle);
-		GNSS_ParseBuffer(&GNSS_Handle);
+		//GNSS_ParseBuffer(&GNSS_Handle);
 
 		if(GNSS_Handle.selectedMode == ModeNotSet){
 			GNSS_SetMode(&GNSS_Handle,ModeAutomotive);
