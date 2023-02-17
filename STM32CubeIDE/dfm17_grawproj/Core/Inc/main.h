@@ -35,8 +35,7 @@ extern "C" {
 #include "radio.h"
 #include "time.h"
 #include "GNSS.h"
-
-
+#include "spi.h"
 
 // Select Radio Mode with the following define
 // 0 = use radio_config.h in Src folder

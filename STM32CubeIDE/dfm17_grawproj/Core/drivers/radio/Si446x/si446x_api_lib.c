@@ -269,7 +269,7 @@ void si446x_set_property( uint8_t GROUP, uint8_t NUM_PROPS, uint8_t START_PROP, 
     cmdIndex = 4;
     while(NUM_PROPS--)
     {
-        Pro2Cmd[cmdIndex] = va_arg (argList, uint8_t);
+        Pro2Cmd[cmdIndex] = va_arg (argList, int);
         cmdIndex++;
     }
     va_end(argList);

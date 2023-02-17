@@ -139,7 +139,7 @@ int main(void)
   GNSS_Init(&GNSS_Handle, &huart2, &txDone, &rxDone);
   HAL_Delay(1000);
   GNSS_LoadConfig(&GNSS_Handle);
-  uint32_t Timer = HAL_GetTick();
+
 
   //Start Timer 6, 5sec interrupt timer for gps updates
   if (HAL_TIM_Base_Start_IT(&htim6) != HAL_OK)
