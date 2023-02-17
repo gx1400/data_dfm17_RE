@@ -149,33 +149,6 @@
 #define b2 2
 #define b3 3
 
-//typedef unsigned char U8;
-//typedef unsigned int U16;
-//typedef unsigned long U32;
-
-typedef signed char S8;
-typedef signed int S16;
-typedef signed long S32;
-
-typedef union UU16
-{
-    uint16_t uint16_t;
-    S16 S16;
-    uint8_t U8[2];
-    S8 S8[2];
-} UU16;
-
-typedef union UU32
-{
-    uint32_t uint32_t;
-    S32 S32;
-    UU16 UU16[2];
-    uint16_t uint16_t[2];
-    S16 S16[2];
-    uint8_t uint8_t[4];
-    S8 S8[4];
-} UU32;
-
 // NOP () macro support
 extern void _nop (void);
 #define NOP() _nop()
