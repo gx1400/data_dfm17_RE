@@ -31,7 +31,27 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../bsp.h"
+#include "led.h"
+#include "radio.h"
+//#include "time.h"
+#include "../drivers/compiler_defs.h"
+
+// Select Radio Mode with the following define
+// 0 = use radio_config.h in Src folder
+// 1 = use config packets from Graw Firmware
+// 2 = use PN9 mode
+// 3 = use Carrier Tx
+#define RADIO_MODE_SELECT 	2
+
+#if (RADIO_MODE_SELECT == 0)
+#include "radio_config.h"
+#elif (RADIO_MODE_SELECT ==1)
+#include "../Src/radioconfigs/radio_config_Si4063_GRAW.h"
+#elif (RADIO_MODE_SELECT ==2)
+#include "../Src/radioconfigs/radio_config_Si4063_PN9.h"
+#elif (RADIO_MODE_SELECT ==3)
+#include "../Src/radioconfigs/radio_config_Si4063_CW.h"
+#endif
 
 
 /* USER CODE END Includes */

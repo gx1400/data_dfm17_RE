@@ -7,7 +7,7 @@
  * @n http://www.silabs.com
  */
 
-#include "../bsp.h"
+#include "radio.h"
 
 /*****************************************************************************
  *  Local Macros & Definitions
@@ -37,8 +37,8 @@ void vRadio_PowerUp(void);
  */
 void vRadio_PowerUp(void)
 {
-  SEGMENT_VARIABLE(wDelay,  U16, SEG_XDATA) = 0u;
-  SEGMENT_VARIABLE(lBootOpt, U8, SEG_XDATA) = 0u;
+  SEGMENT_VARIABLE(wDelay,  uint16_t, SEG_XDATA) = 0u;
+  SEGMENT_VARIABLE(lBootOpt, uint8_t, SEG_XDATA) = 0u;
 
   /* Hardware reset the chip */
   si446x_reset();
@@ -57,7 +57,7 @@ void vRadio_PowerUp(void)
  */
 void vRadio_Init(void)
 {
-  U16 wDelay;
+	uint16_t wDelay;
 
   /* Power Up the radio chip */
   vRadio_PowerUp();
@@ -87,7 +87,7 @@ void vRadio_Init(void)
  *  @note
  *
  */
-void vRadio_StartTx(U8 channel, U8 *pioFixRadioPacket)
+void vRadio_StartTx(uint8_t channel, uint8_t *pioFixRadioPacket)
 {
   // Read ITs, clear pending ones
   si446x_get_int_status(0u, 0u, 0u);

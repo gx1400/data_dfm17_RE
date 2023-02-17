@@ -6,7 +6,7 @@
  */
 
 
-#include "../bsp.h"
+#include "spi.h"
 
 void SpiEnable(void) {
 	SPI1->CR1 |= (1<<6);   // SPE=1, Peripheral enabled
@@ -16,7 +16,7 @@ void SpiDisable(void) {
 	SPI1->CR1 &= ~(1<<6);   // SPE=0, Peripheral Disabled
 }
 
-void SpiWriteData (int size, U8* data) {
+void SpiWriteData (int size, uint8_t* data) {
 
 	/************** STEPS TO FOLLOW *****************
 	1. Wait for the TXE bit to set in the Status Register
@@ -42,14 +42,14 @@ void SpiWriteData (int size, U8* data) {
 	while (((SPI1->SR)&(1<<7))) {};  // wait for BSY bit to Reset -> This will indicate that SPI is not busy in communication
 
 	//  Clear the Overrun flag by reading DR and SR
-	U8 temp = SPI1->DR;
+	uint8_t temp = SPI1->DR;
 	temp = SPI1->SR;
 	(void)temp; // silence not used warning
 
 
 }
 
-void SpiReadData (int size, U8 *data) {
+void SpiReadData (int size, uint8_t *data) {
 	/************** STEPS TO FOLLOW *****************
 	1. Wait for the BSY bit to reset in Status Register
 	2. Send some Dummy data before reading the DATA
@@ -66,7 +66,7 @@ void SpiReadData (int size, U8 *data) {
 }
 
 
-U8 SpiReadWrite (U8 byte) {
+uint8_t SpiReadWrite (uint8_t byte) {
 	/************** STEPS TO FOLLOW *****************
 	1. Wait for the BSY bit to reset in Status Register
 	2. Send some Dummy data before reading the DATA

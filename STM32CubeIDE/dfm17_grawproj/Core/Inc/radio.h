@@ -10,6 +10,17 @@
 #ifndef RADIO_H_
 #define RADIO_H_
 
+#define SEG_XDATA
+
+#include "main.h"
+#include "../drivers/compiler_defs.h"
+#include "../drivers/radio/radio_comm.h"
+#include "../drivers/radio/Si446x/si446x_api_lib.h"
+#include "../drivers/radio/Si446x/si446x_defs.h"
+#include "../drivers/radio/Si446x/si446x_nirq.h"
+
+
+
 /*****************************************************************************
  *  Global Macros & Definitions
  *****************************************************************************/
@@ -19,13 +30,13 @@
  *****************************************************************************/
 typedef struct
 {
-    U8   *Radio_ConfigurationArray;
+    uint8_t   *Radio_ConfigurationArray;
 
-    U8   Radio_ChannelNumber;
-    U8   Radio_PacketLength;
-    U8   Radio_State_After_Power_Up;
+    uint8_t   Radio_ChannelNumber;
+    uint8_t   Radio_PacketLength;
+    uint8_t   Radio_State_After_Power_Up;
 
-    U16  Radio_Delay_Cnt_After_Reset;
+    uint16_t  Radio_Delay_Cnt_After_Reset;
 } tRadioConfiguration;
 
 /*****************************************************************************
@@ -34,13 +45,13 @@ typedef struct
 extern const SEGMENT_VARIABLE_SEGMENT_POINTER(pRadioConfiguration, tRadioConfiguration, SEG_CODE, SEG_CODE);
 
 /*! Si446x configuration array */
-extern const SEGMENT_VARIABLE(Radio_Configuration_Data_Array[], U8, SEG_CODE);
+extern const SEGMENT_VARIABLE(Radio_Configuration_Data_Array[], uint8_t, SEG_CODE);
 
 /*****************************************************************************
  *  Global Function Declarations
  *****************************************************************************/
 void  vRadio_Init(void);
-void  vRadio_StartTx(U8, U8 *);
-U8    bRadio_Check_Ezconfig(U16);
+void  vRadio_StartTx(uint8_t, uint8_t *);
+uint8_t    bRadio_Check_Ezconfig(uint16_t);
 
 #endif /* RADIO_H_ */

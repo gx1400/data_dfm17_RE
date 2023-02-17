@@ -13,7 +13,7 @@
                  *              I N C L U D E              *
                  * ======================================= */
 
-#include "../../bsp.h"
+#include "radio.h"
 
                 /* ======================================= *
                  *          D E F I N I T I O N S          *
@@ -23,9 +23,9 @@
                  *     G L O B A L   V A R I A B L E S     *
                  * ======================================= */
 
-#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455 || (defined SILABS_RADIO_SI406X))
+
 BIT ctsWentHigh = 0;
-#endif
+
 
 
                 /* ======================================= *
@@ -36,8 +36,6 @@ BIT ctsWentHigh = 0;
                  *     P U B L I C   F U N C T I O N S     *
                  * ======================================= */
 
-#if (defined SILABS_RADIO_SI446X) || (defined SILABS_RADIO_SI4455 || (defined SILABS_RADIO_SI406X))
-
 /*!
  * Gets a command response from the radio chip
  *
@@ -46,10 +44,10 @@ BIT ctsWentHigh = 0;
  *
  * @return CTS value
  */
-U8 radio_comm_GetResp(U8 byteCount, U8* pData)
+uint8_t radio_comm_GetResp(uint8_t byteCount, uint8_t* pData)
 {
-  SEGMENT_VARIABLE(ctsVal = 0u, U8, SEG_DATA);
-  SEGMENT_VARIABLE(errCnt = RADIO_CTS_TIMEOUT, U16, SEG_DATA);
+  SEGMENT_VARIABLE(ctsVal = 0u, uint8_t, SEG_DATA);
+	SEGMENT_VARIABLE( errCnt = RADIO_CTS_TIMEOUT, uint16_t, SEG_DATA);
 
   while (errCnt != 0)      //wait until radio IC is ready with the data
   {
@@ -160,7 +158,7 @@ void radio_comm_WriteData(U8 cmd, BIT pollCts, U8 byteCount, U8* pData)
  *
  * @return CTS value
  */
-U8 radio_comm_PollCTS(void)
+uint8_t radio_comm_PollCTS(void)
 {
     return radio_comm_GetResp(0, 0);
 }
@@ -173,7 +171,7 @@ void radio_comm_ClearCTS()
   ctsWentHigh = 0;
 }
 
-#endif
+
 
 /*!
  * Sends a command to the radio chip and gets a response

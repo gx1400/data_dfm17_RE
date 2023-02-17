@@ -7,6 +7,9 @@
 
 #include "time.h"
 
+
+timerRef timRef;
+
 void delayTimerInit(TIM_HandleTypeDef *htim) {
 	timRef.htim = htim;
 	HAL_TIM_Base_Start(timRef.htim); //start timer

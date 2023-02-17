@@ -17,137 +17,139 @@
 #ifndef SI446X_CMD_H
 #define SI446X_CMD_H
 
+#include "radio.h"
+
 
 /* This section contains command map declarations */
 struct si446x_reply_GENERIC_map {
-        U8  REPLY[16];
+        uint8_t  REPLY[16];
 };
 
 struct si446x_reply_PART_INFO_map {
-        U8  CHIPREV;
-        U16  PART;
-        U8  PBUILD;
-        U16  ID;
-        U8  CUSTOMER;
-        U8  ROMID;
+	uint8_t  CHIPREV;
+	uint16_t PART;
+    uint8_t  PBUILD;
+    uint16_t ID;
+    uint8_t  CUSTOMER;
+    uint8_t  ROMID;
 };
 
 struct si446x_reply_FUNC_INFO_map {
-        U8  REVEXT;
-        U8  REVBRANCH;
-        U8  REVINT;
-        U8  FUNC;
+	uint8_t REVEXT;
+	uint8_t REVBRANCH;
+	uint8_t REVINT;
+	uint8_t FUNC;
 };
 
 struct si446x_reply_GET_PROPERTY_map {
-        U8  DATA[16];
+	uint8_t DATA[16];
 };
 
 struct si446x_reply_GPIO_PIN_CFG_map {
-        U8  GPIO[4];
-        U8  NIRQ;
-        U8  SDO;
-        U8  GEN_CONFIG;
+	uint8_t GPIO[4];
+	uint8_t NIRQ;
+	uint8_t SDO;
+	uint8_t GEN_CONFIG;
 };
 
 struct si446x_reply_FIFO_INFO_map {
-        U8  RX_FIFO_COUNT;
-        U8  TX_FIFO_SPACE;
+	uint8_t RX_FIFO_COUNT;
+	uint8_t TX_FIFO_SPACE;
 };
 
 struct si446x_reply_GET_INT_STATUS_map {
-        U8  INT_PEND;
-        U8  INT_STATUS;
-        U8  PH_PEND;
-        U8  PH_STATUS;
-        U8  MODEM_PEND;
-        U8  MODEM_STATUS;
-        U8  CHIP_PEND;
-        U8  CHIP_STATUS;
+	uint8_t INT_PEND;
+	uint8_t INT_STATUS;
+	uint8_t PH_PEND;
+	uint8_t PH_STATUS;
+	uint8_t MODEM_PEND;
+	uint8_t MODEM_STATUS;
+	uint8_t CHIP_PEND;
+	uint8_t CHIP_STATUS;
 };
 
 struct si446x_reply_REQUEST_DEVICE_STATE_map {
-        U8  CURR_STATE;
-        U8  CURRENT_CHANNEL;
+	uint8_t  CURR_STATE;
+        uint8_t  CURRENT_CHANNEL;
 };
 
 struct si446x_reply_READ_CMD_BUFF_map {
-        U8  BYTE[16];
+	uint8_t  BYTE[16];
 };
 
 struct si446x_reply_FRR_A_READ_map {
-        U8  FRR_A_VALUE;
-        U8  FRR_B_VALUE;
-        U8  FRR_C_VALUE;
-        U8  FRR_D_VALUE;
+	uint8_t  FRR_A_VALUE;
+	uint8_t  FRR_B_VALUE;
+	uint8_t  FRR_C_VALUE;
+	uint8_t  FRR_D_VALUE;
 };
 
 struct si446x_reply_FRR_B_READ_map {
-        U8  FRR_B_VALUE;
-        U8  FRR_C_VALUE;
-        U8  FRR_D_VALUE;
-        U8  FRR_A_VALUE;
+	uint8_t  FRR_B_VALUE;
+	uint8_t  FRR_C_VALUE;
+	uint8_t  FRR_D_VALUE;
+	uint8_t  FRR_A_VALUE;
 };
 
 struct si446x_reply_FRR_C_READ_map {
-        U8  FRR_C_VALUE;
-        U8  FRR_D_VALUE;
-        U8  FRR_A_VALUE;
-        U8  FRR_B_VALUE;
+	uint8_t  FRR_C_VALUE;
+	uint8_t  FRR_D_VALUE;
+	uint8_t  FRR_A_VALUE;
+	uint8_t  FRR_B_VALUE;
 };
 
 struct si446x_reply_FRR_D_READ_map {
-        U8  FRR_D_VALUE;
-        U8  FRR_A_VALUE;
-        U8  FRR_B_VALUE;
-        U8  FRR_C_VALUE;
+	uint8_t  FRR_D_VALUE;
+	uint8_t  FRR_A_VALUE;
+	uint8_t  FRR_B_VALUE;
+	uint8_t  FRR_C_VALUE;
 };
 
 struct si446x_reply_IRCAL_MANUAL_map {
-        U8  IRCAL_AMP_REPLY;
-        U8  IRCAL_PH_REPLY;
+	uint8_t  IRCAL_AMP_REPLY;
+	uint8_t  IRCAL_PH_REPLY;
 };
 
 struct si446x_reply_PACKET_INFO_map {
-        U16  LENGTH;
+	uint16_t  LENGTH;
 };
 
 struct si446x_reply_GET_MODEM_STATUS_map {
-        U8  MODEM_PEND;
-        U8  MODEM_STATUS;
-        U8  CURR_RSSI;
-        U8  LATCH_RSSI;
-        U8  ANT1_RSSI;
-        U8  ANT2_RSSI;
-        U16  AFC_FREQ_OFFSET;
+	uint8_t  MODEM_PEND;
+	uint8_t  MODEM_STATUS;
+	uint8_t  CURR_RSSI;
+	uint8_t  LATCH_RSSI;
+	uint8_t  ANT1_RSSI;
+	uint8_t  ANT2_RSSI;
+	uint16_t  AFC_FREQ_OFFSET;
 };
 
 struct si446x_reply_READ_RX_FIFO_map {
-        U8  DATA[2];
+	uint8_t  DATA[2];
 };
 
 struct si446x_reply_GET_ADC_READING_map {
-        U16  GPIO_ADC;
-        U16  BATTERY_ADC;
-        U16  TEMP_ADC;
+	uint16_t  GPIO_ADC;
+	uint16_t  BATTERY_ADC;
+	uint16_t  TEMP_ADC;
 };
 
 struct si446x_reply_GET_PH_STATUS_map {
-        U8  PH_PEND;
-        U8  PH_STATUS;
+	uint8_t  PH_PEND;
+	uint8_t  PH_STATUS;
 };
 
 struct si446x_reply_GET_CHIP_STATUS_map {
-        U8  CHIP_PEND;
-        U8  CHIP_STATUS;
-        U8  CMD_ERR_STATUS;
-        U8  CMD_ERR_CMD_ID;
+	uint8_t  CHIP_PEND;
+	uint8_t  CHIP_STATUS;
+	uint8_t  CMD_ERR_STATUS;
+	uint8_t  CMD_ERR_CMD_ID;
 };
 
 
 /* The union that stores the reply written back to the host registers */
 union si446x_cmd_reply_union {
-        U8                                                               RAW[16];
+	uint8_t                                                               RAW[16];
         struct si446x_reply_GENERIC_map                                  GENERIC;
         struct si446x_reply_PART_INFO_map                                PART_INFO;
         struct si446x_reply_FUNC_INFO_map                                FUNC_INFO;

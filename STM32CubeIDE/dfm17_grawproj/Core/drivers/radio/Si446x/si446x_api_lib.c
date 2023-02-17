@@ -9,11 +9,11 @@
  * Copyright 2011 Silicon Laboratories, Inc.
  */
 
-#include "../../../bsp.h"
+#include "radio.h"
 #include <stdarg.h>
 
 SEGMENT_VARIABLE( Si446xCmd, union si446x_cmd_reply_union, SEG_XDATA );
-SEGMENT_VARIABLE( Pro2Cmd[16], U8, SEG_XDATA );
+SEGMENT_VARIABLE( Pro2Cmd[16], uint8_t, SEG_XDATA );
 
 #ifdef SI446X_PATCH_CMDS
 SEGMENT_VARIABLE( Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS }, U8, SEG_CODE);
@@ -43,7 +43,7 @@ void si446x_reset(void)
  * This function is used to initialize after power-up the radio chip.
  * Before this function @si446x_reset should be called.
  */
-void si446x_power_up(U8 BOOT_OPTIONS, U8 XTAL_OPTIONS, U32 XO_FREQ)
+void si446x_power_up(uint8_t BOOT_OPTIONS, uint8_t XTAL_OPTIONS, uint32_t XO_FREQ)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_POWER_UP;
     Pro2Cmd[1] = BOOT_OPTIONS;
@@ -60,7 +60,7 @@ void si446x_power_up(U8 BOOT_OPTIONS, U8 XTAL_OPTIONS, U32 XO_FREQ)
  * This function is used to load all properties and commands with a list of NULL terminated commands.
  * Before this function @si446x_reset should be called.
  */
-U8 si446x_configuration_init(const U8* pSetPropCmd)
+U8 si446x_configuration_init(const uint8_t* pSetPropCmd)
 {
   SEGMENT_VARIABLE(col, U8, SEG_DATA);
   SEGMENT_VARIABLE(numOfBytes, U8, SEG_DATA);
@@ -135,7 +135,7 @@ void si446x_part_info(void)
  * @param CONDITION Start TX condition.
  * @param TX_LEN    Payload length (exclude the PH generated CRC).
  */
-void si446x_start_tx(U8 CHANNEL, U8 CONDITION, U16 TX_LEN)
+void si446x_start_tx(uint8_t CHANNEL, uint8_t CONDITION, uint16_t TX_LEN)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_START_TX;
     Pro2Cmd[1] = CHANNEL;
@@ -161,7 +161,8 @@ void si446x_start_tx(U8 CHANNEL, U8 CONDITION, U16 TX_LEN)
  * @param NEXT_STATE2 Next state when a valid packet received.
  * @param NEXT_STATE3 Next state when invalid packet received (e.g. CRC error).
  */
-void si446x_start_rx(U8 CHANNEL, U8 CONDITION, U16 RX_LEN, U8 NEXT_STATE1, U8 NEXT_STATE2, U8 NEXT_STATE3)
+void si446x_start_rx(uint8_t CHANNEL, uint8_t CONDITION,
+		uint16_t RX_LEN, U8 NEXT_STATE1, uint8_t NEXT_STATE2, uint8_t NEXT_STATE3)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_START_RX;
     Pro2Cmd[1] = CHANNEL;
@@ -182,7 +183,7 @@ void si446x_start_rx(U8 CHANNEL, U8 CONDITION, U16 RX_LEN, U8 NEXT_STATE1, U8 NE
  * @param MODEM_CLR_PEND  Modem Status pending flags clear.
  * @param CHIP_CLR_PEND   Chip State pending flags clear.
  */
-void si446x_get_int_status(U8 PH_CLR_PEND, U8 MODEM_CLR_PEND, U8 CHIP_CLR_PEND)
+void si446x_get_int_status(uint8_t PH_CLR_PEND, uint8_t MODEM_CLR_PEND, uint8_t CHIP_CLR_PEND)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_GET_INT_STATUS;
     Pro2Cmd[1] = PH_CLR_PEND;
@@ -216,7 +217,8 @@ void si446x_get_int_status(U8 PH_CLR_PEND, U8 MODEM_CLR_PEND, U8 CHIP_CLR_PEND)
  * @param SDO         SDO configuration.
  * @param GEN_CONFIG  General pin configuration.
  */
-void si446x_gpio_pin_cfg(U8 GPIO0, U8 GPIO1, U8 GPIO2, U8 GPIO3, U8 NIRQ, U8 SDO, U8 GEN_CONFIG)
+void si446x_gpio_pin_cfg(uint8_t GPIO0, uint8_t GPIO1, uint8_t GPIO2,
+		uint8_t GPIO3, uint8_t NIRQ, uint8_t SDO, uint8_t GEN_CONFIG)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_GPIO_PIN_CFG;
     Pro2Cmd[1] = GPIO0;
@@ -252,10 +254,10 @@ void si446x_gpio_pin_cfg(U8 GPIO0, U8 GPIO1, U8 GPIO2, U8 GPIO3, U8 NIRQ, U8 SDO
 #ifdef __C51__
 #pragma maxargs (13)  /* allow 13 bytes for parameters */
 #endif
-void si446x_set_property( U8 GROUP, U8 NUM_PROPS, U8 START_PROP, ... )
+void si446x_set_property( uint8_t GROUP, uint8_t NUM_PROPS, uint8_t START_PROP, ... )
 {
     va_list argList;
-    U8 cmdIndex;
+    uint8_t cmdIndex;
 
     Pro2Cmd[0] = SI446X_CMD_ID_SET_PROPERTY;
     Pro2Cmd[1] = GROUP;
@@ -266,7 +268,7 @@ void si446x_set_property( U8 GROUP, U8 NUM_PROPS, U8 START_PROP, ... )
     cmdIndex = 4;
     while(NUM_PROPS--)
     {
-        Pro2Cmd[cmdIndex] = va_arg (argList, U8);
+        Pro2Cmd[cmdIndex] = va_arg (argList, uint8_t);
         cmdIndex++;
     }
     va_end(argList);
@@ -279,7 +281,7 @@ void si446x_set_property( U8 GROUP, U8 NUM_PROPS, U8 START_PROP, ... )
  *
  * @param NEXT_STATE1 Next state.
  */
-void si446x_change_state(U8 NEXT_STATE1)
+void si446x_change_state(uint8_t NEXT_STATE1)
 {
     Pro2Cmd[0] = SI446X_CMD_ID_CHANGE_STATE;
     Pro2Cmd[1] = NEXT_STATE1;
