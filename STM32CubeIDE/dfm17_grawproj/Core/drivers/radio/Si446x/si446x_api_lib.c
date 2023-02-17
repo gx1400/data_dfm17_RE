@@ -12,11 +12,11 @@
 #include "radio.h"
 #include <stdarg.h>
 
-SEGMENT_VARIABLE( Si446xCmd, union si446x_cmd_reply_union, SEG_XDATA );
-SEGMENT_VARIABLE( Pro2Cmd[16], uint8_t, SEG_XDATA );
+union si446x_cmd_reply_union    Si446xCmd;
+uint8_t    Pro2Cmd[16];
 
 #ifdef SI446X_PATCH_CMDS
-SEGMENT_VARIABLE( Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS }, uint8_t, SEG_CODE);
+uint8_t Si446xPatchCommands[][8] = { SI446X_PATCH_CMDS };
 #endif
 
 
@@ -62,8 +62,9 @@ void si446x_power_up(uint8_t BOOT_OPTIONS, uint8_t XTAL_OPTIONS, uint32_t XO_FRE
  */
 uint8_t si446x_configuration_init(const uint8_t* pSetPropCmd)
 {
-  SEGMENT_VARIABLE(col, uint8_t, SEG_DATA);
-  SEGMENT_VARIABLE(numOfBytes, uint8_t, SEG_DATA);
+
+  uint8_t    col;
+  uint8_t    numOfBytes;
 
   /* While cycle as far as the pointer points to a command */
   while (*pSetPropCmd != 0x00)

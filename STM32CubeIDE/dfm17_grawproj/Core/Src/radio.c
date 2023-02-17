@@ -32,8 +32,9 @@ void vRadio_PowerUp(void);
  */
 void vRadio_PowerUp(void)
 {
-  SEGMENT_VARIABLE(wDelay,  uint16_t, SEG_XDATA) = 0u;
-  SEGMENT_VARIABLE(lBootOpt, uint8_t, SEG_XDATA) = 0u;
+	uint16_t wDelay = 0;
+
+	uint8_t lBootOpt = 0;
 
   /* Hardware reset the chip */
   si446x_reset();

@@ -46,8 +46,8 @@ unsigned char ctsWentHigh = 0;
  */
 uint8_t radio_comm_GetResp(uint8_t byteCount, uint8_t* pData)
 {
-  SEGMENT_VARIABLE(ctsVal = 0u, uint8_t, SEG_DATA);
-	SEGMENT_VARIABLE( errCnt = RADIO_CTS_TIMEOUT, uint16_t, SEG_DATA);
+	uint8_t ctsVal = 0;
+	uint16_t    errCnt = RADIO_CTS_TIMEOUT;
 
   while (errCnt != 0)      //wait until radio IC is ready with the data
   {

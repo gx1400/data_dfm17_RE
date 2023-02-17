@@ -29,7 +29,7 @@
                  *     G L O B A L   V A R I A B L E S     *
                  * ======================================= */
 
-extern SEGMENT_VARIABLE(radioCmd[16u], uint8_t, SEG_XDATA);
+extern uint8_t    radioCmd[16u];
 
 
                 /* ======================================= *

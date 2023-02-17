@@ -10,13 +10,6 @@
 #ifndef RADIO_H_
 #define RADIO_H_
 
-#define SEG_FAR
-#define SEG_DATA
-#define SEG_CODE
-
-#define SEGMENT_VARIABLE(name, vartype, locsegment) vartype locsegment name
-#define SEG_XDATA
-
 #include "main.h"
 #include "../drivers/compiler_defs.h"
 #include "../drivers/radio/radio_comm.h"

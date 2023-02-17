@@ -14,8 +14,8 @@
 
 #include "radio.h"
 
-extern SEGMENT_VARIABLE( Si446xCmd, union si446x_cmd_reply_union, SEG_XDATA );
-extern SEGMENT_VARIABLE( Pro2Cmd[16], uint8_t, SEG_XDATA );
+extern union si446x_cmd_reply_union    Si446xCmd;
+extern uint8_t    Pro2Cmd[16];
 
 
 #define SI466X_FIFO_SIZE 64
