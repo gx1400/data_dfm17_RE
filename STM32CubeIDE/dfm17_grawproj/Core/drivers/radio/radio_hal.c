@@ -56,7 +56,7 @@ void radio_hal_SetNsel(void)
 	GPIOB-> BSRR = (1U << 2);
 }
 
-BIT radio_hal_NirqLevel(void)
+unsigned char radio_hal_NirqLevel(void)
 {
     return 1;
 }

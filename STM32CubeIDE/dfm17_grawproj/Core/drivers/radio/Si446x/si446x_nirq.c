@@ -54,6 +54,7 @@
  * are to be used. Otherwise these macros would read/write bits that are
  * placed within that byte by the linker.
  */
+/*
 BITS(Si446xPhPend, 0);
 BITS(Si446xPhPend, 1);
 BITS(Si446xPhPend, 2);
@@ -80,7 +81,7 @@ BITS(Si446xChipPend, 4);
 BITS(Si446xChipPend, 5);
 BITS(Si446xChipPend, 6);
 BITS(Si446xChipPend, 7);
-
+*/
 /*!
  * This function is used to handle the assertion of nIRQ of the si446x chip.
  *
@@ -88,6 +89,7 @@ BITS(Si446xChipPend, 7);
  * si446x chip.
  *
  */
+/*
 void si446x_nirq_process(void)
 {
 #ifdef SI446X_USER_CONFIG_USE_FRR_ABC_FOR_NIRQ
@@ -104,3 +106,4 @@ void si446x_nirq_process(void)
     WRITE_TO_BIT_ARRAY(Si446xChipPend, Si446xCmd.GET_INT_STATUS.CHIP_PEND);
 #endif
 }
+*/

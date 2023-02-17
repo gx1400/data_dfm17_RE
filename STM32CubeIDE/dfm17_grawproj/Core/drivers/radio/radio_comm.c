@@ -24,7 +24,7 @@
                  * ======================================= */
 
 
-BIT ctsWentHigh = 0;
+unsigned char ctsWentHigh = 0;
 
 
 
@@ -112,7 +112,7 @@ void radio_comm_SendCmd(uint8_t byteCount, uint8_t* pData)
  * @param byteCount     Number of bytes to get from the radio chip.
  * @param pData         Pointer to where to put the data.
  */
-void radio_comm_ReadData(uint8_t cmd, BIT pollCts, uint8_t byteCount, uint8_t* pData)
+void radio_comm_ReadData(uint8_t cmd, unsigned char pollCts, uint8_t byteCount, uint8_t* pData)
 {
     if(pollCts)
     {
@@ -137,7 +137,7 @@ void radio_comm_ReadData(uint8_t cmd, BIT pollCts, uint8_t byteCount, uint8_t* p
  * @param byteCount     Number of bytes to get from the radio chip
  * @param pData         Pointer to where to put the data
  */
-void radio_comm_WriteData(uint8_t cmd, BIT pollCts, uint8_t byteCount, uint8_t* pData)
+void radio_comm_WriteData(uint8_t cmd, unsigned char pollCts, uint8_t byteCount, uint8_t* pData)
 {
     if(pollCts)
     {

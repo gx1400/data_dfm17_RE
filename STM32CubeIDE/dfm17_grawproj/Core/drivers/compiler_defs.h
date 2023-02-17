@@ -139,66 +139,10 @@
 #define LOCATED_VARIABLE_NO_INIT(name, vartype, locsegment, addr) locsegment vartype name
 
 
-// used with UU16
-#define LSB 0
-#define MSB 1
 
-// used with UU32 (b0 is least-significant byte)
-#define b0 0
-#define b1 1
-#define b2 2
-#define b3 3
-
-// NOP () macro support
-extern void _nop (void);
-#define NOP() _nop()
-
-typedef unsigned char bit;
-typedef bit BIT;
-
-
-#define BITS(bitArray, bitPos)  BIT bitArray ## bitPos
-#define WRITE_TO_BIT_ARRAY(bitArray, byte)  bitArray ## 0 = byte & 0x01; \
-                                            bitArray ## 1 = byte & 0x02; \
-                                            bitArray ## 2 = byte & 0x04; \
-                                            bitArray ## 3 = byte & 0x08; \
-                                            bitArray ## 4 = byte & 0x10; \
-                                            bitArray ## 5 = byte & 0x20; \
-                                            bitArray ## 6 = byte & 0x40; \
-                                            bitArray ## 7 = byte & 0x80;
-
-#define READ_FROM_BIT_ARRAY(bitArray, byte) byte =  (bitArray ## 0) | \
-                                                   ((bitArray ## 1) << 1) | \
-                                                   ((bitArray ## 2) << 2) | \
-                                                   ((bitArray ## 3) << 3) | \
-                                                   ((bitArray ## 4) << 4) | \
-                                                   ((bitArray ## 5) << 5) | \
-                                                   ((bitArray ## 6) << 6) | \
-                                                   ((bitArray ## 7) << 7);
 
 
 #endif
 
-//-----------------------------------------------------------------------------
-// Compiler independent data type definitions
-//-----------------------------------------------------------------------------
-#ifndef   FALSE
-#define   FALSE     0
-#endif
-#ifndef   TRUE
-#define   TRUE      !FALSE
-#endif
-
-#ifndef   NULL
-#define   NULL      ((void *) 0)
-#endif
-
-//-----------------------------------------------------------------------------
-// Header File PreProcessor Directive
-//-----------------------------------------------------------------------------
 
 // #define COMPILER_DEFS_H
-
-//-----------------------------------------------------------------------------
-// End Of File
-//-----------------------------------------------------------------------------
