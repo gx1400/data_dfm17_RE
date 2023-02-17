@@ -151,7 +151,7 @@
 
 //typedef unsigned char U8;
 //typedef unsigned int U16;
-typedef unsigned long U32;
+//typedef unsigned long U32;
 
 typedef signed char S8;
 typedef signed int S16;
@@ -167,7 +167,7 @@ typedef union UU16
 
 typedef union UU32
 {
-    U32 U32;
+    uint32_t uint32_t;
     S32 S32;
     UU16 UU16[2];
     uint16_t uint16_t[2];
