@@ -124,20 +124,11 @@
 
 #define SEG_FAR
 #define SEG_DATA
-#define SEG_NEAR
-#define SEG_IDATA
-#define SEG_XDATA
-#define SEG_PDATA
 #define SEG_CODE
-#define SEG_BDATA
 
 #define SEGMENT_VARIABLE(name, vartype, locsegment) vartype locsegment name
 #define VARIABLE_SEGMENT_POINTER(name, vartype, targsegment) vartype targsegment * name
 #define SEGMENT_VARIABLE_SEGMENT_POINTER(name, vartype, targsegment, locsegment) vartype targsegment * locsegment name
-#define SEGMENT_POINTER(name, vartype, locsegment) vartype * locsegment name
-#define LOCATED_VARIABLE(name, vartype, locsegment, addr, init) locsegment vartype name
-#define LOCATED_VARIABLE_NO_INIT(name, vartype, locsegment, addr) locsegment vartype name
-
 
 
 
@@ -146,3 +137,7 @@
 
 
 // #define COMPILER_DEFS_H
+
+//-----------------------------------------------------------------------------
+// End Of File
+//-----------------------------------------------------------------------------
