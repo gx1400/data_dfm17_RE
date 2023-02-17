@@ -34,7 +34,8 @@
 #ifndef INC_GNSS_H_
 #define INC_GNSS_H_
 
-#include "../bsp.h"
+//#include "../bsp.h"
+#include "main.h"
 
 union u_Short
 {
