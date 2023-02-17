@@ -16,14 +16,9 @@
 /*****************************************************************************
  *  Global Variables
  *****************************************************************************/
-const SEGMENT_VARIABLE(Radio_Configuration_Data_Array[], uint8_t, SEG_CODE) = \
-              RADIO_CONFIGURATION_DATA_ARRAY;
-
-const SEGMENT_VARIABLE(RadioConfiguration, tRadioConfiguration, SEG_CODE) = \
-              RADIO_CONFIGURATION_DATA;
-
-const SEGMENT_VARIABLE_SEGMENT_POINTER(pRadioConfiguration, tRadioConfiguration, SEG_CODE, SEG_CODE) = \
-                        &RadioConfiguration;
+const uint8_t Radio_Configuration_Data_Array[] = RADIO_CONFIGURATION_DATA_ARRAY;
+const tRadioConfiguration RadioConfiguration = RADIO_CONFIGURATION_DATA;
+const tRadioConfiguration *pRadioConfiguration = &RadioConfiguration;
 
 /*****************************************************************************
  *  Local Function Declarations

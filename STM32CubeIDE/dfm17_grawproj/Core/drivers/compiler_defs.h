@@ -122,13 +122,7 @@
 // http://sdcc.sourceforge.net
 
 
-#define SEG_FAR
-#define SEG_DATA
-#define SEG_CODE
 
-#define SEGMENT_VARIABLE(name, vartype, locsegment) vartype locsegment name
-#define VARIABLE_SEGMENT_POINTER(name, vartype, targsegment) vartype targsegment * name
-#define SEGMENT_VARIABLE_SEGMENT_POINTER(name, vartype, targsegment, locsegment) vartype targsegment * locsegment name
 
 
 

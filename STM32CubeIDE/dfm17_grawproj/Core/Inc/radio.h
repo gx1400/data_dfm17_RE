@@ -10,6 +10,11 @@
 #ifndef RADIO_H_
 #define RADIO_H_
 
+#define SEG_FAR
+#define SEG_DATA
+#define SEG_CODE
+
+#define SEGMENT_VARIABLE(name, vartype, locsegment) vartype locsegment name
 #define SEG_XDATA
 
 #include "main.h"
@@ -42,10 +47,10 @@ typedef struct
 /*****************************************************************************
  *  Global Variable Declarations
  *****************************************************************************/
-extern const SEGMENT_VARIABLE_SEGMENT_POINTER(pRadioConfiguration, tRadioConfiguration, SEG_CODE, SEG_CODE);
+extern const tRadioConfiguration   *pRadioConfiguration;
 
 /*! Si446x configuration array */
-extern const SEGMENT_VARIABLE(Radio_Configuration_Data_Array[], uint8_t, SEG_CODE);
+extern const uint8_t    Radio_Configuration_Data_Array[];
 
 /*****************************************************************************
  *  Global Function Declarations
